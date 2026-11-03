@@ -1,0 +1,39 @@
+{
+  "name": "experiment-001",
+  "model": "Qwen/Qwen2.5-Coder-0.5B-Instruct",
+  "steps": 200,
+  "eval_every": 25,
+  "val_size": 79,
+  "test_size": 300,
+  "max_tokens": 256,
+  "resume": "runs/experiment-001/checkpoints/checkpoint-50",
+  "gpu": "NVIDIA GeForce RTX 5060 Ti",
+  "torch": "2.11.0+cu128",
+  "seed": 42,
+  "decode": "greedy, one attempt",
+  "train_reward": "fraction of original MBPP tests passed",
+  "prepared_data_sha256": {
+    "train": "7aece15473007bac0484c5f2dec26df3efedff2cd9383ebf4c566e385bb1dcca",
+    "validation": "8d8bf0d952b5e86d0000ad68ea677f5e2de99f8323fc6ac6d3251fcf07a941b4",
+    "test": "3524e14814cb3f66033e8e0b001d3c517fd0e66ead20ddea2b36f0f1676a927a"
+  },
+  "model_commit": null,
+  "base_model_revision": "ea3f2471cf1b1f0db85067f1ef93848e38e88c25",
+  "openenv_source_revision": "8b9b08339e64c14efef959c12efb18bdaf991fbd",
+  "training": {
+    "per_device_train_batch_size": 1,
+    "gradient_accumulation_steps": 4,
+    "num_generations": 4,
+    "max_completion_length": 256,
+    "learning_rate": 1e-05,
+    "beta": 0.02,
+    "temperature": 0.8,
+    "lora_rank": 16,
+    "lora_alpha": 32,
+    "lora_dropout": 0,
+    "dtype": "bfloat16",
+    "optimizer": "adamw_torch",
+    "gradient_checkpointing": true,
+    "use_vllm": false
+  }
+}

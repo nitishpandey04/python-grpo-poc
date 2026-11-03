@@ -1,0 +1,8 @@
+.venv
+.cache
+.git
+data
+runs
+__pycache__
+.pytest_cache
+vendor/coding_env/.git

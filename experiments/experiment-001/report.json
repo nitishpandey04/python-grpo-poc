@@ -1,0 +1,35 @@
+{
+  "selected_checkpoint": {
+    "optimizer_step": 0,
+    "validation_correctness": 0.3670886075949367,
+    "note": "No strict validation improvement; baseline retained."
+  },
+  "selected_vs_original": {
+    "problems": 300,
+    "improvement_percentage_points": 0.0,
+    "ci95_percentage_points": [
+      0.0,
+      0.0
+    ],
+    "improved": 0,
+    "regressed": 0,
+    "note": "Greedy single-attempt evaluation; paired bootstrap over tasks; filtered MBPP original tests."
+  },
+  "final_vs_original": {
+    "problems": 300,
+    "improvement_percentage_points": 3.0,
+    "ci95_percentage_points": [
+      0.33333333333333337,
+      5.666666666666666
+    ],
+    "improved": 13,
+    "regressed": 4,
+    "note": "Greedy single-attempt evaluation; paired bootstrap over tasks; filtered MBPP original tests."
+  },
+  "peak_gpu_allocated_mb": 1144.4091796875,
+  "limitations": [
+    "Original MBPP tests only; expanded hidden tests are future work.",
+    "MBPP pretraining contamination and semantic overlaps cannot be ruled out.",
+    "Single training seed; small filtered subset; POC evidence only."
+  ]
+}

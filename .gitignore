@@ -1,0 +1,15 @@
+.venv/
+.cache/
+__pycache__/
+.pytest_cache/
+data/
+runs/
+vendor/
+*.egg-info/
+.publish/
+.agents/
+.codex/
+.aws/
+.env
+.env.*
+*.pid

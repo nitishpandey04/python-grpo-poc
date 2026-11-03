@@ -1,0 +1,424 @@
+{
+  "source": "https://github.com/google-research/google-research/tree/master/mbpp",
+  "source_sha256": "ccf64ceae9c5403bf50a044cb6d505bfd2a2963ee58338ba268fd65beab92a9f",
+  "counts": {
+    "train": 334,
+    "validation": 79,
+    "test": 448
+  },
+  "rejected": [
+    {
+      "task_id": 18,
+      "reason": "Reference failed: unsupported"
+    },
+    {
+      "task_id": 23,
+      "reason": "Reference failed: ok"
+    },
+    {
+      "task_id": 27,
+      "reason": "Reference failed: ok"
+    },
+    {
+      "task_id": 60,
+      "reason": "Reference failed: ok"
+    },
+    {
+      "task_id": 61,
+      "reason": "Reference failed: ok"
+    },
+    {
+      "task_id": 70,
+      "reason": "Reference failed: ok"
+    },
+    {
+      "task_id": 78,
+      "reason": "Reference failed: ok"
+    },
+    {
+      "task_id": 90,
+      "reason": "Reference failed: ok"
+    },
+    {
+      "task_id": 94,
+      "reason": "Reference failed: unsupported"
+    },
+    {
+      "task_id": 99,
+      "reason": "Reference failed: ok"
+    },
+    {
+      "task_id": 100,
+      "reason": "Reference failed: unsupported"
+    },
+    {
+      "task_id": 114,
+      "reason": "Reference failed: ok"
+    },
+    {
+      "task_id": 122,
+      "reason": "Reference failed: unsupported"
+    },
+    {
+      "task_id": 123,
+      "reason": "Reference failed: timeout"
+    },
+    {
+      "task_id": 124,
+      "reason": "Reference failed: unsupported"
+    },
+    {
+      "task_id": 126,
+      "reason": "Reference failed: ok"
+    },
+    {
+      "task_id": 130,
+      "reason": "Reference failed: ok"
+    },
+    {
+      "task_id": 132,
+      "reason": "Reference failed: ok"
+    },
+    {
+      "task_id": 137,
+      "reason": "Reference failed: unsupported"
+    },
+    {
+      "task_id": 144,
+      "reason": "Reference failed: ok"
+    },
+    {
+      "task_id": 164,
+      "reason": "Reference failed: ok"
+    },
+    {
+      "task_id": 212,
+      "reason": "Reference failed: ok"
+    },
+    {
+      "task_id": 243,
+      "reason": "Reference failed: ok"
+    },
+    {
+      "task_id": 251,
+      "reason": "Reference failed: ok"
+    },
+    {
+      "task_id": 252,
+      "reason": "Reference failed: unsupported"
+    },
+    {
+      "task_id": 254,
+      "reason": "Reference failed: ok"
+    },
+    {
+      "task_id": 256,
+      "reason": "Reference failed: ok"
+    },
+    {
+      "task_id": 264,
+      "reason": "Reference failed: unsupported"
+    },
+    {
+      "task_id": 270,
+      "reason": "Reference failed: ok"
+    },
+    {
+      "task_id": 271,
+      "reason": "Reference failed: ok"
+    },
+    {
+      "task_id": 297,
+      "reason": "Reference failed: ok"
+    },
+    {
+      "task_id": 303,
+      "reason": "Reference failed: unsupported"
+    },
+    {
+      "task_id": 307,
+      "reason": "Reference failed: unsupported"
+    },
+    {
+      "task_id": 332,
+      "reason": "Reference failed: ok"
+    },
+    {
+      "task_id": 342,
+      "reason": "Reference failed: unsupported"
+    },
+    {
+      "task_id": 347,
+      "reason": "Duplicate problem statement"
+    },
+    {
+      "task_id": 357,
+      "reason": "Reference failed: ok"
+    },
+    {
+      "task_id": 367,
+      "reason": "Unsupported setup"
+    },
+    {
+      "task_id": 381,
+      "reason": "Reference failed: unsupported"
+    },
+    {
+      "task_id": 382,
+      "reason": "Reference failed: ok"
+    },
+    {
+      "task_id": 396,
+      "reason": "Reference failed: unsupported"
+    },
+    {
+      "task_id": 398,
+      "reason": "Reference failed: ok"
+    },
+    {
+      "task_id": 416,
+      "reason": "Reference failed: unsupported"
+    },
+    {
+      "task_id": 417,
+      "reason": "Reference failed: ok"
+    },
+    {
+      "task_id": 420,
+      "reason": "Reference failed: ok"
+    },
+    {
+      "task_id": 422,
+      "reason": "Reference failed: ok"
+    },
+    {
+      "task_id": 442,
+      "reason": "Reference failed: unsupported"
+    },
+    {
+      "task_id": 443,
+      "reason": "Reference failed: ok"
+    },
+    {
+      "task_id": 448,
+      "reason": "Reference failed: ok"
+    },
+    {
+      "task_id": 476,
+      "reason": "Reference failed: ok"
+    },
+    {
+      "task_id": 480,
+      "reason": "Reference failed: ok"
+    },
+    {
+      "task_id": 504,
+      "reason": "Reference failed: ok"
+    },
+    {
+      "task_id": 511,
+      "reason": "Reference failed: ok"
+    },
+    {
+      "task_id": 512,
+      "reason": "Reference failed: ok"
+    },
+    {
+      "task_id": 517,
+      "reason": "Reference failed: ok"
+    },
+    {
+      "task_id": 524,
+      "reason": "Reference failed: ok"
+    },
+    {
+      "task_id": 530,
+      "reason": "Reference failed: unsupported"
+    },
+    {
+      "task_id": 531,
+      "reason": "Reference failed: unsupported"
+    },
+    {
+      "task_id": 541,
+      "reason": "Reference failed: ok"
+    },
+    {
+      "task_id": 547,
+      "reason": "Reference failed: ok"
+    },
+    {
+      "task_id": 590,
+      "reason": "Reference failed: unsupported"
+    },
+    {
+      "task_id": 596,
+      "reason": "Reference failed: unsupported"
+    },
+    {
+      "task_id": 598,
+      "reason": "Reference failed: ok"
+    },
+    {
+      "task_id": 601,
+      "reason": "Reference failed: unsupported"
+    },
+    {
+      "task_id": 602,
+      "reason": "Duplicate problem statement"
+    },
+    {
+      "task_id": 607,
+      "reason": "Reference failed: unsupported"
+    },
+    {
+      "task_id": 628,
+      "reason": "Reference failed: unsupported"
+    },
+    {
+      "task_id": 630,
+      "reason": "Reference failed: unsupported"
+    },
+    {
+      "task_id": 631,
+      "reason": "Reference failed: unsupported"
+    },
+    {
+      "task_id": 634,
+      "reason": "Reference failed: ok"
+    },
+    {
+      "task_id": 644,
+      "reason": "Reference failed: unsupported"
+    },
+    {
+      "task_id": 656,
+      "reason": "Reference failed: ok"
+    },
+    {
+      "task_id": 661,
+      "reason": "Reference failed: ok"
+    },
+    {
+      "task_id": 663,
+      "reason": "Reference failed: unsupported"
+    },
+    {
+      "task_id": 669,
+      "reason": "Reference failed: unsupported"
+    },
+    {
+      "task_id": 685,
+      "reason": "Reference failed: ok"
+    },
+    {
+      "task_id": 688,
+      "reason": "Reference failed: unsupported"
+    },
+    {
+      "task_id": 696,
+      "reason": "Reference failed: unsupported"
+    },
+    {
+      "task_id": 704,
+      "reason": "Duplicate problem statement"
+    },
+    {
+      "task_id": 717,
+      "reason": "Reference failed: unsupported"
+    },
+    {
+      "task_id": 721,
+      "reason": "Reference failed: unsupported"
+    },
+    {
+      "task_id": 723,
+      "reason": "Reference failed: unsupported"
+    },
+    {
+      "task_id": 737,
+      "reason": "Reference failed: unsupported"
+    },
+    {
+      "task_id": 750,
+      "reason": "Reference failed: ok"
+    },
+    {
+      "task_id": 774,
+      "reason": "Reference failed: unsupported"
+    },
+    {
+      "task_id": 777,
+      "reason": "Reference failed: ok"
+    },
+    {
+      "task_id": 796,
+      "reason": "Reference failed: ok"
+    },
+    {
+      "task_id": 798,
+      "reason": "Reference failed: ok"
+    },
+    {
+      "task_id": 799,
+      "reason": "Reference failed: unsupported"
+    },
+    {
+      "task_id": 829,
+      "reason": "Reference failed: unsupported"
+    },
+    {
+      "task_id": 832,
+      "reason": "Reference failed: unsupported"
+    },
+    {
+      "task_id": 833,
+      "reason": "Reference failed: ok"
+    },
+    {
+      "task_id": 836,
+      "reason": "Reference failed: unsupported"
+    },
+    {
+      "task_id": 837,
+      "reason": "Reference failed: ok"
+    },
+    {
+      "task_id": 843,
+      "reason": "Reference failed: ok"
+    },
+    {
+      "task_id": 860,
+      "reason": "Reference failed: unsupported"
+    },
+    {
+      "task_id": 872,
+      "reason": "Duplicate problem statement"
+    },
+    {
+      "task_id": 877,
+      "reason": "Reference failed: ok"
+    },
+    {
+      "task_id": 910,
+      "reason": "Reference failed: unsupported"
+    },
+    {
+      "task_id": 927,
+      "reason": "Unsupported setup"
+    },
+    {
+      "task_id": 938,
+      "reason": "Reference failed: unsupported"
+    },
+    {
+      "task_id": 947,
+      "reason": "Reference failed: ok"
+    },
+    {
+      "task_id": 962,
+      "reason": "Reference failed: ok"
+    }
+  ],
+  "scope": "Reference-verified subset; original MBPP splits; three original tests per task, not expanded EvalPlus tests."
+}

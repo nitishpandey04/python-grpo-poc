@@ -1,0 +1,8 @@
+[project]
+name = "python-grpo-poc"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = ["torch", "trl", "peft", "trackio", "nvidia-ml-py"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
