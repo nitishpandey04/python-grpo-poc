@@ -1,0 +1,35 @@
+{
+  "raw_candidates": 3000,
+  "problem_groups": 1546,
+  "retained_groups": 306,
+  "split_counts": {
+    "train": 251,
+    "validation": 27,
+    "confirmation": 28
+  },
+  "quality_tiers": {
+    "independent_contract_checked": 14,
+    "reference_and_constant_control_screened": 292
+  },
+  "calibration": {
+    "screened_training_tasks": 251,
+    "selected_tasks": 130,
+    "buckets": {
+      "hard": 86,
+      "mixed": 130,
+      "easy": 35
+    },
+    "selected_quality_tiers": {
+      "reference_and_constant_control_screened": 124,
+      "independent_contract_checked": 6
+    },
+    "peak_gpu_allocated_mb": 1091.4453125
+  },
+  "mixed_independent_behavior_reviewed": 5,
+  "independent_contract_review_issues": 4,
+  "mixed_pending_semantic_review": 124,
+  "mixed_independent_contract_checked": 6,
+  "confirmation_predictions_generated": false,
+  "new_training_performed": false,
+  "improvement_claim": false
+}

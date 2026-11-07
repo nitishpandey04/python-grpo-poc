@@ -1,0 +1,12 @@
+{
+  "cpython_worker.py": "aca1a26f515f31790f1fd4275a46b9ffce2584378192500e6dde79baa9cfcdd0",
+  "opencoder_data.py": "aea4dfe014b8ec726d4f5a54ef8ed06e234176547db457ac151904c0f7621b69",
+  "educational_oracles.py": "06f76075e58cdf5c7ac59f9d8323ff6c07977d97a12a06b26603e7cbf62d996f",
+  "execution.py": "c6af3d75b0bd5e620e48706cc194224654d2822851cfc8f2284cf29fbdba4988",
+  "opencoder_contract_review.json": "55465800ad3c5f8fe1b046659a17d9c08e999370d3c17a0dd80a6af12995aeae",
+  "opencoder_report.py": "805724d4de9cb3c310d865db02631433370941d20e257cc4d4381bd5ad38d200",
+  "monitoring.py": "f5cd1df517f891c141e580b2c5ad999f3372f7b46b913c2a9c146b35b853ddff",
+  "task_selection.py": "e99ab14c3527255695868e8d2e85f8c70b90dd3c68faa1fa1630a21848a36957",
+  "import_opencoder.py": "f3b2df595700ea06e8b5ee5a278dd02bfb652a23e789077306bee8791aa90659",
+  "calibrate_tasks.py": "d7d574977eec0a1a0dbdd48b18df65ccbc2664644f531062dd39009f4cd3b1ba"
+}

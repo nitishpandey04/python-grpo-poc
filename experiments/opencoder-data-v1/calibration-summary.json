@@ -1,0 +1,14 @@
+{
+  "screened_training_tasks": 251,
+  "selected_tasks": 130,
+  "buckets": {
+    "hard": 86,
+    "mixed": 130,
+    "easy": 35
+  },
+  "selected_quality_tiers": {
+    "reference_and_constant_control_screened": 124,
+    "independent_contract_checked": 6
+  },
+  "peak_gpu_allocated_mb": 1091.4453125
+}

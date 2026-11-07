@@ -1,0 +1,106 @@
+[
+  {
+    "task_id": "opencoder/9855304006",
+    "row_sha256": "f1e5685bc7f0ce1aaca687b0a39143811a1785985c28ea9c9ec394414cadae58",
+    "verdict": "behavior_reviewed_on_tested_domain",
+    "note": "Instruction, reference, and independent oracle agree on the tested bounded input domain; no proof for all inputs.",
+    "review_date": "2026-11-07",
+    "review_method": "Assistant reading of instruction, reference, provided examples, and independently implemented oracle."
+  },
+  {
+    "task_id": "opencoder/534180693",
+    "row_sha256": "f8f1f80eada58ec0eec3a5778dd3850ab6611fb2ab90ffc13e03ec2d9ff9dd11",
+    "verdict": "needs_instruction_or_domain_resolution",
+    "note": "Independent cases contain parentheses only. The reference counts other characters as invalid, while the oracle ignores them; clarify the input domain.",
+    "review_date": "2026-11-07",
+    "review_method": "Assistant reading of instruction, reference, provided examples, and independently implemented oracle."
+  },
+  {
+    "task_id": "opencoder/22578728363",
+    "row_sha256": "37f2c920f57618e926aeff892ae00c8a3758ed181526ad367c16dd80de0521d6",
+    "verdict": "behavior_reviewed_on_tested_domain",
+    "note": "Instruction, reference, and independent oracle agree on the tested bounded input domain; no proof for all inputs.",
+    "review_date": "2026-11-07",
+    "review_method": "Assistant reading of instruction, reference, provided examples, and independently implemented oracle."
+  },
+  {
+    "task_id": "opencoder/4527473192",
+    "row_sha256": "d5386c7a3de845f77b77a7a379b808872cf035c0300e0608368dca31de015c1d",
+    "verdict": "needs_instruction_or_domain_resolution",
+    "note": "Instruction bans built-in functions, but the reference uses range; behavioral tests do not enforce this constraint.",
+    "review_date": "2026-11-07",
+    "review_method": "Assistant reading of instruction, reference, provided examples, and independently implemented oracle."
+  },
+  {
+    "task_id": "opencoder/27482863890",
+    "row_sha256": "d697a616dcf0c1f758e29e93b06d468009cc562712348eb1270e5303d58ec2bb",
+    "verdict": "behavior_reviewed_on_tested_domain",
+    "note": "Instruction, reference, and independent oracle agree on the tested bounded input domain; no proof for all inputs.",
+    "review_date": "2026-11-07",
+    "review_method": "Assistant reading of instruction, reference, provided examples, and independently implemented oracle."
+  },
+  {
+    "task_id": "opencoder/17988332139",
+    "row_sha256": "dc9c7ccdb7991fccf02f067a9dba81caddf1cd80fb50bd2597ec9881af5490e1",
+    "verdict": "behavior_reviewed_on_tested_domain",
+    "note": "Instruction, reference, and independent oracle agree on the tested bounded input domain; no proof for all inputs.",
+    "review_date": "2026-11-07",
+    "review_method": "Assistant reading of instruction, reference, provided examples, and independently implemented oracle."
+  },
+  {
+    "task_id": "opencoder/7117093016",
+    "row_sha256": "128ac220ee76beae089f1ca245d02a62c29038d2075c5cb039b476bc1412a748",
+    "verdict": "needs_instruction_or_domain_resolution",
+    "note": "Instruction requires recursion; behavioral tests do not enforce the algorithm constraint.",
+    "review_date": "2026-11-07",
+    "review_method": "Assistant reading of instruction, reference, provided examples, and independently implemented oracle."
+  },
+  {
+    "task_id": "opencoder/70095545909",
+    "row_sha256": "0f4fd216f35a83a8fd8d7a4253a74a6282b8843acd35245a91674383e2384c87",
+    "verdict": "behavior_reviewed_on_tested_domain",
+    "note": "Instruction, reference, and independent oracle agree on the tested bounded input domain; no proof for all inputs.",
+    "review_date": "2026-11-07",
+    "review_method": "Assistant reading of instruction, reference, provided examples, and independently implemented oracle."
+  },
+  {
+    "task_id": "opencoder/28740482231",
+    "row_sha256": "78c5ed47bdfec058c2683b03fde96add32b40b7380a96e600065bd68e4b052c9",
+    "verdict": "needs_instruction_or_domain_resolution",
+    "note": "Reference fails negative integers. The broad number wording needs an explicit nonnegative-integer domain; sampled additional cases did not cover negatives.",
+    "review_date": "2026-11-07",
+    "review_method": "Assistant reading of instruction, reference, provided examples, and independently implemented oracle."
+  },
+  {
+    "task_id": "opencoder/20942812131",
+    "row_sha256": "741135c8d56efc422e40dfbd28bda3ea824ca899528b11db4e34e952f90a37cd",
+    "verdict": "behavior_reviewed_on_tested_domain",
+    "note": "Instruction, reference, and independent oracle agree on the tested bounded input domain; no proof for all inputs.",
+    "review_date": "2026-11-07",
+    "review_method": "Assistant reading of instruction, reference, provided examples, and independently implemented oracle."
+  },
+  {
+    "task_id": "opencoder/3579853496",
+    "row_sha256": "a5e7f177609fcba23ab0ff4128325f01e29c8f978100af2f71bf704eabc7cec7",
+    "verdict": "behavior_reviewed_on_tested_domain",
+    "note": "Instruction, reference, and independent oracle agree on the tested bounded input domain; no proof for all inputs.",
+    "review_date": "2026-11-07",
+    "review_method": "Assistant reading of instruction, reference, provided examples, and independently implemented oracle."
+  },
+  {
+    "task_id": "opencoder/34478518852",
+    "row_sha256": "227cdf9162a8942ec446e8915b5ec787a481153bb276815a1ea727bdc4566d4d",
+    "verdict": "behavior_reviewed_on_tested_domain",
+    "note": "Instruction, reference, and independent oracle agree on the tested bounded input domain; no proof for all inputs.",
+    "review_date": "2026-11-07",
+    "review_method": "Assistant reading of instruction, reference, provided examples, and independently implemented oracle."
+  },
+  {
+    "task_id": "opencoder/41418242529",
+    "row_sha256": "3758ad92775d483085ea657482cc0e8fcf6efd202b8ab61b383847466964cd94",
+    "verdict": "behavior_reviewed_on_tested_domain",
+    "note": "Instruction, reference, and independent oracle agree on the tested bounded input domain; no proof for all inputs.",
+    "review_date": "2026-11-07",
+    "review_method": "Assistant reading of instruction, reference, provided examples, and independently implemented oracle."
+  }
+]

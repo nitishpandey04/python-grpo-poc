@@ -1,0 +1,15 @@
+{
+  "purpose": "train-only difficulty calibration",
+  "protocol": "assert_suite",
+  "quality": "runs/opencoder-curation-v2",
+  "output": "runs/calibration-opencoder-v1",
+  "dataset": "data/opencoder-selected-v1",
+  "model": "Qwen/Qwen2.5-Coder-0.5B-Instruct",
+  "revision": "ea3f2471cf1b1f0db85067f1ef93848e38e88c25",
+  "samples": 8,
+  "temperature": 0.8,
+  "max_tokens": 256,
+  "seed": 42,
+  "quality_manifest_sha256": "9cbdef005e819a47e72951797ace8d38942241fc91f1ab91cb2e2f9abb5827d5",
+  "selection_rule": "0 < full_pass_candidates < samples; no validation/test outcomes used"
+}

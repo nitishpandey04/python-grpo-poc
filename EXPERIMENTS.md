@@ -50,3 +50,16 @@ Next training work should review reference/test quality, freeze a suitable evalu
 - Peak PyTorch allocation was 1.25 GiB. Confirmation predictions were not generated.
 
 This combined pipeline pilot demonstrates verified selection, useful reward comparisons, and working batch composition. It does not demonstrate model improvement or isolate the effects of individual changes. The next bottleneck is the small verified, learnable training pool; expand it before a longer run, and use matched-budget comparisons and additional seeds before spending confirmation data.
+
+## OpenCoder data acquisition and calibration — 2026-11-07
+
+[Report, frozen data, review queue, and source snapshot](experiments/opencoder-data-v1/REPORT.md).
+
+- Pinned 3,000 educational rows; grouping and screening retained 306 problems: 251 training, 27 development, and 28 additional confirmation tasks.
+- Fourteen retained tasks received independently computed narrow-contract cases; 292 passed only supplied-test and nine-constant-control screening and still need semantic review.
+- Eight original-model samples on each training task produced 130 mixed, 86 all-fail, and 35 all-pass tasks.
+- The 130 mixed tasks comprise 124 pending semantic review and six with independent contract checks.
+- Code-and-instruction review flagged four of the 13 independent-contract training rows for instruction/domain issues. 5 mixed tasks remain after those exclusions, with correctness claims limited to their tested domains.
+- No model predictions were generated on the new development/confirmation splits or the existing 49-task MBPP confirmation pool. No new model was trained.
+
+This first data import did not achieve hundreds of independently verified learnable tasks. The larger mixed pool is a review queue, not approved training data. Keep the existing expanded MBPP evaluation, strengthen tests and semantic checks, and integrate the separate assertion-suite reward protocol only after freezing approved data.

@@ -23,6 +23,14 @@ def main(args):
     if args.output.exists() or args.dataset.exists():
         raise ValueError('Calibration output/dataset already exists; choose new paths')
     quality=json.loads((args.quality/'manifest.json').read_text())
+    if args.protocol=='assert_suite' and quality.get('protocol')!='opencoder-screened-v1':
+        raise ValueError('Assertion-suite calibration requires an OpenCoder screening manifest')
+    if args.protocol=='mbpp_expanded' and quality.get('protocol')=='opencoder-screened-v1':
+        raise ValueError('OpenCoder tasks require --protocol assert_suite')
+    scorer=expanded_score
+    if args.protocol=='assert_suite':
+        from opencoder_data import assertion_suite_score
+        scorer=assertion_suite_score
     rows=read_rows(args.quality/'train.jsonl')
     if not quality.get('counts_after') or not rows:
         raise ValueError('Reference verification is incomplete or no training tasks passed')
@@ -54,7 +62,7 @@ def main(args):
                 monitor.phase=f'calibration scoring {i+1}/{len(rows)}'
                 for j,output in enumerate(outputs):
                     completion=tokenizer.decode(output[inputs.input_ids.shape[1]:],skip_special_tokens=True)
-                    score=expanded_score(sandbox,completion,row['tests'],row['task_id'])
+                    score=scorer(sandbox,completion,row['tests'],row['task_id'])
                     candidate={'task_id':row['task_id'],'candidate':j,'completion':completion,'reward':float(score['correct']),**score}
                     candidates.append(candidate);monitor.sample(candidate)
                 correct=sum(c['correct'] for c in candidates)
@@ -67,14 +75,18 @@ def main(args):
                 monitor.log({'calibration/tasks_completed':i+1,'calibration/tasks_total':len(rows),'calibration/percent':100*(i+1)/len(rows),'calibration/selected_mixed':len(selected),'calibration/hard':counts['hard'],'calibration/easy':counts['easy'],'calibration/current_full_pass_fraction':correct/args.samples})
                 print(f"[calibration] {i+1}/{len(rows)} task={row['task_id']} passes={correct}/{args.samples} {bucket}; selected={len(selected)}",flush=True)
         counts=dict(collections.Counter(r['bucket'] for r in records))
-        (args.output/'summary.json').write_text(json.dumps({'verified_training_tasks':len(rows),'selected_tasks':len(selected),'buckets':counts,'peak_gpu_allocated_mb':torch.cuda.max_memory_allocated()/1024**2},indent=2))
-        if len(selected)<4:raise RuntimeError('Fewer than four mixed-outcome tasks; do not start broad-batch training')
+        (args.output/'summary.json').write_text(json.dumps({('screened_training_tasks' if args.protocol=='assert_suite' else 'verified_training_tasks'):len(rows),'selected_tasks':len(selected),'buckets':counts,'selected_quality_tiers':dict(collections.Counter(r.get('quality_tier','mbpp_expanded') for r in selected)),'peak_gpu_allocated_mb':torch.cuda.max_memory_allocated()/1024**2},indent=2))
+        if len(selected)<4 and args.protocol=='mbpp_expanded':raise RuntimeError('Fewer than four mixed-outcome tasks; do not start broad-batch training')
         validation=read_rows(args.quality/'validation.jsonl');confirmation=read_rows(args.quality/'confirmation.jsonl')
         assert_disjoint(selected,validation,confirmation)
         args.dataset.mkdir(parents=True)
         for split,items in [('train',selected),('validation',validation),('confirmation',confirmation)]:
             (args.dataset/f'{split}.jsonl').write_text(''.join(json.dumps(row)+'\n' for row in items))
-        manifest={**config,'protocol':'selected-grpo-v2','counts':{'train':len(selected),'training_verified':len(rows),'validation':len(validation),'confirmation':len(confirmation)},'buckets':counts,'image_id':quality['image_id'],'files_sha256':{split:sha(args.dataset/f'{split}.jsonl') for split in ['train','validation','confirmation']},'task_ids':{'train':[r['task_id'] for r in selected],'validation':[r['task_id'] for r in validation],'confirmation':[r['task_id'] for r in confirmation]},'confirmation_predictions_generated':False}
+        manifest={**config,'protocol':('opencoder-selected-v1' if args.protocol=='assert_suite' else 'selected-grpo-v2'),'counts':{'train':len(selected),('training_screened' if args.protocol=='assert_suite' else 'training_verified'):len(rows),'validation':len(validation),'confirmation':len(confirmation)},'buckets':counts,'image_id':quality['image_id'],'files_sha256':{split:sha(args.dataset/f'{split}.jsonl') for split in ['train','validation','confirmation']},'task_ids':{'train':[r['task_id'] for r in selected],'validation':[r['task_id'] for r in validation],'confirmation':[r['task_id'] for r in confirmation]},'confirmation_predictions_generated':False}
+        if args.protocol=='assert_suite':
+            ready=[r for r in selected if r['quality_tier']=='independent_contract_checked']
+            (args.dataset/'train-independent.jsonl').write_text(''.join(json.dumps(r)+'\n' for r in ready))
+            manifest.update(selected_quality_tiers=dict(collections.Counter(r['quality_tier'] for r in selected)),independent_selected=len(ready),screened_only_requires_semantic_review=True,training_adapter_required=True,independent_file_sha256=sha(args.dataset/'train-independent.jsonl'))
         (args.dataset/'manifest.json').write_text(json.dumps(manifest,indent=2))
         monitor.phase='complete'
         print(json.dumps(manifest,indent=2),flush=True)
@@ -87,6 +99,7 @@ def main(args):
 
 if __name__=='__main__':
     parser=argparse.ArgumentParser()
+    parser.add_argument('--protocol',choices=['mbpp_expanded','assert_suite'],default='mbpp_expanded')
     parser.add_argument('--quality',type=Path,default=Path('runs/task-quality-v2'))
     parser.add_argument('--output',type=Path,default=Path('runs/calibration-v2'))
     parser.add_argument('--dataset',type=Path,default=Path('data/selected-v2'))

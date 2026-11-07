@@ -1,0 +1,1 @@
+Derived educational tasks and references originate from OpenCoder-LLM/opc-sft-stage2, educational_instruct. The upstream dataset declares the MIT license. Source: https://huggingface.co/datasets/OpenCoder-LLM/opc-sft-stage2 . Pinned revision: 7d28f40d579edd7c24402d17d0c7639f991e6f8d . Project authors retain attribution to the upstream OpenCoder authors.
