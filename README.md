@@ -153,11 +153,14 @@ New data preparation and training default to CPython; changing backend changes t
 The v2 pipeline verifies training references with original and official expanded tests, samples the original model on training tasks only, and selects tasks with mixed outcomes. Development and confirmation outcomes are excluded from selection.
 
 ```bash
-python3 -u task_selection.py --output runs/task-quality-v2
+HF_HOME="$PWD/.cache/huggingface" .venv/bin/hf download Qwen/Qwen2.5-Coder-0.5B-Instruct --revision ea3f2471cf1b1f0db85067f1ef93848e38e88c25
+python3 -u task_selection.py --previous experiments/experiment-001 --output runs/task-quality-v2
 .venv/bin/python -u calibrate_tasks.py --quality runs/task-quality-v2 --output runs/calibration-v2 --dataset data/selected-v2
 .venv/bin/python -u train_v2.py --dataset data/selected-v2 --output runs/pilot-v2 --steps 10 --eval-every 5
 python3 pipeline_report.py
 ```
+
+The recorded pilot used the frozen legacy-prepared data from experiment 001. To reproduce its exact task counts in a fresh checkout, use the legacy preparation commands above, pass that directory with `task_selection.py --data data/prepared-legacy`, and verify its JSONL hashes against `experiments/experiment-001/config.json`. Fresh data prepared under CPython can produce different task pools and must be treated as a new experiment. The public `experiments/experiment-001` directory supplies the prior evaluated task IDs; private `runs/` files are not required.
 
 Use new output paths for subsequent runs. Reference verification supports `--resume` with matching inputs and image; calibration and pilot outputs are immutable and cannot be overwritten. The calibration rule is predeclared: select a task if 1–7 of eight candidates pass every original and expanded test. Default generation uses the pinned original model, temperature 0.8, 256 tokens, and seed 42.
 
