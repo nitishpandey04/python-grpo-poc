@@ -1,0 +1,36 @@
+test_no_compatible_tasks_does_not_report_perfect_accuracy (test_audit.AuditTests.test_no_compatible_tasks_does_not_report_perfect_accuracy) ... ok
+test_reference_and_coverage_filter_is_paired (test_audit.AuditTests.test_reference_and_coverage_filter_is_paired) ... ok
+test_comparison_pairs_by_id_not_order (test_evaluation.EvaluationTests.test_comparison_pairs_by_id_not_order) ... ok
+test_comparison_rejects_different_tasks (test_evaluation.EvaluationTests.test_comparison_rejects_different_tasks) ... ok
+test_comparison_rejects_duplicate_tasks (test_evaluation.EvaluationTests.test_comparison_rejects_duplicate_tasks) ... ok
+test_extracts_code_without_explanation (test_evaluation.EvaluationTests.test_extracts_code_without_explanation) ... ok
+test_ast_clone_detection_ignores_cosmetic_names (test_opencoder.OpenCoderTests.test_ast_clone_detection_ignores_cosmetic_names) ... ok
+test_independent_oracle_adds_edges_and_is_bounded (test_opencoder.OpenCoderTests.test_independent_oracle_adds_edges_and_is_bounded) ... ok
+test_recognized_contract_variants_share_a_group (test_opencoder.OpenCoderTests.test_recognized_contract_variants_share_a_group) ... ok
+test_reference_and_tests_stay_out_of_prompt_fields (test_opencoder.OpenCoderTests.test_reference_and_tests_stay_out_of_prompt_fields) ... ok
+test_requires_direct_literal_contracts (test_opencoder.OpenCoderTests.test_requires_direct_literal_contracts) ... ok
+test_split_is_deterministic_and_suite_is_all_or_nothing (test_opencoder.OpenCoderTests.test_split_is_deterministic_and_suite_is_all_or_nothing) ... ok
+test_known_roman_and_permutation_edges (test_reviewed_contracts.ReviewedOracleTests.test_known_roman_and_permutation_edges) ... ok
+test_related_contracts_cannot_get_separate_weights (test_reviewed_contracts.ReviewedOracleTests.test_related_contracts_cannot_get_separate_weights) ... ok
+test_specified_boundaries_are_in_generated_tests (test_reviewed_contracts.ReviewedOracleTests.test_specified_boundaries_are_in_generated_tests) ... ok
+test_good_reference_passes_and_all_faulty_controls_fail (test_reviewed_contracts.ReviewedSuiteDockerTests.test_good_reference_passes_and_all_faulty_controls_fail) ... ok
+test_stronger_tests_catch_real_source_reference_bugs (test_reviewed_contracts.ReviewedSuiteDockerTests.test_stronger_tests_catch_real_source_reference_bugs) ... ok
+test_container_isolation (test_sandbox.SandboxTests.test_container_isolation) ... ok
+test_correct_and_partial_solutions (test_sandbox.SandboxTests.test_correct_and_partial_solutions) ... ok
+test_early_process_exit_is_not_success (test_sandbox.SandboxTests.test_early_process_exit_is_not_success) ... ok
+test_empty_and_invalid_tests_fail_closed (test_sandbox.SandboxTests.test_empty_and_invalid_tests_fail_closed) ... ok
+test_expanded_oracle_budget_is_explicit (test_sandbox.SandboxTests.test_expanded_oracle_budget_is_explicit) ... ok
+test_expanded_tests_reject_constant_solution (test_sandbox.SandboxTests.test_expanded_tests_reject_constant_solution) ... ok
+test_no_state_leakage_between_tests_or_requests (test_sandbox.SandboxTests.test_no_state_leakage_between_tests_or_requests) ... ok
+test_runtime_errors_during_tests_are_labelled (test_sandbox.SandboxTests.test_runtime_errors_during_tests_are_labelled) ... ok
+test_timeout_and_memory_failure_recover (test_sandbox.SandboxTests.test_timeout_and_memory_failure_recover) ... ok
+test_valid_python_defaults_classes_and_prints (test_sandbox.SandboxTests.test_valid_python_defaults_classes_and_prints) ... ok
+test_four_distinct_groups_of_eight (test_selection.SelectionTests.test_four_distinct_groups_of_eight) ... ok
+test_heldout_overlap_is_rejected (test_selection.SelectionTests.test_heldout_overlap_is_rejected) ... ok
+test_mixed_task_rule_excludes_all_pass_and_all_fail (test_selection.SelectionTests.test_mixed_task_rule_excludes_all_pass_and_all_fail) ... ok
+test_stronger_failure_is_not_rewarded (test_selection.SelectionTests.test_stronger_failure_is_not_rewarded) ... ok
+
+----------------------------------------------------------------------
+Ran 31 tests in 5.475s
+
+OK

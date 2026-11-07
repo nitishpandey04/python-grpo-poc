@@ -184,3 +184,17 @@ Use fresh output paths. The final curation pass groups recognized contract varia
 `train-independent.jsonl` contains mixed tasks with narrow independent contract checks. It still needs review for instruction constraints and domain assumptions. Other mixed tasks go into a semantic-review queue before training. The OpenCoder manifest uses a separate protocol that the MBPP-specific trainer rejects; an approved training manifest and scorer integration are required before a longer run. These new supplied-test development/confirmation splits do not replace the existing stronger MBPP evaluation.
 
 [OpenCoder source](https://huggingface.co/datasets/OpenCoder-LLM/opc-sft-stage2), pinned revision and row IDs are recorded in the manifest. The source declares MIT; the upstream copyright/license is retained in [third_party/OPENCODER_LICENSE](third_party/OPENCODER_LICENSE).
+
+## Strengthen and review the mixed-task queue
+
+[Completed review and fresh calibration](experiments/opencoder-reviewed-v2/REPORT.md): 130 task decisions, 29 contracts passing independent-case and fault-control checks, and 22 freshly calibrated mixed-outcome training tasks. Five source references fail stronger tests. Sixty related held-out-family candidates are excluded conservatively, 33 tasks are deferred, and three duplicate contracts are collapsed. No additional model training was performed.
+
+```bash
+.venv/bin/python -u strengthen_opencoder.py --output runs/opencoder-strengthened-v2
+.venv/bin/python -u calibrate_tasks.py --protocol assert_suite --quality runs/opencoder-strengthened-v2 --output runs/calibration-opencoder-v2 --dataset data/opencoder-selected-v2
+.venv/bin/python reviewed_data_report.py
+```
+
+Use fresh output paths. `opencoder_review_v2.json` records assistant review decisions bound to exact source rows. `reviewed_contracts.py` specifies bounded independent cases and two nonconstant faulty controls per retained contract; the runner also tests nine constants and an old-example lookup. Unclear instructions and algorithm restrictions are deferred rather than rewritten silently. All candidate/reference/control code executes only inside Docker.
+
+The [training manifest](experiments/opencoder-reviewed-v2/training-manifest.json) pairs the 22-task input pool with the existing 29-task expanded MBPP development protocol and fingerprints the 49-task unqueried confirmation pool. It requires separate training and development scorers; the existing MBPP-only trainer rejects its protocol. Finite-domain review is not a proof of universal correctness or an independently human-labelled gold dataset. These are prepared inputs for the next controlled experiment.

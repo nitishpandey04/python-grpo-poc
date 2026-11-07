@@ -1,0 +1,12 @@
+{
+  "cpython_worker.py": "aca1a26f515f31790f1fd4275a46b9ffce2584378192500e6dde79baa9cfcdd0",
+  "opencoder_data.py": "aea4dfe014b8ec726d4f5a54ef8ed06e234176547db457ac151904c0f7621b69",
+  "strengthen_opencoder.py": "be108b833927f483298091408874e0a140d542edc8f4a071c1b838ddce0c30dc",
+  "educational_oracles.py": "06f76075e58cdf5c7ac59f9d8323ff6c07977d97a12a06b26603e7cbf62d996f",
+  "execution.py": "c6af3d75b0bd5e620e48706cc194224654d2822851cfc8f2284cf29fbdba4988",
+  "opencoder_review_v2.json": "3e9d7d345541580bf6f4a411afb11cbbd0ef4c8359be5a5afc9274b886cb3843",
+  "monitoring.py": "f5cd1df517f891c141e580b2c5ad999f3372f7b46b913c2a9c146b35b853ddff",
+  "task_selection.py": "e99ab14c3527255695868e8d2e85f8c70b90dd3c68faa1fa1630a21848a36957",
+  "calibrate_tasks.py": "d7d574977eec0a1a0dbdd48b18df65ccbc2664644f531062dd39009f4cd3b1ba",
+  "reviewed_contracts.py": "c959b47501b8214c700ea1e461afd3fdebe7319786ce8a94bcd6b1d30828a1e9"
+}

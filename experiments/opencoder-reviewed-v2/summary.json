@@ -1,0 +1,46 @@
+{
+  "tasks_reviewed": 130,
+  "approved_contracts_before_recalibration": 29,
+  "decisions": {
+    "exclude_known_heldout_family": 46,
+    "defer_contract_or_enforcement": 33,
+    "exclude_related_heldout_family": 14,
+    "approved_on_declared_test_domain": 29,
+    "exclude_duplicate_reviewed_contract": 3,
+    "reject_reference_disagrees_with_stronger_tests": 5
+  },
+  "fault_controls_rejected": 348,
+  "nonconstant_fault_controls_rejected": 58,
+  "controls_newly_rejected": 40,
+  "frozen_baseline_old_passes": 102,
+  "frozen_baseline_strong_passes": 91,
+  "frozen_baseline_candidates": 232,
+  "frozen_strong_buckets": {
+    "mixed": 26,
+    "hard": 3
+  },
+  "heldout_predictions_generated": false,
+  "new_training_performed": false,
+  "fresh_calibration": {
+    "screened_training_tasks": 29,
+    "selected_tasks": 22,
+    "buckets": {
+      "mixed": 22,
+      "hard": 6,
+      "easy": 1
+    },
+    "selected_quality_tiers": {
+      "independent_contract_checked": 22
+    },
+    "peak_gpu_allocated_mb": 1049.3056640625
+  },
+  "selected_reviewed_mixed_tasks": 22,
+  "newly_rejected_control_types": {
+    "nonconstant_algorithmic": 11,
+    "memorization": 29
+  },
+  "primary_development_tasks": 29,
+  "primary_confirmation_tasks": 49,
+  "confirmation_predictions_generated": false,
+  "model_improvement_claim": false
+}

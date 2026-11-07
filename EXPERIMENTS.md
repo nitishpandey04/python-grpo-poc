@@ -63,3 +63,15 @@ This combined pipeline pilot demonstrates verified selection, useful reward comp
 - No model predictions were generated on the new development/confirmation splits or the existing 49-task MBPP confirmation pool. No new model was trained.
 
 This first data import did not achieve hundreds of independently verified learnable tasks. The larger mixed pool is a review queue, not approved training data. Keep the existing expanded MBPP evaluation, strengthen tests and semantic checks, and integrate the separate assertion-suite reward protocol only after freezing approved data.
+
+## Stronger task review and recalibration — 2026-11-07
+
+[Full review report and frozen evidence](experiments/opencoder-reviewed-v2/REPORT.md).
+
+- Reviewed all 130 formerly mixed tasks: 60 related held-out-family exclusions, 33 deferred instruction/algorithm contracts, three collapsed duplicates, five reference failures, and 29 retained contracts.
+- Each retained contract passes independently computed bounded cases and rejects two nonconstant faulty implementations, nine constant outputs, and a lookup memorizing old examples.
+- On the same 232 frozen baseline answers, stronger criteria reduce passing answers from 102 to 91. This measures stricter testing, not model training or regression.
+- Fresh eight-answer baseline calibration selects 22 mixed tasks; six are all-fail and one all-pass.
+- All 31 regression checks passed. No additional model was trained. Existing expanded MBPP development data and the 49-task unqueried confirmation pool remain unchanged.
+
+The resulting 22-task manifest is a stronger, small input pool for a controlled run, with separate assertion-suite training and expanded-MBPP development scorers required. It does not establish a model improvement, guarantee full semantic decontamination, or reach the target of hundreds of diverse verified problems.
