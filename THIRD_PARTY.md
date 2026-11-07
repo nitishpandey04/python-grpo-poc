@@ -6,3 +6,5 @@
 - Training and logging use TRL, Transformers, PEFT, PyTorch, and Trackio. Exact host package versions are in `requirements.lock.txt`; upstream packages retain their own licenses.
 
 The project license applies to the original code in this repository. It does not replace third-party licenses.
+
+- Expanded evaluation: [EvalPlus](https://github.com/evalplus/evalplus), pinned package version 0.3.1, and its MBPP+ v0.2.0 release. Evaluation runs upstream input conversions, tolerances, and special oracles; package and dataset licenses remain upstream. The expanded dataset is downloaded separately into ignored `evaluation_assets/`.

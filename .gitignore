@@ -13,3 +13,5 @@ vendor/
 .env
 .env.*
 *.pid
+
+evaluation_assets/

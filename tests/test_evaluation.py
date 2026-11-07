@@ -15,6 +15,11 @@ class EvaluationTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             compare([{"task_id": 1, "correct": True}], [{"task_id": 2, "correct": True}])
 
+    def test_comparison_rejects_duplicate_tasks(self):
+        rows=[{"task_id":1,"correct":True}]*2
+        with self.assertRaises(ValueError):
+            compare(rows,rows)
+
     def test_extracts_code_without_explanation(self):
         self.assertEqual(extract_code("Here is code:\n```python\ndef add(a,b):\n    return a+b\n```"), "def add(a,b):\n    return a+b")
 

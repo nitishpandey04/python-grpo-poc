@@ -1,0 +1,14 @@
+{
+  "purpose": "train-only difficulty calibration",
+  "quality": "runs/task-quality-v2",
+  "output": "runs/calibration-v2",
+  "dataset": "data/selected-v2",
+  "model": "Qwen/Qwen2.5-Coder-0.5B-Instruct",
+  "revision": "ea3f2471cf1b1f0db85067f1ef93848e38e88c25",
+  "samples": 8,
+  "temperature": 0.8,
+  "max_tokens": 256,
+  "seed": 42,
+  "quality_manifest_sha256": "abc85cd1ad57c58647ac85b4d730ec2610de9839d751d4499a0dbd2def699c49",
+  "selection_rule": "0 < full_pass_candidates < samples; no validation/test outcomes used"
+}

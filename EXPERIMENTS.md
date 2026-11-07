@@ -24,3 +24,29 @@ Suggested record fields:
 - Baseline and checkpoint validation results.
 - Selected checkpoint and final test comparison.
 - Failure modes, limitations, and the next decision.
+
+## Evaluation audit — 2026-11-07
+
+[Report and frozen source snapshot](experiments/evaluation-audit-v2/REPORT.md). Existing answers were re-scored without training or generation. The corrected CPython evaluator accepts ordinary Python constructs and records actual assertion/runtime failures.
+
+| Protocol | Validation: original / final | Test: original / final |
+|---|---:|---:|
+| Original tests under CPython | 30/79 / 25/79 | 99/300 / 106/300 |
+| Expanded compatible subset | 16/29 / 14/29 | 40/96 / 43/96 |
+
+Expanded results use EvalPlus 0.3.1 with MBPP+ v0.2.0. Seven validation and 35 test references failed expanded checks; uncovered tasks, one entry-point mismatch, and one canonical-oracle memory limit are also excluded explicitly. This is an audited subset of old-prompt answers, not a standard full MBPP+ score. No validation-supported improvement was established. Historical experiment-001 records and its published weights remain unchanged.
+
+Next training work should review reference/test quality, freeze a suitable evaluation protocol, then calibrate training-task difficulty and broaden batches. No second training run had started at the time of this evaluation audit.
+
+## Verified selection and batching pilot — 2026-11-07
+
+[Full pipeline report](experiments/pipeline-v2/REPORT.md).
+
+- Stronger reference checks retained 66 training tasks, 29 development tasks, and 49 untouched confirmation tasks.
+- Eight baseline samples per training task selected 27 mixed-outcome tasks; 37 had no passing samples and two had all samples pass.
+- The 10-step GPU pilot used four distinct prompts and eight candidates per update, with binary original-plus-expanded correctness rewards.
+- Runtime checks confirmed 32 candidates per optimizer update. Mixed rewards occurred in 31/40 prompt groups (77.5%).
+- Development validation was 16/29 before and after; one problem improved and one regressed. The original model remains selected.
+- Peak PyTorch allocation was 1.25 GiB. Confirmation predictions were not generated.
+
+This combined pipeline pilot demonstrates verified selection, useful reward comparisons, and working batch composition. It does not demonstrate model improvement or isolate the effects of individual changes. The next bottleneck is the small verified, learnable training pool; expand it before a longer run, and use matched-budget comparisons and additional seeds before spending confirmation data.

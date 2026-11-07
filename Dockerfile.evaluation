@@ -1,0 +1,11 @@
+FROM python:3.12-slim
+# Install only EvalPlus core evaluation dependencies; inference stacks are unnecessary.
+RUN pip install --no-cache-dir numpy==2.2.6 psutil==7.2.2 appdirs==1.4.4 wget==3.2 tqdm==4.67.1 tempdir==0.7.1 && pip install --no-cache-dir --no-deps evalplus==0.3.1
+RUN pip install --no-cache-dir datasets==5.1.0
+RUN python -c "from evalplus.data import get_mbpp_plus; from evalplus.eval import untrusted_check"
+COPY cpython_worker.py /app/cpython_worker.py
+COPY evaluation_assets/MbppPlus-v0.2.0.jsonl.gz /app/MbppPlus-v0.2.0.jsonl.gz
+ENV PYTHONUNBUFFERED=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MBPP_OVERRIDE_PATH=/app/MbppPlus-v0.2.0.jsonl.gz EVALPLUS_MAX_MEMORY_BYTES=2147483648
+WORKDIR /tmp
+USER 65534:65534
+CMD ["python", "-I", "-u", "/app/cpython_worker.py"]

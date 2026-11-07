@@ -1,4 +1,4 @@
-"""A persistent, resource-limited Docker worker using the real OpenEnv Coding API."""
+"""Resource-limited Docker execution; CPython v2 by default, legacy OpenEnv opt-in."""
 import json
 import os
 import re
@@ -14,8 +14,12 @@ def extract_code(text):
 
 
 class Sandbox:
-    def __init__(self, image="python-grpo-sandbox:local", timeout=8):
-        self.image, self.timeout = image, timeout
+    def __init__(self, image=None, timeout=8, backend="cpython"):
+        if backend not in {"cpython", "openenv"}:
+            raise ValueError("Unknown execution backend")
+        self.backend = backend
+        self.image = image or ("python-grpo-cpython:v2" if backend == "cpython" else "python-grpo-sandbox:local")
+        self.timeout = timeout
         self.proc = None
         self.name = None
         self.buffer = b""
@@ -27,10 +31,10 @@ class Sandbox:
             while b"\n" not in self.buffer:
                 remaining = deadline - time.monotonic()
                 if remaining <= 0 or not selector.select(remaining):
-                    raise TimeoutError("OpenEnv execution timed out")
+                    raise TimeoutError("Evaluation request timed out")
                 chunk = os.read(self.proc.stdout.fileno(), 65536)
                 if not chunk:
-                    raise RuntimeError("OpenEnv worker exited unexpectedly; inspect Docker / sandbox logs")
+                    raise RuntimeError("Evaluation worker exited unexpectedly; inspect Docker state")
                 self.buffer += chunk
         line, self.buffer = self.buffer.split(b"\n", 1)
         return json.loads(line)
@@ -47,19 +51,31 @@ class Sandbox:
         self.proc = subprocess.Popen(args, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
         self.buffer = b""
         try:
-            if self._read(90) != {"ready": True}:
-                raise RuntimeError("Unexpected OpenEnv worker greeting")
+            greeting = self._read(90)
+            if greeting.get("ready") is not True or (self.backend == "cpython" and greeting.get("backend") != "cpython-v2"):
+                raise RuntimeError("Unexpected evaluation worker greeting")
         except BaseException:
             self.close()
             raise
 
     def score(self, code, tests):
+        if not tests:
+            raise ValueError("Cannot score an empty test suite")
+        return self._request({"code": extract_code(code), "tests": tests, "case_timeout": min(2, self.timeout / len(tests))})
+
+    def score_plus(self, code, task_id):
+        if self.backend != "cpython":
+            raise ValueError("Expanded tests require the CPython backend")
+        return self._request({"mode": "evalplus", "code": extract_code(code), "task_id": task_id}, timeout=90)
+
+    def _request(self, request, timeout=None):
         self.start()
+        tests = request.get("tests", ["evalplus"])
         start = time.monotonic()
         try:
-            self.proc.stdin.write((json.dumps({"code": extract_code(code), "tests": tests}) + "\n").encode())
+            self.proc.stdin.write((json.dumps(request) + "\n").encode())
             self.proc.stdin.flush()
-            response = self._read(self.timeout)
+            response = self._read(timeout or self.timeout)
         except TimeoutError:
             self.close()
             return {"passed": 0, "total": len(tests), "status": "timeout", "errors": ["Execution exceeded time budget"], "seconds": time.monotonic() - start}
@@ -71,7 +87,7 @@ class Sandbox:
             # rollout. Other infrastructure failures still abort rather than change rewards.
             if details.get("OOMKilled"):
                 return {"passed": 0, "total": len(tests), "status": "memory_error", "errors": ["Generated code exceeded the 1 GiB sandbox memory budget"], "seconds": time.monotonic() - start}
-            raise RuntimeError(f"OpenEnv worker failed: {details}")
+            raise RuntimeError(f"Evaluation worker failed: {details}")
         if "infrastructure_error" in response:
             raise RuntimeError(response["infrastructure_error"])
         return response

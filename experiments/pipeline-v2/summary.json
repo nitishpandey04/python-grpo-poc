@@ -1,0 +1,27 @@
+{
+  "quality_counts": {
+    "train": 66,
+    "validation": 29,
+    "confirmation": 49
+  },
+  "calibration": {
+    "verified_training_tasks": 66,
+    "selected_tasks": 27,
+    "buckets": {
+      "hard": 37,
+      "mixed": 27,
+      "easy": 2
+    },
+    "peak_gpu_allocated_mb": 1012.671875
+  },
+  "pilot_steps": 10,
+  "observed_prompt_groups": 40,
+  "mixed_reward_groups": 31,
+  "mixed_group_fraction": 0.775,
+  "baseline_development_solved": 16,
+  "final_development_solved": 16,
+  "development_problems": 29,
+  "peak_gpu_allocated_mb": 1280.4736328125,
+  "confirmation_problems": 49,
+  "confirmation_evaluated": false
+}

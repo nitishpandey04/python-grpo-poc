@@ -1,0 +1,101 @@
+{
+  "protocol": "verified-task-pools-v2",
+  "image_id": "sha256:369d660c4b4697c9e7c634ec8846837603085a1d73d3cb1b3238cee587b17524",
+  "created_at": 1794058284.007892,
+  "source_sha256": {
+    "train": "7aece15473007bac0484c5f2dec26df3efedff2cd9383ebf4c566e385bb1dcca",
+    "validation": "8d8bf0d952b5e86d0000ad68ea677f5e2de99f8323fc6ac6d3251fcf07a941b4",
+    "test": "3524e14814cb3f66033e8e0b001d3c517fd0e66ead20ddea2b36f0f1676a927a"
+  },
+  "previous_test_ids_sha256": "725b484f9f2a1b5feb13ec8e6dc4494ffcac945b7c0f5a56386e605085a02b90",
+  "plus_data_sha256": "af43697e8791c4c149bdfd6b489d8b5412507551ac20e28a439f650b8225db63",
+  "selection_uses": "training reference quality only; model difficulty calibration is a subsequent train-only stage",
+  "reward": "binary: all original + official base/extra tests pass",
+  "counts_before": {
+    "train": 334,
+    "validation": 79,
+    "confirmation": 148
+  },
+  "counts_after": {
+    "train": 66,
+    "validation": 29,
+    "confirmation": 49
+  },
+  "exclusions": {
+    "train": {
+      "verified": 66,
+      "reference_failed_expanded_tests": 18,
+      "not_in_mbppplus": 240,
+      "entry_point_mismatch": 9,
+      "empty_expanded_suite": 1
+    },
+    "validation": {
+      "not_in_mbppplus": 43,
+      "verified": 29,
+      "reference_failed_expanded_tests": 7
+    },
+    "confirmation": {
+      "verified": 49,
+      "not_in_mbppplus": 82,
+      "reference_failed_expanded_tests": 15,
+      "entry_point_mismatch": 2
+    }
+  },
+  "files_sha256": {
+    "train": "bbaca32cefcb1b96c9f901b3e761c106ac3fed07004a5c525f4f2f845adf6521",
+    "validation": "aeabb25fdaaf1cd7dff719a9e9caa67b215496b888474f44abdbf8b6cea5dea8",
+    "confirmation": "293947acc44ea063075d38a6c201c0656ad1fc430bf2f3047ccc30ea470b934d"
+  },
+  "confirmation_task_ids": [
+    14,
+    58,
+    62,
+    63,
+    65,
+    67,
+    68,
+    88,
+    89,
+    98,
+    103,
+    105,
+    109,
+    128,
+    140,
+    141,
+    142,
+    168,
+    170,
+    222,
+    226,
+    227,
+    230,
+    235,
+    237,
+    238,
+    250,
+    257,
+    268,
+    273,
+    277,
+    293,
+    300,
+    389,
+    390,
+    394,
+    395,
+    410,
+    413,
+    421,
+    424,
+    427,
+    430,
+    439,
+    447,
+    450,
+    470,
+    473,
+    477
+  ],
+  "confirmation_predictions_generated": false
+}

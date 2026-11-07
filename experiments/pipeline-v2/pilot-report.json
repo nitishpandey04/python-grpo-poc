@@ -1,0 +1,57 @@
+{
+  "stage": "validation-only pilot",
+  "steps": 10,
+  "train_problems": 27,
+  "development_problems": 29,
+  "sealed_confirmation_problems": 49,
+  "confirmation_evaluated": false,
+  "baseline_validation": {
+    "correctness": 0.5517241379310345,
+    "mean_test_fraction": 0.6666666666666666,
+    "mean_tokens": 80.6896551724138,
+    "problems": 29,
+    "evaluator": "cpython",
+    "correctness_protocol": "expanded_score",
+    "failure_counts": {
+      "ok": 16,
+      "expanded_test_failure": 2,
+      "assertion_error": 9,
+      "runtime_error": 2
+    }
+  },
+  "final_validation": {
+    "correctness": 0.5517241379310345,
+    "mean_test_fraction": 0.6551724137931034,
+    "mean_tokens": 77.17241379310344,
+    "problems": 29,
+    "evaluator": "cpython",
+    "correctness_protocol": "expanded_score",
+    "failure_counts": {
+      "ok": 16,
+      "runtime_error": 3,
+      "expanded_test_failure": 2,
+      "assertion_error": 8
+    }
+  },
+  "selected_checkpoint": {
+    "step": 0,
+    "correctness": 0.5517241379310345
+  },
+  "development_comparison": {
+    "problems": 29,
+    "improvement_percentage_points": 0.0,
+    "ci95_percentage_points": [
+      -10.344827586206897,
+      10.344827586206897
+    ],
+    "improved": 1,
+    "regressed": 1,
+    "note": "Development-only comparison in a bounded pipeline pilot; not independent confirmation."
+  },
+  "peak_gpu_allocated_mb": 1280.4736328125,
+  "limitations": [
+    "Selection, stronger rewards and batching changed together; this pilot does not isolate their causal effects.",
+    "Small development set and one training seed; no claim of general improvement.",
+    "Confirmation predictions are deliberately deferred."
+  ]
+}

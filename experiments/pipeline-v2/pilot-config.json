@@ -1,0 +1,23 @@
+{
+  "dataset": "data/selected-v2",
+  "output": "runs/pilot-v2",
+  "steps": 10,
+  "eval_every": 5,
+  "prompts_per_update": 4,
+  "generations": 8,
+  "micro_batch": 2,
+  "learning_rate": 1e-05,
+  "seed": 42,
+  "stage": "validation-only pilot",
+  "batch_settings": {
+    "per_device_train_batch_size": 2,
+    "gradient_accumulation_steps": 16,
+    "generation_batch_size": 32,
+    "num_generations": 8
+  },
+  "dataset_manifest_sha256": "c39f4da1c92d91c12f31e52da0c86423f252b9688469320369668665300c34d8",
+  "reward": "binary original + official expanded suites",
+  "confirmation_evaluated": false,
+  "gpu": "NVIDIA GeForce RTX 5060 Ti",
+  "torch": "2.11.0+cu128"
+}

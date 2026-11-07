@@ -47,9 +47,17 @@ def main(args):
         raise ValueError("Run already exists. Choose --name or explicitly use --resume CHECKPOINT.")
     config = {**vars(args), "gpu": torch.cuda.get_device_name(), "torch": torch.__version__, "seed": 42, "decode": "greedy, one attempt", "train_reward": "fraction of original MBPP tests passed"}
     config["prepared_data_sha256"] = {split: hashlib.sha256((ROOT / f"data/prepared/{split}.jsonl").read_bytes()).hexdigest() for split in ("train", "validation", "test")}
+    if args.resume:
+        previous = json.loads((output / "config.json").read_text())
+        previous_backend = previous.get("execution_backend", "openenv")
+        if previous_backend != args.execution_backend:
+            raise ValueError("Cannot switch execution backend while resuming; use the recorded backend or a new run name")
+        for key in ("model", "max_tokens", "prepared_data_sha256"):
+            if previous.get(key) != config.get(key):
+                raise ValueError(f"Cannot resume with changed evaluation protocol: {key}")
     (output / "config.json").write_text(json.dumps(config, indent=2))
     monitor = Monitor(output, args.name, config)
-    sandbox = Sandbox(timeout=8)
+    sandbox = Sandbox(timeout=8, backend=args.execution_backend)
     try:
         sandbox.start()
         monitor.phase = "loading model"
@@ -81,7 +89,7 @@ def main(args):
                 rewards.append(score["passed"] / score["total"])
                 statuses.append(score["status"])
                 monitor.sample({"task_id": problem_id, "completion": text, "reward": rewards[-1], **score})
-            monitor.log({"execution/syntax_error_fraction": statuses.count("syntax_error") / len(statuses), "execution/runtime_error_fraction": statuses.count("runtime_error") / len(statuses), "execution/timeout_fraction": statuses.count("timeout") / len(statuses), "execution/memory_error_fraction": statuses.count("memory_error") / len(statuses), "execution/unsupported_fraction": statuses.count("unsupported") / len(statuses), "execution/all_tests_passed_fraction": sum(r == 1 for r in rewards) / len(rewards)})
+            monitor.log({"execution/syntax_error_fraction": statuses.count("syntax_error") / len(statuses), "execution/assertion_error_fraction": statuses.count("assertion_error") / len(statuses), "execution/runtime_error_fraction": statuses.count("runtime_error") / len(statuses), "execution/timeout_fraction": statuses.count("timeout") / len(statuses), "execution/memory_error_fraction": statuses.count("memory_error") / len(statuses), "execution/unsupported_fraction": statuses.count("unsupported") / len(statuses), "execution/all_tests_passed_fraction": sum(r == 1 for r in rewards) / len(rewards)})
             monitor.phase = "updating weights / generating next group"
             return rewards
 
@@ -172,5 +180,6 @@ if __name__ == "__main__":
     parser.add_argument("--val-size", type=int, default=100)
     parser.add_argument("--test-size", type=int, default=300)
     parser.add_argument("--max-tokens", type=int, default=256)
+    parser.add_argument("--execution-backend", choices=["cpython", "openenv"], default="cpython")
     parser.add_argument("--resume")
     main(parser.parse_args())

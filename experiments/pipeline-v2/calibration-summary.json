@@ -1,0 +1,10 @@
+{
+  "verified_training_tasks": 66,
+  "selected_tasks": 27,
+  "buckets": {
+    "hard": 37,
+    "mixed": 27,
+    "easy": 2
+  },
+  "peak_gpu_allocated_mb": 1012.671875
+}

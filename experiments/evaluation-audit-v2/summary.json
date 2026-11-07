@@ -1,0 +1,142 @@
+{
+  "test/original_cpython": {
+    "problems": 300,
+    "statuses": {
+      "baseline": {
+        "ok": 99,
+        "assertion_error": 162,
+        "runtime_error": 34,
+        "syntax_error": 4,
+        "timeout": 1
+      },
+      "final": {
+        "ok": 106,
+        "assertion_error": 160,
+        "runtime_error": 33,
+        "syntax_error": 1
+      }
+    },
+    "baseline_solved": 99,
+    "baseline_correctness": 0.33,
+    "final_solved": 106,
+    "final_correctness": 0.35333333333333333,
+    "paired_comparison": {
+      "problems": 300,
+      "improvement_percentage_points": 2.3333333333333335,
+      "ci95_percentage_points": [
+        0.0,
+        5.0
+      ],
+      "improved": 11,
+      "regressed": 4,
+      "note": "Frozen experiment-001 answers; paired problem-level bootstrap; evaluator audit, not a fresh benchmark."
+    },
+    "historical_baseline_solved_on_same_tasks": 97,
+    "historical_final_solved_on_same_tasks": 106
+  },
+  "test/expanded_compatible": {
+    "problems": 96,
+    "statuses": {
+      "baseline": {
+        "ok": 96
+      },
+      "final": {
+        "ok": 96
+      }
+    },
+    "baseline_solved": 40,
+    "baseline_correctness": 0.4166666666666667,
+    "final_solved": 43,
+    "final_correctness": 0.4479166666666667,
+    "paired_comparison": {
+      "problems": 96,
+      "improvement_percentage_points": 3.125,
+      "ci95_percentage_points": [
+        -2.083333333333333,
+        8.333333333333332
+      ],
+      "improved": 5,
+      "regressed": 2,
+      "note": "Frozen experiment-001 answers; paired problem-level bootstrap; evaluator audit, not a fresh benchmark."
+    }
+  },
+  "test/coverage": {
+    "saved_problems": 300,
+    "invalid_original_references": [],
+    "expanded_exclusions": {
+      "not_in_mbppplus": 167,
+      "eligible": 96,
+      "original_reference_failed_expanded_tests": 35,
+      "entry_point_mismatch": 1,
+      "canonical_oracle_resource_limit": 1
+    }
+  },
+  "validation/original_cpython": {
+    "problems": 79,
+    "statuses": {
+      "baseline": {
+        "ok": 30,
+        "assertion_error": 38,
+        "runtime_error": 10,
+        "syntax_error": 1
+      },
+      "final": {
+        "ok": 25,
+        "assertion_error": 41,
+        "runtime_error": 13
+      }
+    },
+    "baseline_solved": 30,
+    "baseline_correctness": 0.379746835443038,
+    "final_solved": 25,
+    "final_correctness": 0.31645569620253167,
+    "paired_comparison": {
+      "problems": 79,
+      "improvement_percentage_points": -6.329113924050633,
+      "ci95_percentage_points": [
+        -12.658227848101266,
+        0.0
+      ],
+      "improved": 1,
+      "regressed": 6,
+      "note": "Frozen experiment-001 answers; paired problem-level bootstrap; evaluator audit, not a fresh benchmark."
+    },
+    "historical_baseline_solved_on_same_tasks": 29,
+    "historical_final_solved_on_same_tasks": 24
+  },
+  "validation/expanded_compatible": {
+    "problems": 29,
+    "statuses": {
+      "baseline": {
+        "ok": 29
+      },
+      "final": {
+        "ok": 29
+      }
+    },
+    "baseline_solved": 16,
+    "baseline_correctness": 0.5517241379310345,
+    "final_solved": 14,
+    "final_correctness": 0.4827586206896552,
+    "paired_comparison": {
+      "problems": 29,
+      "improvement_percentage_points": -6.896551724137931,
+      "ci95_percentage_points": [
+        -17.24137931034483,
+        0.0
+      ],
+      "improved": 0,
+      "regressed": 2,
+      "note": "Frozen experiment-001 answers; paired problem-level bootstrap; evaluator audit, not a fresh benchmark."
+    }
+  },
+  "validation/coverage": {
+    "saved_problems": 79,
+    "invalid_original_references": [],
+    "expanded_exclusions": {
+      "eligible": 29,
+      "not_in_mbppplus": 43,
+      "original_reference_failed_expanded_tests": 7
+    }
+  }
+}

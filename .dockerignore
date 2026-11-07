@@ -6,3 +6,8 @@ runs
 __pycache__
 .pytest_cache
 vendor/coding_env/.git
+
+.publish
+.agents
+.codex
+.aws

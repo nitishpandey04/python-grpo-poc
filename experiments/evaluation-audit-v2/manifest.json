@@ -1,0 +1,31 @@
+{
+  "protocol": "evaluation-audit-v2",
+  "created_at": 1794056186.5052364,
+  "image_id": "sha256:369d660c4b4697c9e7c634ec8846837603085a1d73d3cb1b3238cee587b17524",
+  "source_files": {
+    "baseline_validation": "605cc30f39f662f839d35b90304a580502784b25af5a44d6d3c977b728056333",
+    "final_validation": "85782ded884d4489f2c11b75529cb86444e2ae5cdef976dd3d2af173198290ec",
+    "baseline_test": "7b3219513ca3007f975087267a42c7bcc50fd56a492629f44ab7dd780eba114f",
+    "final_test": "37a34ffbf10352427b6cdff157101b0ac23eead1066aba31d5e08370e5f6f089"
+  },
+  "prepared_files": {
+    "validation": "8d8bf0d952b5e86d0000ad68ea677f5e2de99f8323fc6ac6d3251fcf07a941b4",
+    "test": "3524e14814cb3f66033e8e0b001d3c517fd0e66ead20ddea2b36f0f1676a927a"
+  },
+  "plus_data_sha256": "af43697e8791c4c149bdfd6b489d8b5412507551ac20e28a439f650b8225db63",
+  "evaluator_source_sha256": {
+    "cpython_worker.py": "aca1a26f515f31790f1fd4275a46b9ffce2584378192500e6dde79baa9cfcdd0",
+    "execution.py": "c6af3d75b0bd5e620e48706cc194224654d2822851cfc8f2284cf29fbdba4988",
+    "audit_evaluation.py": "206878926e9629bfd4c4e2279d08c1eef9657fc4a83022fac64f6c87e447e593"
+  },
+  "plus_version": "v0.2.0",
+  "evalplus_version": "0.3.1",
+  "limit_per_split": null,
+  "seed": "saved outputs, no new randomness",
+  "original_address_space_limit_bytes": 536870912,
+  "expanded_address_space_limit_bytes": 2147483648,
+  "container_physical_memory_limit_bytes": 1073741824,
+  "original_test_wall_seconds": 2,
+  "plus_min_case_seconds": 0.2,
+  "plus_ref_time_factor": 4.0
+}
