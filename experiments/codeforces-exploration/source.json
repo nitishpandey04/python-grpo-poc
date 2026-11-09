@@ -1,0 +1,47 @@
+{
+  "repo": "open-r1/codeforces",
+  "revision": "fbe3f6e903ee854eec2e69e9d96d0306cde59baf",
+  "train_shards": [
+    {
+      "path": "verifiable/train-00000-of-00010.parquet",
+      "bytes": 319626883
+    },
+    {
+      "path": "verifiable/train-00001-of-00010.parquet",
+      "bytes": 226840842
+    },
+    {
+      "path": "verifiable/train-00002-of-00010.parquet",
+      "bytes": 146698811
+    },
+    {
+      "path": "verifiable/train-00003-of-00010.parquet",
+      "bytes": 139367227
+    },
+    {
+      "path": "verifiable/train-00004-of-00010.parquet",
+      "bytes": 388115029
+    },
+    {
+      "path": "verifiable/train-00005-of-00010.parquet",
+      "bytes": 502778802
+    },
+    {
+      "path": "verifiable/train-00006-of-00010.parquet",
+      "bytes": 315555194
+    },
+    {
+      "path": "verifiable/train-00007-of-00010.parquet",
+      "bytes": 26286337
+    },
+    {
+      "path": "verifiable/train-00008-of-00010.parquet",
+      "bytes": 185055793
+    },
+    {
+      "path": "verifiable/train-00009-of-00010.parquet",
+      "bytes": 183762023
+    }
+  ],
+  "license_metadata": "cc-by-4.0"
+}

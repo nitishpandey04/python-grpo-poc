@@ -1,0 +1,11 @@
+{
+  "method": "Read selected rows from smallest pinned training Parquet shard after preview API timeouts",
+  "shard": "verifiable/train-00007-of-00010.parquet",
+  "shard_bytes": 26286337,
+  "shard_sha256": "345b1bd27020c127049de6a8f9587cada8bef475936064ff510126940f057ce9",
+  "sample_problems": 27,
+  "sample_sha256": "ffb4bed01dcd44e9bf471ff394121131dc70e96749957305ffb5de0875282812",
+  "sample_test_records": 985,
+  "test_split_read": false,
+  "selection_bias": "Convenience sample from one shard; not a random or representative coverage study."
+}

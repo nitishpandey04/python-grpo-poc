@@ -1,0 +1,87 @@
+{
+  "scope": "Four convenience-sampled training tasks. Independent arithmetic checks inspect existing official tests; no generated tests, model predictions or training.",
+  "problems": {
+    "263/A": {
+      "title": "Beautiful Matrix",
+      "official_test_records": 25,
+      "independent_arithmetic_matches": 25,
+      "plausible_fault_rejected_on_cases": 16,
+      "all_expected_outputs_agree": true,
+      "valid_domain_size": 25,
+      "distinct_one_positions": 25,
+      "all_valid_positions_covered": true,
+      "fault": "Uses maximum coordinate displacement instead of their sum."
+    },
+    "228/A": {
+      "title": "Is your horseshoe on the other hoof?",
+      "official_test_records": 34,
+      "independent_arithmetic_matches": 34,
+      "plausible_fault_rejected_on_cases": 11,
+      "all_expected_outputs_agree": true,
+      "distinct_color_counts_covered": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "smallest_color": 1,
+      "largest_color": 995577259,
+      "fault": "Counts adjacent duplicate colors only, missing separated duplicates."
+    },
+    "266/A": {
+      "title": "Stones on the Table",
+      "official_test_records": 34,
+      "independent_arithmetic_matches": 34,
+      "plausible_fault_rejected_on_cases": 28,
+      "all_expected_outputs_agree": true,
+      "lengths_covered": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        10,
+        15,
+        20,
+        25,
+        30,
+        35,
+        40,
+        45,
+        50
+      ],
+      "single_stone_present": true,
+      "maximum_length_present": true,
+      "all_same_color_present": true,
+      "fault": "Removes all repeated colors instead of adjacent duplicates only."
+    },
+    "996/A": {
+      "title": "Hit the Lottery",
+      "official_test_records": 49,
+      "independent_arithmetic_matches": 49,
+      "plausible_fault_rejected_on_cases": 43,
+      "all_expected_outputs_agree": true,
+      "smallest_amount": 1,
+      "largest_amount": 1000000000,
+      "denomination_boundaries": {
+        "1": true,
+        "4": true,
+        "5": true,
+        "6": true,
+        "9": false,
+        "10": true,
+        "11": false,
+        "19": false,
+        "20": true,
+        "21": false,
+        "99": false,
+        "100": false,
+        "101": false,
+        "1000000000": true
+      },
+      "fault": "Uses only 100 and 1 denominations, ignoring 20/10/5."
+    }
+  },
+  "official_records_checked": 142,
+  "all_142_expectations_agree": true
+}

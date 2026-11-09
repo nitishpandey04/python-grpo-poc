@@ -90,3 +90,13 @@ The resulting 22-task manifest is a stronger, small input pool for a controlled 
 - No confirmation model predictions were generated. The source tests remain imperfect; corpus eligibility is not independent correctness certification.
 
 This completes the simplification and an end-to-end smoke check. It does not establish model improvement or justify selecting the smoke adapter. Full-budget training is a separate experiment.
+
+## Codeforces source exploration — 2026-11-09
+
+[Dataset inspection and boundary audit](experiments/codeforces-exploration/REPORT.md).
+
+Scanned the pinned Open-R1 `verifiable/train` metadata: 8,338 tasks, 1,654 complete official suites, 1,247 with complete suites and a simple standard-I/O/no-custom-checker interface, and 344 in that scope rated 800–1000. Those 344 average 45.16 official I/O records (median 38); no minimum test-count filter was used.
+
+Downloaded one 26 MB shard and inspected 27 easier problems with 985 official records. Four simple tasks were checked independently against all 142 supplied outputs, with full agreement. Beautiful Matrix's 25 tests cover all 25 valid board states. Complete official suites still need not be exhaustive for larger domains.
+
+No model predictions, training changes or test-split reads were performed. The next step is a small standard-I/O execution path and a baseline-only check on the cached sample before deciding to train on this source.
