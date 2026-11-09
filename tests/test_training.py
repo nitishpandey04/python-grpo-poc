@@ -1,6 +1,6 @@
 import unittest
 from train import batch_settings,validate_generation_groups
-from execution import program_score
+from execution import program_score,solution_score
 from evaluate import expanded_score
 
 
@@ -17,8 +17,11 @@ class TrainingTests(unittest.TestCase):
             def score(self,code,tests):
                 self.tests=tests
                 return {'passed':1,'total':1,'status':'ok','errors':[]}
+            def score_stdio(self,code,cases,time_limit,memory_limit_mb):
+                return {'passed':1,'total':1,'status':'ok','correct':True}
             def score_plus(self,code,task):return {'status':'ok','correct':False,'suites':{'plus':{'status':'fail'}}}
         sandbox=FakeSandbox()
+        self.assertTrue(solution_score(sandbox,'code',{'mode':'stdio','cases':[{'input':'1','output':'1'}],'time_limit':1,'memory_limit_mb':64})['correct'])
         self.assertTrue(program_score(sandbox,'code',['x=1','assert x==1'],'opencoder/1')['correct'])
         self.assertEqual(sandbox.tests,['x=1\nassert x==1'])
         self.assertFalse(expanded_score(sandbox,'code',['assert f()==1'],1)['correct'])

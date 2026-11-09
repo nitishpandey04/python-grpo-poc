@@ -1,0 +1,38 @@
+{
+  "dataset": "data/codeforces-python",
+  "name": "codeforces-baseline-002",
+  "output": "/home/nitish/Documents/Codex/2026-11-03-i-want-to-fine-tune-a-2/runs/codeforces-baseline-002",
+  "max_tokens": 1024,
+  "baseline_only": true,
+  "temperature": 0.8,
+  "steps": 10,
+  "eval_every": 5,
+  "prompts_per_update": 4,
+  "generations": 8,
+  "micro_batch": 2,
+  "learning_rate": 1e-05,
+  "seed": 42,
+  "stage": "baseline-only",
+  "batch_settings": {
+    "per_device_train_batch_size": 2,
+    "gradient_accumulation_steps": 16,
+    "generation_batch_size": 32,
+    "num_generations": 8
+  },
+  "dataset_manifest_sha256": "68dc5df9f80ae4ca15c1fba54b5f1d3868da00b1d53ebb8494ecf583fb7d6f50",
+  "reward": "Binary: all official I/O records pass; fail fast on first failure. No minimum test count or model-difficulty calibration gate.",
+  "development_protocol": "Fixed Codeforces train-derived development split, same official Python I/O grader before/after. Existing MBPP development/confirmation inputs remain unchanged.",
+  "execution_image": "python-grpo-cpython:v3",
+  "execution_image_id": "sha256:4ee6fd96080cdeb87a2a07a3fc4dcd7dc47c58280fe222b1418569825af1927d",
+  "source_sha256": {
+    "train.py": "b06157ac590721483a05710effb63eed65170b61353e906f38b2e5c75d809da9",
+    "prepare_data.py": "dfa76588395d1f627b5c22bba9320a2b0f87baf70fea2c46dca9d4eda692f1e1",
+    "evaluate.py": "bd10e398059dd2531715f02353930a022dfc1e8b364d9062faeea65c41fcb5c0",
+    "execution.py": "a12fb9d1dccad99157acb95bbce4a4cc8baadf4bcfaae0b17c21fa6344f52af2",
+    "cpython_worker.py": "14445b3bc07085cb508d5ff25fc91570929c1399b7fc200fe091ebc0feae1987",
+    "monitoring.py": "f5cd1df517f891c141e580b2c5ad999f3372f7b46b913c2a9c146b35b853ddff"
+  },
+  "confirmation_evaluated": false,
+  "gpu": "NVIDIA GeForce RTX 5060 Ti",
+  "torch": "2.11.0+cu128"
+}

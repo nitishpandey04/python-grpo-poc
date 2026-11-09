@@ -1,4 +1,4 @@
-"""Resource-limited Docker execution; CPython v2 by default, legacy OpenEnv opt-in."""
+"""Resource-limited Docker execution; CPython v3 by default, legacy OpenEnv opt-in."""
 import json
 import os
 import re
@@ -14,12 +14,14 @@ def extract_code(text):
 
 
 class Sandbox:
-    def __init__(self, image=None, timeout=8, backend="cpython"):
+    def __init__(self, image=None, timeout=8, backend="cpython", memory="1g"):
         if backend not in {"cpython", "openenv"}:
             raise ValueError("Unknown execution backend")
         self.backend = backend
-        self.image = image or ("python-grpo-cpython:v2" if backend == "cpython" else "python-grpo-sandbox:local")
+        self.image = image or ("python-grpo-cpython:v3" if backend == "cpython" else "python-grpo-sandbox:local")
         self.timeout = timeout
+        self.memory = memory
+        self.capabilities = []
         self.proc = None
         self.name = None
         self.buffer = b""
@@ -45,15 +47,16 @@ class Sandbox:
         self.name = "python-grpo-" + uuid.uuid4().hex[:12]
         # Keep the container until explicit cleanup so a crash can be diagnosed.
         args = ["docker", "run", "-i", "--name", self.name,
-                "--network=none", "--memory=1g", "--cpus=1", "--pids-limit=64",
+                "--network=none", "--memory="+self.memory, "--cpus=1", "--pids-limit=64",
                 "--cap-drop=ALL", "--security-opt=no-new-privileges", "--read-only",
                 "--tmpfs", "/tmp:rw,noexec,nosuid,size=128m", self.image]
         self.proc = subprocess.Popen(args, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
         self.buffer = b""
         try:
             greeting = self._read(90)
-            if greeting.get("ready") is not True or (self.backend == "cpython" and greeting.get("backend") != "cpython-v2"):
+            if greeting.get("ready") is not True or (self.backend == "cpython" and greeting.get("backend") not in {"cpython-v2","cpython-v3"}):
                 raise RuntimeError("Unexpected evaluation worker greeting")
+            self.capabilities=greeting.get("capabilities",[])
         except BaseException:
             self.close()
             raise
@@ -63,6 +66,12 @@ class Sandbox:
             raise ValueError("Cannot score an empty test suite")
         return self._request({"code": extract_code(code), "tests": tests, "case_timeout": min(2, self.timeout / len(tests))})
 
+    def score_stdio(self,code,cases,time_limit=2,memory_limit_mb=256):
+        if not cases:raise ValueError('Empty standard-I/O suite')
+        self.start()
+        if 'stdio' not in self.capabilities:raise RuntimeError('Rebuild python-grpo-cpython:v3 for standard-I/O support')
+        return self._request({'mode':'stdio','code':extract_code(code),'cases':cases,'time_limit':time_limit,'memory_limit_mb':memory_limit_mb},timeout=len(cases)*(float(time_limit)+0.5)+10)
+
     def score_plus(self, code, task_id):
         if self.backend != "cpython":
             raise ValueError("Expanded tests require the CPython backend")
@@ -70,7 +79,7 @@ class Sandbox:
 
     def _request(self, request, timeout=None):
         self.start()
-        tests = request.get("tests", ["evalplus"])
+        tests = request.get("tests", request.get("cases", ["evalplus"]))
         start = time.monotonic()
         try:
             self.proc.stdin.write((json.dumps(request) + "\n").encode())
@@ -112,3 +121,11 @@ def program_score(sandbox,completion,tests,task_id=None):
     if not program.strip():raise ValueError('Empty Python test program')
     score=sandbox.score(completion,[program])
     return {**score,'correct':score['total']==1 and score['passed']==1,'correctness_protocol':'python_test_program'}
+
+
+def solution_score(sandbox,completion,tests,task_id=None):
+    if isinstance(tests,dict):
+        if tests.get('mode')!='stdio':raise ValueError('Unknown test execution mode')
+        result=sandbox.score_stdio(completion,tests['cases'],tests['time_limit'],tests['memory_limit_mb'])
+        return {**result,'correct':result['passed']==result['total'],'correctness_protocol':'codeforces_stdio'}
+    return program_score(sandbox,completion,tests,task_id)

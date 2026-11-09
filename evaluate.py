@@ -26,8 +26,12 @@ def evaluate(model, tokenizer, rows, sandbox, output, max_new_tokens=256, monito
                 monitor.phase = f"{prefix}: testing {i + 1}/{len(rows)}"
             score = score_fn(sandbox, completion, row["tests"], row["task_id"]) if score_fn else sandbox.score(completion, row["tests"])
             results.append({"task_id": row["task_id"], "completion": completion, "correct": score["passed"] == score["total"], "tokens": tokens.shape[1] - inputs.input_ids.shape[1], **score})
+            if monitor:monitor.log({f'{prefix}/completed':i+1,f'{prefix}/total':len(rows),f'{prefix}/percent':100*(i+1)/len(rows)})
             print(f"[{prefix}] {i + 1}/{len(rows)}: {sum(r['correct'] for r in results)}/{len(results)} correct", flush=True)
-        metrics = {"correctness": sum(r["correct"] for r in results) / len(results), "mean_test_fraction": sum(r["passed"] / r["total"] for r in results) / len(results), "mean_tokens": sum(r["tokens"] for r in results) / len(results), "problems": len(results)}
+        metrics = {"correctness": sum(r["correct"] for r in results) / len(results), "mean_tokens": sum(r["tokens"] for r in results) / len(results), "problems": len(results)}
+        if all(r.get('checked',r['total'])==r['total'] for r in results):
+            metrics['mean_test_fraction']=sum(r['passed']/r['total'] for r in results)/len(results)
+        metrics['mean_checked_tests']=sum(r.get('checked',r['total']) for r in results)/len(results)
         metrics.update(evaluator=sandbox.backend, correctness_protocol=score_fn.__name__ if score_fn else "original_tests", failure_counts=dict(collections.Counter(r["status"] for r in results)))
         path = Path(output)
         path.parent.mkdir(parents=True, exist_ok=True)

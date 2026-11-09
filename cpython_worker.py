@@ -6,12 +6,14 @@ import math
 import os
 from pathlib import Path
 import resource
+import re
+import tempfile
 import signal
 import subprocess
 import sys
 import time
 
-VERSION = "cpython-v2"
+VERSION = "cpython-v3"
 
 
 class BoundedOutput(io.StringIO):
@@ -23,10 +25,10 @@ class BoundedOutput(io.StringIO):
         return size
 
 
-def limits(cpu_seconds=3, memory=512 * 1024 * 1024):
+def limits(cpu_seconds=3, memory=512 * 1024 * 1024, output_limit=1024 * 1024):
     resource.setrlimit(resource.RLIMIT_AS, (memory, memory))
     resource.setrlimit(resource.RLIMIT_CORE, (0, 0))
-    resource.setrlimit(resource.RLIMIT_FSIZE, (1024 * 1024, 1024 * 1024))
+    resource.setrlimit(resource.RLIMIT_FSIZE, (output_limit, output_limit))
     resource.setrlimit(resource.RLIMIT_CPU, (cpu_seconds, cpu_seconds + 1))
     resource.setrlimit(resource.RLIMIT_NOFILE, (64, 64))
 
@@ -100,6 +102,60 @@ def score(request):
             "test_results": outcomes, "seconds": time.monotonic() - start, "evaluator": VERSION}
 
 
+
+def normalized_output(text):
+    # Match the upstream no-custom-checker policy: whitespace and YES/NO case.
+    return re.sub(r'\b(?:yes|no)\b',lambda m:m.group().upper(),text,flags=re.I).split()
+
+
+def stdio_score(request):
+    code=request['code'];tests=request['cases']
+    if not tests or any(not isinstance(t.get('input'),str) or not isinstance(t.get('output'),str) for t in tests):
+        raise ValueError('Standard-I/O scoring requires nonempty input/output records')
+    wall=float(request['time_limit']);memory=int(request['memory_limit_mb'])*1024*1024
+    if not 0<wall<=60 or not 0<memory<=1024**3:raise ValueError('Unsupported test resource limits')
+    result={'passed':0,'total':len(tests),'checked':0,'status':'ok','errors':[],'test_results':[],'evaluator':VERSION,'correctness_protocol':'codeforces_stdio'}
+    start=time.monotonic()
+    try:compile(code,'<candidate>','exec')
+    except SyntaxError as exc:
+        return {**result,'status':'syntax_error','errors':[str(exc)],'correct':False,'seconds':time.monotonic()-start}
+    if len(code.encode())>65536:
+        return {**result,'status':'runtime_error','errors':['Candidate exceeds 64 KiB source budget'],'correct':False,'seconds':time.monotonic()-start}
+    for index,test in enumerate(tests):
+        # Fresh script and working directory prevent candidate mutation/state from
+        # changing the next test's code. Expected output stays in the grader.
+        with tempfile.TemporaryDirectory() as work, tempfile.TemporaryFile() as out, tempfile.TemporaryFile() as err:
+            path=Path(work)/'solution.py';path.write_text(code)
+            output_limit=max(1024*1024,len(test['output'].encode())+1024*1024)
+            proc=subprocess.Popen([sys.executable,'-I',str(path)],stdin=subprocess.PIPE,stdout=out,stderr=err,cwd=work,
+                start_new_session=True,env={'PATH':'/usr/local/bin:/usr/bin:/bin','LANG':'C.UTF-8','PYTHONHASHSEED':'0','OPENBLAS_NUM_THREADS':'1','OMP_NUM_THREADS':'1'},
+                preexec_fn=lambda:limits(max(1,math.ceil(wall)),memory,output_limit))
+            status='ok';message=''
+            try:
+                proc.communicate(test['input'].replace('\r\n','\n').encode(),timeout=wall)
+            except subprocess.TimeoutExpired:
+                status='timeout';message=f'Exceeded {wall}s per-case wall time'
+            finally:
+                try:os.killpg(proc.pid,signal.SIGKILL)
+                except ProcessLookupError:pass
+                proc.communicate()
+            err.seek(0);stderr=err.read(4096).decode(errors='replace')
+            if status=='ok' and proc.returncode:
+                status=('memory_error' if 'MemoryError' in stderr else 'timeout' if proc.returncode in {-signal.SIGXCPU,-signal.SIGKILL} else 'output_limit' if proc.returncode==-signal.SIGXFSZ else 'runtime_error')
+                message=f'Exit {proc.returncode}: {stderr}'
+            out.seek(0);actual=out.read(output_limit+1).decode(errors='replace')
+            if status=='ok' and normalized_output(actual)!=normalized_output(test['output']):
+                status='wrong_answer';message='Output differs from official expected output'
+            outcome={'case_index':index,'status':status}
+            if status!='ok':outcome.update(message=message,actual_preview=actual[:4096],expected_preview=test['output'][:4096])
+            result['checked']+=1;result['test_results'].append(outcome)
+            if status!='ok':
+                result.update(status=status,errors=[f'case {index}: {message}'])
+                break  # Binary all-pass reward; unchecked cases are not reported as tested.
+            result['passed']+=1
+    result.update(correct=result['passed']==result['total'],seconds=time.monotonic()-start)
+    return result
+
 def plus_case(request):
     """Use EvalPlus's own input deserialization, special oracles, and checker."""
     import copy
@@ -128,11 +184,13 @@ def plus_case(request):
 
 
 def main():
-    print(json.dumps({"ready": True, "backend": VERSION}), flush=True)
+    print(json.dumps({"ready": True, "backend": VERSION, "capabilities": ["stdio", "evalplus", "python_test_program"]}), flush=True)
     for line in sys.stdin:
         try:
             request = json.loads(line)
-            if request.get("mode") == "evalplus":
+            if request.get("mode") == "stdio":
+                response = stdio_score(request)
+            elif request.get("mode") == "evalplus":
                 response = subprocess_case(request, mode="evalplus", timeout=75)
             else:
                 response = score(request)

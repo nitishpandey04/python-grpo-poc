@@ -1,0 +1,68 @@
+task_id,title,language,rating,difficulty,official_io_records,source_url
+codeforces/1003/A,Polycarp's Pockets,python,800,easy,37,https://codeforces.com/problemset/problem/1003/A
+codeforces/1032/A,Kitchen Utensils,python,900,easy,23,https://codeforces.com/problemset/problem/1032/A
+codeforces/1043/A,Elections,python,800,easy,47,https://codeforces.com/problemset/problem/1043/A
+codeforces/1068/A,Birthday,python,1400,medium,91,https://codeforces.com/problemset/problem/1068/A
+codeforces/1075/A,The King's Race,python,800,easy,38,https://codeforces.com/problemset/problem/1075/A
+codeforces/1080/A,Petya and Origami,python,800,easy,34,https://codeforces.com/problemset/problem/1080/A
+codeforces/1157/A,Reachable Numbers,python,1100,medium,130,https://codeforces.com/problemset/problem/1157/A
+codeforces/1173/A,Nauuo and Votes,python,800,easy,114,https://codeforces.com/problemset/problem/1173/A
+codeforces/1181/A,Chunga-Changa,python,1000,easy,39,https://codeforces.com/problemset/problem/1181/A
+codeforces/1203/D1,Remove the Substring (easy version),python,1600,medium,44,https://codeforces.com/problemset/problem/1203/D1
+codeforces/1204/A,BowWow and the Timetable,python,1000,easy,50,https://codeforces.com/problemset/problem/1204/A
+codeforces/1213/D1,Equalizing by Division (easy version),python,1500,medium,29,https://codeforces.com/problemset/problem/1213/D1
+codeforces/139/A,Petr and Book,python,1000,easy,49,https://codeforces.com/problemset/problem/139/A
+codeforces/150/B,Quantity of Strings,python,1600,medium,70,https://codeforces.com/problemset/problem/150/B
+codeforces/1836/A,Destroyer,python,800,easy,22,https://codeforces.com/problemset/problem/1836/A
+codeforces/1841/A,Game with Board,python,800,easy,5,https://codeforces.com/problemset/problem/1841/A
+codeforces/185/A,Plant,python,1300,medium,49,https://codeforces.com/problemset/problem/185/A
+codeforces/190/A,Vasya and the Bus,python,1100,medium,54,https://codeforces.com/problemset/problem/190/A
+codeforces/192/A,Funky Numbers,python,1300,medium,71,https://codeforces.com/problemset/problem/192/A
+codeforces/197/A,Plate Game,python,1600,medium,95,https://codeforces.com/problemset/problem/197/A
+codeforces/320/A,Magic Numbers,python,900,easy,47,https://codeforces.com/problemset/problem/320/A
+codeforces/325/A,Square and Rectangles,python,1500,medium,68,https://codeforces.com/problemset/problem/325/A
+codeforces/337/A,Puzzles,python,900,easy,18,https://codeforces.com/problemset/problem/337/A
+codeforces/347/A,Difference Row,python,1300,medium,16,https://codeforces.com/problemset/problem/347/A
+codeforces/387/A,George and Sleep,python,900,easy,47,https://codeforces.com/problemset/problem/387/A
+codeforces/405/A,Gravity Flip,python,900,easy,32,https://codeforces.com/problemset/problem/405/A
+codeforces/409/H,A + B Strikes Back,python,1500,medium,20,https://codeforces.com/problemset/problem/409/H
+codeforces/413/A,Data Recovery,python,1200,medium,68,https://codeforces.com/problemset/problem/413/A
+codeforces/430/B,Balls Game,python,1400,medium,18,https://codeforces.com/problemset/problem/430/B
+codeforces/460/B,Little Dima and Equation,python,1500,medium,48,https://codeforces.com/problemset/problem/460/B
+codeforces/47/B,Coins,python,1200,medium,50,https://codeforces.com/problemset/problem/47/B
+codeforces/485/A,Factory,python,1400,medium,23,https://codeforces.com/problemset/problem/485/A
+codeforces/492/A,Vanya and Cubes,python,800,easy,25,https://codeforces.com/problemset/problem/492/A
+codeforces/507/B,Amr and Pins,python,1400,medium,37,https://codeforces.com/problemset/problem/507/B
+codeforces/514/A,Chewbaсca and Number,python,1200,medium,43,https://codeforces.com/problemset/problem/514/A
+codeforces/515/C,Drazil and Factorial,python,1400,medium,45,https://codeforces.com/problemset/problem/515/C
+codeforces/535/B,Tavas and SaDDas,python,1100,medium,33,https://codeforces.com/problemset/problem/535/B
+codeforces/546/A,Soldier and Bananas,python,800,easy,15,https://codeforces.com/problemset/problem/546/A
+codeforces/559/A,Gerald's Hexagon,python,1600,medium,26,https://codeforces.com/problemset/problem/559/A
+codeforces/59/B,Fortune Telling,python,1200,medium,43,https://codeforces.com/problemset/problem/59/B
+codeforces/599/A,Patrick and Shopping,python,800,easy,21,https://codeforces.com/problemset/problem/599/A
+codeforces/61/A,Ultra-Fast Mathematician,python,800,easy,102,https://codeforces.com/problemset/problem/61/A
+codeforces/611/B,New Year and Old Property,python,1300,medium,103,https://codeforces.com/problemset/problem/611/B
+codeforces/626/A,Robot Sequence,python,1000,easy,25,https://codeforces.com/problemset/problem/626/A
+codeforces/645/B,Mischievous Mess Makers,python,1200,medium,92,https://codeforces.com/problemset/problem/645/B
+codeforces/653/B,Bear and Compressing,python,1300,medium,32,https://codeforces.com/problemset/problem/653/B
+codeforces/659/A,Round House,python,1000,easy,50,https://codeforces.com/problemset/problem/659/A
+codeforces/682/A,Alyona and Numbers,python,1100,medium,128,https://codeforces.com/problemset/problem/682/A
+codeforces/712/C,Memory and De-Evolution,python,1600,medium,76,https://codeforces.com/problemset/problem/712/C
+codeforces/729/A,Interview with Oleg,python,900,easy,48,https://codeforces.com/problemset/problem/729/A
+codeforces/735/A,Ostap and Grasshopper,python,800,easy,83,https://codeforces.com/problemset/problem/735/A
+codeforces/764/A,Taymyr is calling you,python,800,easy,32,https://codeforces.com/problemset/problem/764/A
+codeforces/801/A,Vicious Keyboard,python,1100,medium,63,https://codeforces.com/problemset/problem/801/A
+codeforces/834/A,The Useless Toy,python,900,easy,47,https://codeforces.com/problemset/problem/834/A
+codeforces/846/A,Curriculum Vitae,python,1500,medium,18,https://codeforces.com/problemset/problem/846/A
+codeforces/859/B,Lazy Security Guard,python,1000,easy,35,https://codeforces.com/problemset/problem/859/B
+codeforces/875/A,Classroom Watch,python,1200,medium,18,https://codeforces.com/problemset/problem/875/A
+codeforces/876/A,Trip For Meal,python,900,easy,48,https://codeforces.com/problemset/problem/876/A
+codeforces/888/D,Almost Identity Permutations,python,1600,medium,25,https://codeforces.com/problemset/problem/888/D
+codeforces/899/B,Months and Years,python,1200,medium,62,https://codeforces.com/problemset/problem/899/B
+codeforces/926/A,2-3-numbers,python,1300,medium,53,https://codeforces.com/problemset/problem/926/A
+codeforces/937/B,Vile Grasshoppers,python,1400,medium,58,https://codeforces.com/problemset/problem/937/B
+codeforces/962/C,Make a Square,python,1400,medium,70,https://codeforces.com/problemset/problem/962/C
+codeforces/979/A,"Pizza, Pizza, Pizza!!!",python,1000,easy,47,https://codeforces.com/problemset/problem/979/A
+codeforces/980/A,Links and Pearls,python,900,easy,69,https://codeforces.com/problemset/problem/980/A
+codeforces/990/A,Commentary Boxes,python,1000,easy,109,https://codeforces.com/problemset/problem/990/A
+codeforces/991/C,Candies,python,1500,medium,69,https://codeforces.com/problemset/problem/991/C

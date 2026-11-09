@@ -1,0 +1,41 @@
+{
+  "stage": "baseline-only",
+  "steps": 0,
+  "train_problems": 628,
+  "development_problems": 67,
+  "sealed_confirmation_problems": 49,
+  "confirmation_evaluated": false,
+  "baseline_validation": {
+    "correctness": 0.014925373134328358,
+    "mean_tokens": 167.67164179104478,
+    "problems": 67,
+    "mean_checked_tests": 1.5970149253731343,
+    "evaluator": "cpython",
+    "correctness_protocol": "solution_score",
+    "failure_counts": {
+      "wrong_answer": 52,
+      "runtime_error": 9,
+      "syntax_error": 3,
+      "ok": 1,
+      "timeout": 2
+    }
+  },
+  "by_difficulty": {
+    "easy": {
+      "correct": 0,
+      "problems": 30,
+      "mean_tokens": 170.3,
+      "token_cap_hits": 1
+    },
+    "medium": {
+      "correct": 1,
+      "problems": 37,
+      "mean_tokens": 165.54054054054055,
+      "token_cap_hits": 1
+    }
+  },
+  "max_completion_tokens": 1024,
+  "dataset_manifest_sha256": "68dc5df9f80ae4ca15c1fba54b5f1d3868da00b1d53ebb8494ecf583fb7d6f50",
+  "peak_gpu_allocated_mb": 986.1376953125,
+  "development_protocol": "Fixed Codeforces train-derived development split, same official Python I/O grader before/after. Existing MBPP development/confirmation inputs remain unchanged."
+}

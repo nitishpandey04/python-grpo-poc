@@ -100,3 +100,15 @@ Scanned the pinned Open-R1 `verifiable/train` metadata: 8,338 tasks, 1,654 compl
 Downloaded one 26 MB shard and inspected 27 easier problems with 985 official records. Four simple tasks were checked independently against all 142 supplied outputs, with full agreement. Beautiful Matrix's 25 tests cover all 25 valid board states. Complete official suites still need not be exhaustive for larger domains.
 
 No model predictions, training changes or test-split reads were performed. The next step is a small standard-I/O execution path and a baseline-only check on the cached sample before deciding to train on this source.
+
+## Python-only Codeforces ready — 2026-11-09
+
+[Prepared scope, grader checks and baseline](experiments/codeforces-python-ready/REPORT.md).
+
+- Prepared Python 3 solutions only: 628 training tasks (304 easy, 324 medium), plus 67 fixed development tasks (30 easy, 37 medium).
+- Experiment scope: ratings 800–1000 easy and 1100–1600 medium, complete official I/O tests, standard I/O and supported output comparison. No model-success or minimum-test-count gate.
+- Eight otherwise in-scope rows had no statement; 20 declared alternative outputs without usable checkers. The latter correction supersedes the local provisional 647/68 preparation and baseline.
+- Training has 32,983 official I/O records. The existing Docker worker supports Python standard I/O, explicit per-case limits and fail-fast all-pass rewards; all 28 checks pass. Known-correct programs pass 45 real official cases.
+- Final unchanged-model baseline: 1/67 (easy 0/30, medium 1/37). No optimization, adapter upload or confirmation predictions. Both requested difficulty groups remain included.
+
+The next experiment needs a sampled training-reward check before a long GRPO run; the new baseline indicates sparse rewards may be a bottleneck. This is a harder/different task set than MBPP, not a measured model regression.

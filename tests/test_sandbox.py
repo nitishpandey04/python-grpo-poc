@@ -13,6 +13,33 @@ class SandboxTests(unittest.TestCase):
     def tearDownClass(cls):
         cls.sandbox.close()
 
+    def test_standard_io_uses_real_python_stdin_and_normal_exit(self):
+        tests=[{'input':'41\r\n','output':'42'}]
+        code="import sys\nx=int(sys.stdin.buffer.read())\nprint(x+1)\nsys.exit(0)"
+        self.assertTrue(self.sandbox.score_stdio(code,tests)['correct'])
+        self.assertEqual(self.sandbox.score_stdio('int main() {}',tests)['status'],'syntax_error')
+
+    def test_output_normalization_and_no_numeric_coercion(self):
+        self.assertTrue(self.sandbox.score_stdio("print(' yes  No ')",[{'input':'','output':'YES\nNO'}])['correct'])
+        self.assertFalse(self.sandbox.score_stdio("print('yesterday')",[{'input':'','output':'YESterday'}])['correct'])
+        self.assertFalse(self.sandbox.score_stdio("print('1.0')",[{'input':'','output':'1'}])['correct'])
+
+    def test_standard_io_is_fresh_and_fail_fast_is_explicit(self):
+        code="from pathlib import Path\np=Path('state')\nx=int(p.read_text()) if p.exists() else 0\np.write_text(str(x+1))\nprint(x+1)"
+        cases=[{'input':'','output':'1'}]*2
+        self.assertTrue(self.sandbox.score_stdio(code,cases)['correct'])
+        score=self.sandbox.score_stdio("print(0)",cases)
+        self.assertFalse(score['correct']);self.assertEqual(score['checked'],1);self.assertEqual(score['total'],2)
+        with self.assertRaises(ValueError):self.sandbox.score_stdio(code,[])
+
+    def test_standard_io_limits_and_runtime_failure(self):
+        score=self.sandbox.score_stdio('while True: pass',[{'input':'','output':'1'}],time_limit=0.2)
+        self.assertEqual(score['status'],'timeout')
+        score=self.sandbox.score_stdio('x=bytes(10**9)',[{'input':'','output':'1'}],memory_limit_mb=64)
+        self.assertEqual(score['status'],'memory_error')
+        self.assertFalse(self.sandbox.score_stdio('import os; os._exit(0)',[{'input':'','output':'1'}])['correct'])
+        self.assertTrue(self.sandbox.score_stdio("import os; print(int(os.getuid()!=0 and 'HF_TOKEN' not in os.environ))",[{'input':'','output':'1'}])['correct'])
+
     def test_native_program_preserves_setup_and_explicit_failure(self):
         tests=['values=[1,2,3]','def check():',' for value in values:','  if f(value)!=value+1:','   raise ValueError("wrong result")','check()']
         self.assertTrue(program_score(self.sandbox,'def f(x): return x+1',tests)['correct'])

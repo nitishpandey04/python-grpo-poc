@@ -3,6 +3,7 @@ import argparse
 import hashlib
 import json
 import os
+import subprocess
 from pathlib import Path
 import time
 
@@ -17,7 +18,7 @@ headers=ROOT/'.cache/python-headers/usr/include'
 if headers.exists():os.environ['C_INCLUDE_PATH']=os.pathsep.join([str(headers/'python3.12'),str(headers),os.environ.get('C_INCLUDE_PATH','')])
 
 from evaluate import compare,evaluate
-from execution import Sandbox,program_score
+from execution import Sandbox,solution_score
 from monitoring import Monitor
 from evaluate import expanded_score,read_rows,sha
 from report import build_report
@@ -53,10 +54,14 @@ def main(args):
     if args.output is None:args.output=ROOT/'runs'/args.name
     batches=batch_settings(args.prompts_per_update,args.generations,args.micro_batch)
     manifest=json.loads((args.dataset/'manifest.json').read_text())
-    if manifest['protocol']!='python-program-grpo-v1':raise ValueError('Prepare native Python programs with prepare_data.py first')
+    if manifest['protocol'] not in {'python-program-grpo-v1','python-grpo-v1'}:raise ValueError('Prepare native Python programs with prepare_data.py first')
     for split,digest in manifest['files_sha256'].items():
         if sha(args.dataset/f'{split}.jsonl')!=digest:raise ValueError('Frozen selected data changed')
     train_rows=read_rows(args.dataset/'train.jsonl');val_rows=read_rows(args.dataset/'validation.jsonl')
+    stdio=manifest.get('execution_mode')=='stdio'
+    if stdio and any(r.get('language')!='python' for r in train_rows+val_rows):raise ValueError('This run accepts Python-only data')
+    if args.max_tokens is None:args.max_tokens=manifest.get('max_completion_tokens',256)
+    evaluation_scorer=solution_score if stdio else expanded_score
     # Only IDs are used to guard the sealed confirmation pool. No confirmation prediction is generated.
     train_ids={r['task_id'] for r in train_rows};val_ids={r['task_id'] for r in val_rows};confirmation_ids=set(manifest['confirmation']['task_ids'])
     if train_ids&val_ids or train_ids&confirmation_ids or val_ids&confirmation_ids:raise ValueError('Data leakage')
@@ -66,7 +71,7 @@ def main(args):
     args.output.mkdir(parents=True,exist_ok=True)
     if not torch.cuda.is_available():raise RuntimeError('CUDA unavailable')
     set_seed(args.seed);torch.set_num_threads(4)
-    config={**{k:str(v) if isinstance(v,Path) else v for k,v in vars(args).items()},'stage':'short pipeline smoke test','batch_settings':batches,'dataset_manifest_sha256':sha(args.dataset/'manifest.json'),'reward':'binary all supplied Python test-program checks pass','development_protocol':'unchanged original + official expanded MBPP suites','source_sha256':{name:sha(ROOT/name) for name in ['train.py','prepare_data.py','evaluate.py','execution.py','cpython_worker.py','monitoring.py']},'confirmation_evaluated':False,'gpu':torch.cuda.get_device_name(),'torch':torch.__version__}
+    config={**{k:str(v) if isinstance(v,Path) else v for k,v in vars(args).items()},'stage':'baseline-only' if args.baseline_only else 'short pipeline smoke test','batch_settings':batches,'dataset_manifest_sha256':sha(args.dataset/'manifest.json'),'reward':manifest['training_reward'],'development_protocol':manifest['development_protocol'],'execution_image':manifest.get('execution_image','python-grpo-cpython:v3'),'execution_image_id':subprocess.check_output(['docker','image','inspect','--format','{{.Id}}',manifest.get('execution_image','python-grpo-cpython:v3')],text=True).strip(),'source_sha256':{name:sha(ROOT/name) for name in ['train.py','prepare_data.py','evaluate.py','execution.py','cpython_worker.py','monitoring.py']},'confirmation_evaluated':False,'gpu':torch.cuda.get_device_name(),'torch':torch.__version__}
     (args.output/'config.json').write_text(json.dumps(config,indent=2))
     monitor=Monitor(args.output,args.output.name,config)
     try:
@@ -75,17 +80,28 @@ def main(args):
         tokenizer.padding_side='left'
         if tokenizer.pad_token_id is None:tokenizer.pad_token=tokenizer.eos_token
         model=AutoModelForCausalLM.from_pretrained(manifest['model'],revision=manifest['revision'],local_files_only=True,dtype=torch.bfloat16,attn_implementation='sdpa').to('cuda')
-        with Sandbox() as sandbox:
-            before,baseline=evaluate(model,tokenizer,val_rows,sandbox,args.output/'baseline-validation.jsonl',args.max_tokens,monitor,'baseline_validation',score_fn=expanded_score)
+        with Sandbox(image=manifest.get('execution_image'),memory=manifest.get('container_memory','1g')) as sandbox:
+            before,baseline=evaluate(model,tokenizer,val_rows,sandbox,args.output/'baseline-validation.jsonl',args.max_tokens,monitor,'baseline_validation',score_fn=evaluation_scorer)
+            if args.baseline_only:
+                groups={}
+                for label in sorted({r.get('difficulty','development') for r in val_rows}):
+                    ids={r['task_id'] for r in val_rows if r.get('difficulty','development')==label}
+                    outputs=[r for r in before if r['task_id'] in ids]
+                    groups[label]={'correct':sum(r['correct'] for r in outputs),'problems':len(outputs),'mean_tokens':sum(r['tokens'] for r in outputs)/len(outputs),'token_cap_hits':sum(r['tokens']>=args.max_tokens for r in outputs)}
+                    monitor.log({f'baseline/{label}_correctness':groups[label]['correct']/len(outputs)})
+                report={'stage':'baseline-only','steps':0,'train_problems':len(train_rows),'development_problems':len(val_rows),'sealed_confirmation_problems':len(confirmation_ids),'confirmation_evaluated':False,'baseline_validation':baseline,'by_difficulty':groups,'max_completion_tokens':args.max_tokens,'dataset_manifest_sha256':sha(args.dataset/'manifest.json'),'peak_gpu_allocated_mb':torch.cuda.max_memory_allocated()/1024**2,'development_protocol':manifest['development_protocol']}
+                (args.output/'report.json').write_text(json.dumps(report,indent=2));build_report(args.output)
+                monitor.phase='complete';print(json.dumps(report,indent=2),flush=True)
+                return
             best={'step':0,'correctness':baseline['correctness']}
 
             def reward(completions,tests,task_id,**kwargs):
                 layout=validate_generation_groups(task_id,args.prompts_per_update,args.generations)
                 rewards=[]
-                monitor.phase='running supplied Python test programs'
+                monitor.phase='executing Python solutions against supplied tests'
                 for completion,problem_tests,problem_id in zip(completions,tests,task_id,strict=True):
                     text=completion[0]['content'] if isinstance(completion,list) else completion
-                    score=program_score(sandbox,text,problem_tests,problem_id)
+                    score=solution_score(sandbox,text,problem_tests,problem_id)
                     value=float(score['correct']);rewards.append(value)
                     monitor.sample({'task_id':problem_id,'completion':text,'reward':value,**score})
                 grouped=[rewards[i:i+args.generations] for i in range(0,len(rewards),args.generations)]
@@ -105,7 +121,7 @@ def main(args):
                 def on_step_end(self,config,state,control,model=None,**kwargs):
                     monitor.step=state.global_step
                     if state.global_step%args.eval_every==0 or state.global_step==args.steps:
-                        _,metrics=evaluate(model,tokenizer,val_rows,sandbox,args.output/f'validation-step-{state.global_step}.jsonl',args.max_tokens,monitor,'validation',score_fn=expanded_score)
+                        _,metrics=evaluate(model,tokenizer,val_rows,sandbox,args.output/f'validation-step-{state.global_step}.jsonl',args.max_tokens,monitor,'validation',score_fn=evaluation_scorer)
                         monitor.log({'validation/baseline_correctness':baseline['correctness'],'validation/change_from_baseline':metrics['correctness']-baseline['correctness']})
                         if metrics['correctness']>best['correctness']:
                             best.update(step=state.global_step,correctness=metrics['correctness'])
@@ -125,7 +141,7 @@ def main(args):
             trainer.train()
             trainer.save_model(str(args.output/'final-adapter'));tokenizer.save_pretrained(args.output/'final-adapter')
             after=read_rows(args.output/f'validation-step-{args.steps}.jsonl')
-            report={'stage':'short pipeline smoke test','steps':args.steps,'train_problems':len(train_rows),'development_problems':len(val_rows),'sealed_confirmation_problems':len(confirmation_ids),'dataset_manifest_sha256':sha(args.dataset/'manifest.json'),'confirmation_evaluated':False,'baseline_validation':baseline,'final_validation':json.loads((args.output/f'validation-step-{args.steps}.summary.json').read_text()),'selected_checkpoint':best,'development_comparison':compare(before,after,note='Development-only comparison in a bounded pipeline pilot; not independent confirmation.'),'peak_gpu_allocated_mb':torch.cuda.max_memory_allocated()/1024**2,'limitations':['Ten-step default is a pipeline smoke test, not evidence of general improvement.','Small development set and one training seed; no claim of general improvement.','Confirmation predictions are deliberately deferred.']}
+            report={'stage':'short pipeline smoke test','steps':args.steps,'train_problems':len(train_rows),'development_problems':len(val_rows),'sealed_confirmation_problems':len(confirmation_ids),'dataset_manifest_sha256':sha(args.dataset/'manifest.json'),'confirmation_evaluated':False,'development_protocol':manifest['development_protocol'],'baseline_validation':baseline,'final_validation':json.loads((args.output/f'validation-step-{args.steps}.summary.json').read_text()),'selected_checkpoint':best,'development_comparison':compare(before,after,note='Development-only comparison in a bounded pipeline pilot; not independent confirmation.'),'peak_gpu_allocated_mb':torch.cuda.max_memory_allocated()/1024**2,'limitations':['Ten-step default is a pipeline smoke test, not evidence of general improvement.','Small development set and one training seed; no claim of general improvement.','Confirmation predictions are deliberately deferred.']}
             (args.output/'report.json').write_text(json.dumps(report,indent=2))
             metrics=[json.loads(line) for line in (args.output/'metrics.jsonl').read_text().splitlines()]
             layouts=[r for r in metrics if 'batch/distinct_prompts' in r]
@@ -143,10 +159,11 @@ def main(args):
 
 if __name__=='__main__':
     parser=argparse.ArgumentParser()
-    parser.add_argument('--dataset',type=Path,default=Path('data/python-programs'))
+    parser.add_argument('--dataset',type=Path,default=Path('data/codeforces-python'))
     parser.add_argument('--name',default='simple-smoke')
     parser.add_argument('--output',type=Path)
-    parser.add_argument('--max-tokens',type=int,default=256)
+    parser.add_argument('--max-tokens',type=int)
+    parser.add_argument('--baseline-only',action='store_true')
     parser.add_argument('--temperature',type=float,default=0.8)
     parser.add_argument('--steps',type=int,default=10)
     parser.add_argument('--eval-every',type=int,default=5)
