@@ -43,6 +43,12 @@ def batch_settings(prompts,generations,micro_batch):
 
 
 
+
+def resolve_model(manifest,model=None,revision=None):
+    if (model is None)!=(revision is None):raise ValueError('Model overrides require both --model and --model-revision')
+    return (model,revision) if model is not None else (manifest['model'],manifest['revision'])
+
+
 def select_probe_rows(rows,count,seed):
     """Fixed balanced sample from training only, without observing model answers."""
     if not 0<count<=len(rows):raise ValueError('Probe count must fit the training pool')
@@ -124,6 +130,7 @@ def main(args):
     for split,digest in manifest['files_sha256'].items():
         if sha(args.dataset/f'{split}.jsonl')!=digest:raise ValueError('Frozen selected data changed')
     train_rows=read_rows(args.dataset/'train.jsonl');val_rows=read_rows(args.dataset/'validation.jsonl')
+    model_id,model_revision=resolve_model(manifest,args.model,args.model_revision)
     stdio=manifest.get('execution_mode')=='stdio'
     if stdio and any(r.get('language')!='python' for r in train_rows+val_rows):raise ValueError('This run accepts Python-only data')
     if args.max_tokens is None:args.max_tokens=manifest.get('max_completion_tokens',256)
@@ -141,16 +148,16 @@ def main(args):
     if selected is not None:
         selection={'split':'train','seed':args.seed,'rule':'Hash-order within difficulty, round-robin equal allocation, independent of model outcomes. Balanced probe is not a population-weighted score.','problems':[{k:r[k] for k in ['task_id','difficulty','rating']} for r in selected]}
         (args.output/'probe-selection.json').write_text(json.dumps(selection,indent=2))
-    config={**{k:str(v) if isinstance(v,Path) else v for k,v in vars(args).items()},'stage':'reward-probe' if args.reward_probe else 'baseline-only' if args.baseline_only else 'short pipeline smoke test','batch_settings':batches,'dataset_manifest_sha256':sha(args.dataset/'manifest.json'),'reward':manifest['training_reward'],'development_protocol':manifest['development_protocol'],'execution_image':manifest.get('execution_image','python-grpo-cpython:v3'),'execution_image_id':subprocess.check_output(['docker','image','inspect','--format','{{.Id}}',manifest.get('execution_image','python-grpo-cpython:v3')],text=True).strip(),'source_sha256':{name:sha(ROOT/name) for name in ['train.py','prepare_data.py','evaluate.py','execution.py','cpython_worker.py','monitoring.py']},'confirmation_evaluated':False,'gpu':torch.cuda.get_device_name(),'torch':torch.__version__}
+    config={**{k:str(v) if isinstance(v,Path) else v for k,v in vars(args).items()},'model':model_id,'model_revision':model_revision,'stage':'reward-probe' if args.reward_probe else 'baseline-only' if args.baseline_only else 'short pipeline smoke test','batch_settings':batches,'dataset_manifest_sha256':sha(args.dataset/'manifest.json'),'reward':manifest['training_reward'],'development_protocol':manifest['development_protocol'],'execution_image':manifest.get('execution_image','python-grpo-cpython:v3'),'execution_image_id':subprocess.check_output(['docker','image','inspect','--format','{{.Id}}',manifest.get('execution_image','python-grpo-cpython:v3')],text=True).strip(),'source_sha256':{name:sha(ROOT/name) for name in ['train.py','prepare_data.py','evaluate.py','execution.py','cpython_worker.py','monitoring.py']},'confirmation_evaluated':False,'gpu':torch.cuda.get_device_name(),'torch':torch.__version__}
     if selected is not None:config['probe_selection_sha256']=sha(args.output/'probe-selection.json')
     (args.output/'config.json').write_text(json.dumps(config,indent=2))
     monitor=Monitor(args.output,args.output.name,config)
     try:
         monitor.phase='loading original model'
-        tokenizer=AutoTokenizer.from_pretrained(manifest['model'],revision=manifest['revision'],local_files_only=True)
+        tokenizer=AutoTokenizer.from_pretrained(model_id,revision=model_revision,local_files_only=True)
         tokenizer.padding_side='left'
         if tokenizer.pad_token_id is None:tokenizer.pad_token=tokenizer.eos_token
-        model=AutoModelForCausalLM.from_pretrained(manifest['model'],revision=manifest['revision'],local_files_only=True,dtype=torch.bfloat16,attn_implementation='sdpa').to('cuda')
+        model=AutoModelForCausalLM.from_pretrained(model_id,revision=model_revision,local_files_only=True,dtype=torch.bfloat16,attn_implementation='sdpa').to('cuda')
         with Sandbox(image=manifest.get('execution_image'),memory=manifest.get('container_memory','1g')) as sandbox:
             if args.reward_probe:
                 summary=probe_rewards(model,tokenizer,selected,sandbox,args,monitor)
@@ -240,6 +247,8 @@ if __name__=='__main__':
     parser=argparse.ArgumentParser()
     parser.add_argument('--dataset',type=Path,default=Path('data/codeforces-python'))
     parser.add_argument('--name',default='simple-smoke')
+    parser.add_argument('--model')
+    parser.add_argument('--model-revision')
     parser.add_argument('--output',type=Path)
     parser.add_argument('--max-tokens',type=int)
     mode=parser.add_mutually_exclusive_group()

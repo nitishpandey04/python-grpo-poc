@@ -1,6 +1,6 @@
 # Python coding GRPO on a 16 GB GPU
 
-One active path: **prepare Codeforces problems → generate Python solutions → execute official tests in Docker → train with GRPO and compare on fixed development data**. Qwen2.5-Coder-0.5B-Instruct, LoRA, TRL and local Trackio logging.
+One active path: **prepare Codeforces problems → generate Python solutions → execute official tests in Docker → train with GRPO and compare on fixed development data**. Qwen2.5-Coder (0.5B baseline and 1.5B comparison), LoRA, TRL and local Trackio logging.
 
 Codeforces problems are language-neutral. Every prepared row requests **Python 3**, and the runner executes Python only. No C++ or other-language solutions are used as training targets.
 
@@ -30,6 +30,16 @@ docker build -t python-grpo-cpython:v3 -f Dockerfile.evaluation .
 ```
 
 Preparation and runs refuse to overwrite existing outputs. Prepared data is under `data/codeforces-python/`; skip preparation when reusing it. Use `prepare_data.py --output data/my-data` and `train.py --dataset data/my-data --name my-run` for another dataset. `--max-rating` defaults to 1600. To run in the foreground, call `train.py` directly.
+
+To compare the 1.5B model on the identical data, add these arguments to either a probe or training command:
+
+```bash
+--model Qwen/Qwen2.5-Coder-1.5B-Instruct --model-revision 2e1fd397ee46e1388853d2af2c993145b0f1098a
+```
+
+**1.5B result:** 9/256 passing sampled solutions and 4/32 mixed groups, versus 3/256 and 2/32 for 0.5B. Ten BF16 + LoRA GRPO updates completed with 6.87 GiB peak PyTorch allocation; development stayed 4/67 before and after, so the original 1.5B remains selected. [Full comparison and evidence](experiments/codeforces-1.5b-001/REPORT.md).
+
+Both override arguments are required together. Download that pinned model into the local cache first; the run records its resolved identity independently of the frozen dataset manifest. The original 0.5B model remains the default for reproducing earlier runs.
 
 Before optimization, check sampled training rewards on 16 easy and 16 medium problems:
 

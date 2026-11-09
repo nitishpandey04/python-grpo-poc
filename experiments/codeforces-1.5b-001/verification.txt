@@ -1,0 +1,36 @@
+test_duplicate_matching_preserves_numbers_and_negation (test_data.CodeforcesDataTests.test_duplicate_matching_preserves_numbers_and_negation) ... ok
+test_medium_tasks_are_python_only_and_hidden_tests_are_not_in_prompt (test_data.CodeforcesDataTests.test_medium_tasks_are_python_only_and_hidden_tests_are_not_in_prompt) ... ok
+test_missing_checker_metadata_cannot_override_output_contract (test_data.CodeforcesDataTests.test_missing_checker_metadata_cannot_override_output_contract) ... ok
+test_missing_statement_and_unavailable_grader_are_explicit (test_data.CodeforcesDataTests.test_missing_statement_and_unavailable_grader_are_explicit) ... ok
+test_one_complete_test_is_allowed_but_bad_completeness_is_rejected (test_data.CodeforcesDataTests.test_one_complete_test_is_allowed_but_bad_completeness_is_rejected) ... ok
+test_requested_rating_scope_keeps_medium_and_defers_hard (test_data.CodeforcesDataTests.test_requested_rating_scope_keeps_medium_and_defers_hard) ... ok
+test_split_does_not_depend_on_model_outcomes (test_data.CodeforcesDataTests.test_split_does_not_depend_on_model_outcomes) ... ok
+test_comparison_pairs_by_id_not_order (test_evaluation.EvaluationTests.test_comparison_pairs_by_id_not_order) ... ok
+test_comparison_rejects_different_tasks (test_evaluation.EvaluationTests.test_comparison_rejects_different_tasks) ... ok
+test_comparison_rejects_duplicate_tasks (test_evaluation.EvaluationTests.test_comparison_rejects_duplicate_tasks) ... ok
+test_extracts_code_without_explanation (test_evaluation.EvaluationTests.test_extracts_code_without_explanation) ... ok
+test_container_isolation (test_sandbox.SandboxTests.test_container_isolation) ... ok
+test_correct_and_partial_solutions (test_sandbox.SandboxTests.test_correct_and_partial_solutions) ... ok
+test_early_process_exit_is_not_success (test_sandbox.SandboxTests.test_early_process_exit_is_not_success) ... ok
+test_empty_and_invalid_tests_fail_closed (test_sandbox.SandboxTests.test_empty_and_invalid_tests_fail_closed) ... ok
+test_expanded_oracle_budget_is_explicit (test_sandbox.SandboxTests.test_expanded_oracle_budget_is_explicit) ... ok
+test_expanded_tests_reject_constant_solution (test_sandbox.SandboxTests.test_expanded_tests_reject_constant_solution) ... ok
+test_native_program_preserves_setup_and_explicit_failure (test_sandbox.SandboxTests.test_native_program_preserves_setup_and_explicit_failure) ... ok
+test_no_state_leakage_between_tests_or_requests (test_sandbox.SandboxTests.test_no_state_leakage_between_tests_or_requests) ... ok
+test_output_normalization_and_no_numeric_coercion (test_sandbox.SandboxTests.test_output_normalization_and_no_numeric_coercion) ... ok
+test_runtime_errors_during_tests_are_labelled (test_sandbox.SandboxTests.test_runtime_errors_during_tests_are_labelled) ... ok
+test_standard_io_is_fresh_and_fail_fast_is_explicit (test_sandbox.SandboxTests.test_standard_io_is_fresh_and_fail_fast_is_explicit) ... ok
+test_standard_io_limits_and_runtime_failure (test_sandbox.SandboxTests.test_standard_io_limits_and_runtime_failure) ... ok
+test_standard_io_uses_real_python_stdin_and_normal_exit (test_sandbox.SandboxTests.test_standard_io_uses_real_python_stdin_and_normal_exit) ... ok
+test_timeout_and_memory_failure_recover (test_sandbox.SandboxTests.test_timeout_and_memory_failure_recover) ... ok
+test_valid_python_defaults_classes_and_prints (test_sandbox.SandboxTests.test_valid_python_defaults_classes_and_prints) ... ok
+test_four_prompts_eight_candidates_per_update (test_training.TrainingTests.test_four_prompts_eight_candidates_per_update) ... ok
+test_model_override_requires_its_own_revision_and_keeps_data_manifest (test_training.TrainingTests.test_model_override_requires_its_own_revision_and_keeps_data_manifest) ... ok
+test_probe_distinguishes_mixed_zero_and_full_reward_groups (test_training.TrainingTests.test_probe_distinguishes_mixed_zero_and_full_reward_groups) ... ok
+test_probe_selection_is_balanced_stable_and_ignores_rewards (test_training.TrainingTests.test_probe_selection_is_balanced_stable_and_ignores_rewards) ... ok
+test_training_and_development_use_their_declared_scorers (test_training.TrainingTests.test_training_and_development_use_their_declared_scorers) ... ok
+
+----------------------------------------------------------------------
+Ran 31 tests in 5.015s
+
+OK

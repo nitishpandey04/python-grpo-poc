@@ -124,3 +124,15 @@ The next experiment needs a sampled training-reward check before a long GRPO run
 - All 628 tasks remain eligible, including 324 medium tasks. No development/confirmation predictions or model uploads.
 
 Current binary rewards are sparse for a long run. A small, separately tracked Python standard-I/O warm-up is a reasonable next experiment before repeating this frozen probe; this check neither trains weights nor establishes improvement.
+
+## Qwen2.5-Coder-1.5B comparison and GRPO smoke — 2026-11-10
+
+[Comparison and complete evidence](experiments/codeforces-1.5b-001/REPORT.md).
+
+- Same 32 problems × eight samples: the original 1.5B passes 9/256 candidates with 4/32 mixed groups, compared with 3/256 and 2/32 for the original 0.5B. The 1.5B solves one medium problem in the probe.
+- Fixed greedy development: 1/67 for original 0.5B, 4/67 for original 1.5B. These starting-model results are separate from training effects.
+- Completed ten actual BF16 + LoRA GRPO updates on the RTX 5060 Ti: 40 distinct training problems, 320 candidates, 16 passes, 7/40 mixed groups. Peak PyTorch allocation 6.87 GiB; no quantization required.
+- Development remains 4/67 after training, with no problems newly solved or regressed. Step 0 retains the original 1.5B model. The experimental adapter remains local.
+- All 31 checks passed. Data unchanged at 628 training/67 development, medium scope retained, no confirmation predictions and no new model upload.
+
+This establishes that the 1.5B LoRA GRPO configuration fits and runs locally, and that its original model supplies more reward signal on the frozen probe. It does not establish GRPO improvement or justify a full-budget run on this evidence alone.

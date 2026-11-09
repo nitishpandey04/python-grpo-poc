@@ -1,0 +1,62 @@
+{
+  "stage": "short pipeline smoke test",
+  "steps": 10,
+  "train_problems": 628,
+  "development_problems": 67,
+  "sealed_confirmation_problems": 49,
+  "dataset_manifest_sha256": "68dc5df9f80ae4ca15c1fba54b5f1d3868da00b1d53ebb8494ecf583fb7d6f50",
+  "confirmation_evaluated": false,
+  "development_protocol": "Fixed Codeforces train-derived development split, same official Python I/O grader before/after. Existing MBPP development/confirmation inputs remain unchanged.",
+  "baseline_validation": {
+    "correctness": 0.05970149253731343,
+    "mean_tokens": 161.6417910447761,
+    "problems": 67,
+    "mean_checked_tests": 4.492537313432836,
+    "evaluator": "cpython",
+    "correctness_protocol": "solution_score",
+    "failure_counts": {
+      "wrong_answer": 54,
+      "runtime_error": 5,
+      "timeout": 2,
+      "ok": 4,
+      "memory_error": 1,
+      "syntax_error": 1
+    }
+  },
+  "final_validation": {
+    "correctness": 0.05970149253731343,
+    "mean_tokens": 140.61194029850745,
+    "problems": 67,
+    "mean_checked_tests": 4.507462686567164,
+    "evaluator": "cpython",
+    "correctness_protocol": "solution_score",
+    "failure_counts": {
+      "wrong_answer": 52,
+      "runtime_error": 7,
+      "timeout": 3,
+      "ok": 4,
+      "memory_error": 1
+    }
+  },
+  "selected_checkpoint": {
+    "step": 0,
+    "correctness": 0.05970149253731343
+  },
+  "development_comparison": {
+    "problems": 67,
+    "improvement_percentage_points": 0.0,
+    "ci95_percentage_points": [
+      0.0,
+      0.0
+    ],
+    "improved": 0,
+    "regressed": 0,
+    "note": "Development-only comparison in a bounded pipeline pilot; not independent confirmation."
+  },
+  "peak_gpu_allocated_mb": 7039.72314453125,
+  "limitations": [
+    "Ten-step default is a pipeline smoke test, not evidence of general improvement.",
+    "Small development set and one training seed; no claim of general improvement.",
+    "Confirmation predictions are deliberately deferred."
+  ]
+}

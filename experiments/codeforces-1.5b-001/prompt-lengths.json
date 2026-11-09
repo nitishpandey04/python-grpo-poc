@@ -1,0 +1,14 @@
+{
+  "training": {
+    "problems": 628,
+    "median_prompt_tokens": 424.0,
+    "max_prompt_tokens": 983,
+    "max_with_completion": 2007
+  },
+  "fixed_probe": {
+    "problems": 32,
+    "median_prompt_tokens": 438.5,
+    "max_prompt_tokens": 768,
+    "max_with_completion": 1792
+  }
+}

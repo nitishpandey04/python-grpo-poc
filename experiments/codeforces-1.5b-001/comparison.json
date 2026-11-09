@@ -1,0 +1,136 @@
+{
+  "data_sha256": "68dc5df9f80ae4ca15c1fba54b5f1d3868da00b1d53ebb8494ecf583fb7d6f50",
+  "selection_sha256": "f574311016b663737778a75389504e687881299fbf56f7745418b7bf851aa9e3",
+  "model_source": {
+    "repo": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+    "revision": "2e1fd397ee46e1388853d2af2c993145b0f1098a",
+    "license": "apache-2.0",
+    "weights": [
+      {
+        "path": "model.safetensors",
+        "bytes": 3087467144,
+        "sha256": "c1b9b30e907950516ba3c646bdf570d8084c25a6410a0cdca80cf04b11bc13a8"
+      }
+    ],
+    "download_method": "Installed hf CLI with HF_HUB_DISABLE_XET=1 after stalled Xet transfer"
+  },
+  "probe_0.5b": {
+    "problems": 32,
+    "candidates": 256,
+    "correct_candidates": 3,
+    "full_pass_fraction": 0.01171875,
+    "all_fail_groups": 30,
+    "mixed_reward_groups": 2,
+    "all_pass_groups": 0,
+    "solved_at_least_once": 2,
+    "token_cap_hits": 2,
+    "failure_counts": {
+      "runtime_error": 80,
+      "wrong_answer": 153,
+      "ok": 3,
+      "syntax_error": 16,
+      "memory_error": 1,
+      "timeout": 3
+    }
+  },
+  "probe_1.5b": {
+    "problems": 32,
+    "candidates": 256,
+    "correct_candidates": 9,
+    "full_pass_fraction": 0.03515625,
+    "all_fail_groups": 28,
+    "mixed_reward_groups": 4,
+    "all_pass_groups": 0,
+    "solved_at_least_once": 4,
+    "token_cap_hits": 2,
+    "failure_counts": {
+      "wrong_answer": 186,
+      "runtime_error": 41,
+      "ok": 9,
+      "syntax_error": 7,
+      "timeout": 13
+    }
+  },
+  "probe_1.5b_by_difficulty": {
+    "easy": {
+      "problems": 16,
+      "candidates": 128,
+      "correct_candidates": 8,
+      "full_pass_fraction": 0.0625,
+      "all_fail_groups": 13,
+      "mixed_reward_groups": 3,
+      "all_pass_groups": 0,
+      "solved_at_least_once": 3,
+      "token_cap_hits": 0,
+      "failure_counts": {
+        "wrong_answer": 102,
+        "runtime_error": 14,
+        "ok": 8,
+        "syntax_error": 2,
+        "timeout": 2
+      }
+    },
+    "medium": {
+      "problems": 16,
+      "candidates": 128,
+      "correct_candidates": 1,
+      "full_pass_fraction": 0.0078125,
+      "all_fail_groups": 15,
+      "mixed_reward_groups": 1,
+      "all_pass_groups": 0,
+      "solved_at_least_once": 1,
+      "token_cap_hits": 2,
+      "failure_counts": {
+        "wrong_answer": 84,
+        "runtime_error": 27,
+        "syntax_error": 5,
+        "timeout": 11,
+        "ok": 1
+      }
+    }
+  },
+  "greedy_development": {
+    "original_0.5b": 1,
+    "original_1.5b": 4,
+    "trained_1.5b_step_10": 4,
+    "problems": 67,
+    "improved": 0,
+    "regressed": 0
+  },
+  "training": {
+    "optimizer_steps": 10,
+    "distinct_prompts": 40,
+    "candidates": 320,
+    "passing_candidates": 16.0,
+    "mixed_groups": 7,
+    "by_difficulty": {
+      "easy": {
+        "problems": 18,
+        "candidates": 144,
+        "passing_candidates": 15.0,
+        "mixed_groups": 6,
+        "all_pass_groups": 0
+      },
+      "medium": {
+        "problems": 22,
+        "candidates": 176,
+        "passing_candidates": 1.0,
+        "mixed_groups": 1,
+        "all_pass_groups": 0
+      }
+    },
+    "peak_pytorch_allocated_mib": 7039.72314453125,
+    "peak_sampled_device_mib": 7761.0
+  },
+  "final_adapter": {
+    "local_path": "runs/codeforces-1.5b-smoke-001/final-adapter",
+    "sha256": "4126c2ebbe5a35c26169d16200a1be0d32ec9329de03a478765834232301a7a2",
+    "selected": false,
+    "uploaded": false
+  },
+  "historical_evidence_sha256": {
+    "probe_0.5b": "a8007e830e2fbd7e6e557444b8cf1c3617113c8a3a947c9d2145874e02f93f2d",
+    "baseline_0.5b": "9a2190d57a2a2b97d3a7b86a27e2f9e1ade469528db99ae4f0c9504928fdd95a"
+  },
+  "confirmation_evaluated": false
+}

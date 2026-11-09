@@ -1,0 +1,16 @@
+{
+  "correctness": 0.05970149253731343,
+  "mean_tokens": 161.6417910447761,
+  "problems": 67,
+  "mean_checked_tests": 4.492537313432836,
+  "evaluator": "cpython",
+  "correctness_protocol": "solution_score",
+  "failure_counts": {
+    "wrong_answer": 54,
+    "runtime_error": 5,
+    "timeout": 2,
+    "ok": 4,
+    "memory_error": 1,
+    "syntax_error": 1
+  }
+}

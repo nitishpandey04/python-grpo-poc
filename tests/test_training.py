@@ -1,10 +1,18 @@
 import unittest
-from train import batch_settings,validate_generation_groups,select_probe_rows,summarize_probe
+from train import batch_settings,validate_generation_groups,select_probe_rows,summarize_probe,resolve_model
 from execution import program_score,solution_score
 from evaluate import expanded_score
 
 
 class TrainingTests(unittest.TestCase):
+    def test_model_override_requires_its_own_revision_and_keeps_data_manifest(self):
+        manifest={'model':'original','revision':'original-sha'}
+        self.assertEqual(resolve_model(manifest),('original','original-sha'))
+        self.assertEqual(resolve_model(manifest,'larger','larger-sha'),('larger','larger-sha'))
+        self.assertEqual(manifest,{'model':'original','revision':'original-sha'})
+        with self.assertRaises(ValueError):resolve_model(manifest,'larger')
+        with self.assertRaises(ValueError):resolve_model(manifest,revision='larger-sha')
+
     def test_four_prompts_eight_candidates_per_update(self):
         config=batch_settings(4,8,2)
         self.assertEqual(config['per_device_train_batch_size']*config['gradient_accumulation_steps'],32)
