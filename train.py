@@ -1,4 +1,4 @@
-"""One local GRPO path: native Python training tests and fixed MBPP development evaluation."""
+"""One local Python GRPO path, with baseline and sampled-reward checks."""
 import argparse
 import hashlib
 import json
@@ -42,6 +42,71 @@ def batch_settings(prompts,generations,micro_batch):
     return {'per_device_train_batch_size':micro_batch,'gradient_accumulation_steps':total//micro_batch,'generation_batch_size':total,'num_generations':generations}
 
 
+
+def select_probe_rows(rows,count,seed):
+    """Fixed balanced sample from training only, without observing model answers."""
+    if not 0<count<=len(rows):raise ValueError('Probe count must fit the training pool')
+    groups={label:sorted([r for r in rows if r['difficulty']==label],key=lambda r:hashlib.sha256(f"{seed}/{r['task_id']}".encode()).hexdigest()) for label in sorted({r['difficulty'] for r in rows})}
+    selected=[]
+    for index in range(max(map(len,groups.values()))):
+        for group in groups.values():
+            if index<len(group):selected.append(group[index])
+            if len(selected)==count:return selected
+
+
+def summarize_probe(groups,generations):
+    import collections
+    if not groups or len({r['task_id'] for r in groups})!=len(groups):raise ValueError('Empty or duplicate probe groups')
+    if any(len(r['rewards'])!=generations or any(v not in {0,1} for v in r['rewards']) for r in groups):raise ValueError('Incomplete or non-binary probe group')
+    def metrics(rows):
+        correct=sum(sum(r['rewards']) for r in rows);n=len(rows)
+        return {'problems':n,'candidates':n*generations,'correct_candidates':correct,'full_pass_fraction':correct/(n*generations),
+            'all_fail_groups':sum(not any(r['rewards']) for r in rows),'mixed_reward_groups':sum(0<sum(r['rewards'])<generations for r in rows),
+            'all_pass_groups':sum(all(r['rewards']) for r in rows),'solved_at_least_once':sum(any(r['rewards']) for r in rows),
+            'token_cap_hits':sum(r['token_cap_hits'] for r in rows),'failure_counts':dict(collections.Counter(status for r in rows for status in r['statuses']))}
+    return {'overall':metrics(groups),'by_difficulty':{label:metrics([r for r in groups if r['difficulty']==label]) for label in sorted({r['difficulty'] for r in groups})}}
+
+
+def probe_rewards(model,tokenizer,rows,sandbox,args,monitor):
+    import torch
+    from transformers import GenerationConfig
+    # Match the installed GRPO trainer's EOS union and sampling defaults.
+    eos_ids=model.generation_config.eos_token_id
+    eos_ids=[] if eos_ids is None else [eos_ids] if isinstance(eos_ids,int) else list(eos_ids)
+    if tokenizer.eos_token_id is not None and tokenizer.eos_token_id not in eos_ids:eos_ids.insert(0,tokenizer.eos_token_id)
+    generation=GenerationConfig(max_new_tokens=args.max_tokens,do_sample=True,temperature=args.temperature,top_p=1.0,top_k=0,min_p=None,repetition_penalty=1.0,
+        pad_token_id=tokenizer.pad_token_id,bos_token_id=tokenizer.bos_token_id,eos_token_id=eos_ids or None,disable_compile=True)
+    (args.output/'probe-generation.json').write_text(generation.to_json_string())
+    model.eval();groups=[];started=time.monotonic()
+    for index,row in enumerate(rows):
+        monitor.phase=f"probe: generating {index+1}/{len(rows)} ({row['difficulty']})"
+        text=tokenizer.apply_chat_template(row['prompt'],tokenize=False,add_generation_prompt=True)
+        inputs=tokenizer(text,return_tensors='pt').to(model.device)
+        with torch.inference_mode():
+            tokens=model.generate(**inputs,generation_config=generation,num_return_sequences=args.generations,use_cache=True)
+        rewards=[];statuses=[];cap_hits=0
+        for sample,sequence in enumerate(tokens):
+            monitor.phase=f'probe: testing problem {index+1}/{len(rows)}, candidate {sample+1}/{args.generations}'
+            generated=sequence[inputs.input_ids.shape[1]:].tolist()
+            eos=next((i for i,t in enumerate(generated) if t in eos_ids),None)
+            token_count=len(generated) if eos is None else eos+1
+            cap_hit=eos is None and token_count>=args.max_tokens;cap_hits+=cap_hit
+            completion=tokenizer.decode(generated,skip_special_tokens=True)
+            score=solution_score(sandbox,completion,row['tests'],row['task_id'])
+            reward=int(score['correct']);rewards.append(reward);statuses.append(score['status'])
+            monitor.sample({'task_id':row['task_id'],'difficulty':row['difficulty'],'rating':row['rating'],'sample_index':sample,'completion':completion,'reward':reward,'tokens':token_count,'token_cap_hit':cap_hit,**score})
+        group={'task_id':row['task_id'],'difficulty':row['difficulty'],'rating':row['rating'],'rewards':rewards,'statuses':statuses,'token_cap_hits':cap_hits}
+        groups.append(group)
+        with (args.output/'probe-groups.jsonl').open('a') as handle:handle.write(json.dumps(group)+'\n')
+        summary=summarize_probe(groups,args.generations)
+        eta=(time.monotonic()-started)/(index+1)*(len(rows)-index-1)
+        monitor.log({f'probe/{k}':v for k,v in summary['overall'].items() if isinstance(v,(int,float))})
+        monitor.log({'probe/completed_problems':index+1,'probe/total_problems':len(rows),'probe/percent':100*(index+1)/len(rows),'probe/eta_seconds':eta})
+        for label,values in summary['by_difficulty'].items():monitor.log({f'probe/{label}/{k}':v for k,v in values.items() if isinstance(v,(int,float))})
+        print(f"[probe] {index+1}/{len(rows)}; {sum(rewards)}/{args.generations} pass; mixed groups {summary['overall']['mixed_reward_groups']}; ETA {eta/60:.1f} min",flush=True)
+    return {**summarize_probe(groups,args.generations),'elapsed_seconds':time.monotonic()-started}
+
+
 def main(args):
     import torch
     from datasets import Dataset
@@ -50,6 +115,7 @@ def main(args):
     from trl import GRPOConfig,GRPOTrainer
 
     if int(os.environ.get('WORLD_SIZE','1'))!=1:raise ValueError('This pilot is configured for one GPU')
+    if args.reward_probe and args.temperature<=0:raise ValueError('Sampling temperature must be positive')
     if args.steps<1 or args.eval_every<1:raise ValueError('Steps and evaluation interval must be positive')
     if args.output is None:args.output=ROOT/'runs'/args.name
     batches=batch_settings(args.prompts_per_update,args.generations,args.micro_batch)
@@ -71,7 +137,12 @@ def main(args):
     args.output.mkdir(parents=True,exist_ok=True)
     if not torch.cuda.is_available():raise RuntimeError('CUDA unavailable')
     set_seed(args.seed);torch.set_num_threads(4)
-    config={**{k:str(v) if isinstance(v,Path) else v for k,v in vars(args).items()},'stage':'baseline-only' if args.baseline_only else 'short pipeline smoke test','batch_settings':batches,'dataset_manifest_sha256':sha(args.dataset/'manifest.json'),'reward':manifest['training_reward'],'development_protocol':manifest['development_protocol'],'execution_image':manifest.get('execution_image','python-grpo-cpython:v3'),'execution_image_id':subprocess.check_output(['docker','image','inspect','--format','{{.Id}}',manifest.get('execution_image','python-grpo-cpython:v3')],text=True).strip(),'source_sha256':{name:sha(ROOT/name) for name in ['train.py','prepare_data.py','evaluate.py','execution.py','cpython_worker.py','monitoring.py']},'confirmation_evaluated':False,'gpu':torch.cuda.get_device_name(),'torch':torch.__version__}
+    selected=select_probe_rows(train_rows,args.probe_problems,args.seed) if args.reward_probe else None
+    if selected is not None:
+        selection={'split':'train','seed':args.seed,'rule':'Hash-order within difficulty, round-robin equal allocation, independent of model outcomes. Balanced probe is not a population-weighted score.','problems':[{k:r[k] for k in ['task_id','difficulty','rating']} for r in selected]}
+        (args.output/'probe-selection.json').write_text(json.dumps(selection,indent=2))
+    config={**{k:str(v) if isinstance(v,Path) else v for k,v in vars(args).items()},'stage':'reward-probe' if args.reward_probe else 'baseline-only' if args.baseline_only else 'short pipeline smoke test','batch_settings':batches,'dataset_manifest_sha256':sha(args.dataset/'manifest.json'),'reward':manifest['training_reward'],'development_protocol':manifest['development_protocol'],'execution_image':manifest.get('execution_image','python-grpo-cpython:v3'),'execution_image_id':subprocess.check_output(['docker','image','inspect','--format','{{.Id}}',manifest.get('execution_image','python-grpo-cpython:v3')],text=True).strip(),'source_sha256':{name:sha(ROOT/name) for name in ['train.py','prepare_data.py','evaluate.py','execution.py','cpython_worker.py','monitoring.py']},'confirmation_evaluated':False,'gpu':torch.cuda.get_device_name(),'torch':torch.__version__}
+    if selected is not None:config['probe_selection_sha256']=sha(args.output/'probe-selection.json')
     (args.output/'config.json').write_text(json.dumps(config,indent=2))
     monitor=Monitor(args.output,args.output.name,config)
     try:
@@ -81,6 +152,14 @@ def main(args):
         if tokenizer.pad_token_id is None:tokenizer.pad_token=tokenizer.eos_token
         model=AutoModelForCausalLM.from_pretrained(manifest['model'],revision=manifest['revision'],local_files_only=True,dtype=torch.bfloat16,attn_implementation='sdpa').to('cuda')
         with Sandbox(image=manifest.get('execution_image'),memory=manifest.get('container_memory','1g')) as sandbox:
+            if args.reward_probe:
+                summary=probe_rewards(model,tokenizer,selected,sandbox,args,monitor)
+                report={'stage':'reward-probe','steps':0,'train_problems':len(train_rows),'probe_problems':len(selected),'generations':args.generations,'temperature':args.temperature,'max_completion_tokens':args.max_tokens,
+                    'development_evaluated':False,'confirmation_evaluated':False,'dataset_manifest_sha256':sha(args.dataset/'manifest.json'),'probe_selection_sha256':config['probe_selection_sha256'],
+                    'peak_gpu_allocated_mb':torch.cuda.max_memory_allocated()/1024**2,**summary}
+                (args.output/'report.json').write_text(json.dumps(report,indent=2));build_report(args.output)
+                monitor.phase='complete';print(json.dumps(report,indent=2),flush=True)
+                return
             before,baseline=evaluate(model,tokenizer,val_rows,sandbox,args.output/'baseline-validation.jsonl',args.max_tokens,monitor,'baseline_validation',score_fn=evaluation_scorer)
             if args.baseline_only:
                 groups={}
@@ -163,7 +242,10 @@ if __name__=='__main__':
     parser.add_argument('--name',default='simple-smoke')
     parser.add_argument('--output',type=Path)
     parser.add_argument('--max-tokens',type=int)
-    parser.add_argument('--baseline-only',action='store_true')
+    mode=parser.add_mutually_exclusive_group()
+    mode.add_argument('--baseline-only',action='store_true')
+    mode.add_argument('--reward-probe',action='store_true')
+    parser.add_argument('--probe-problems',type=int,default=32)
     parser.add_argument('--temperature',type=float,default=0.8)
     parser.add_argument('--steps',type=int,default=10)
     parser.add_argument('--eval-every',type=int,default=5)

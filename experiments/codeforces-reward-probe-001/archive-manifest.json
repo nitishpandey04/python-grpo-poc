@@ -1,0 +1,17 @@
+{
+  "run": "codeforces-reward-probe-001",
+  "files_sha256": {
+    "NOTES.md": "0023a09aab926773311dda2ef6641c53a20a94cb5022048d42b5b1e3cc50753d",
+    "REPORT.md": "924315c260b1dd5e992cc3558f8fc6de3abe1e86452d90c162bda47ff65aa326",
+    "config.json": "d564b5de2e2543e21c962b504c7fa1b7ba3b933b1ee6130dcdbe1895cc8c4c82",
+    "dataset-manifest.json": "68dc5df9f80ae4ca15c1fba54b5f1d3868da00b1d53ebb8494ecf583fb7d6f50",
+    "metrics.jsonl": "f5103e5575b08855e42dc77e16a8cb33c0ce176361b6d9d375fec3dbd9669075",
+    "probe-generation.json": "b8ebb1ef7c51d9f1afe9d86685f4a15259626b4b60e37d1879167e3395a11f6f",
+    "probe-groups.jsonl": "f2e7ff2d82f684ad9ddc4e2fc0269f296885c46a72eee4972880c84c453ada73",
+    "probe-selection.json": "f574311016b663737778a75389504e687881299fbf56f7745418b7bf851aa9e3",
+    "report.json": "a8007e830e2fbd7e6e557444b8cf1c3617113c8a3a947c9d2145874e02f93f2d",
+    "rollouts.jsonl": "4480c83fc5dbf952db1cf036a2de079be6dd1b25de8525786a78d06b10ed0a72",
+    "status.json": "b6431ac20b1d458e602a5d6cb2000f31c263a205e049b4baff5b03d17b903b5a",
+    "verification.txt": "16b4a885d44f23dd191bb2a7e6b182782e7bbcc0ace2a9698d611c798a438865"
+  }
+}

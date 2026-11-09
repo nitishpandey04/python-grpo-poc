@@ -1,0 +1,15 @@
+{
+  "disable_compile": true,
+  "do_sample": true,
+  "eos_token_id": [
+    151645,
+    151643
+  ],
+  "max_new_tokens": 1024,
+  "pad_token_id": 151643,
+  "repetition_penalty": 1.0,
+  "temperature": 0.8,
+  "top_k": 0,
+  "top_p": 1.0,
+  "transformers_version": "5.22.1"
+}

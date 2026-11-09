@@ -112,3 +112,15 @@ No model predictions, training changes or test-split reads were performed. The n
 - Final unchanged-model baseline: 1/67 (easy 0/30, medium 1/37). No optimization, adapter upload or confirmation predictions. Both requested difficulty groups remain included.
 
 The next experiment needs a sampled training-reward check before a long GRPO run; the new baseline indicates sparse rewards may be a bottleneck. This is a harder/different task set than MBPP, not a measured model regression.
+
+## Codeforces sampled-reward check — 2026-11-09
+
+[Results and per-candidate evidence](experiments/codeforces-reward-probe-001/REPORT.md) · [Interpretation and next experiment](experiments/codeforces-reward-probe-001/NOTES.md).
+
+- Unchanged original model, zero optimizer steps: 32 training tasks selected before predictions, balanced 16 easy/16 medium, eight sampled Python solutions each.
+- Passing candidates: 3/256 (easy 3/128, medium 0/128). Mixed-reward groups: 2/32 (both easy); the other 30 groups were all-fail.
+- Only two outputs hit the 1,024-token cap. Failures include incorrect answers, input parsing and syntax; increasing the token budget alone is not supported as the main fix.
+- Completed in 96.6 seconds after loading; peak PyTorch allocation 1.21 GiB. All 30 regression checks pass. Live Trackio run: codeforces-reward-probe-001.
+- All 628 tasks remain eligible, including 324 medium tasks. No development/confirmation predictions or model uploads.
+
+Current binary rewards are sparse for a long run. A small, separately tracked Python standard-I/O warm-up is a reasonable next experiment before repeating this frozen probe; this check neither trains weights nor establishes improvement.

@@ -31,6 +31,16 @@ docker build -t python-grpo-cpython:v3 -f Dockerfile.evaluation .
 
 Preparation and runs refuse to overwrite existing outputs. Prepared data is under `data/codeforces-python/`; skip preparation when reusing it. Use `prepare_data.py --output data/my-data` and `train.py --dataset data/my-data --name my-run` for another dataset. `--max-rating` defaults to 1600. To run in the foreground, call `train.py` directly.
 
+Before optimization, check sampled training rewards on 16 easy and 16 medium problems:
+
+```bash
+.venv/bin/python launch.py train --name cf-reward-probe --reward-probe --probe-problems 32 --generations 8 --temperature 0.8
+```
+
+**Completed first check:** 3/256 candidates passed; 2/32 groups had mixed rewards, both easy. All 16 sampled medium groups failed all eight attempts. No weights changed and no tasks were dropped. [Results](experiments/codeforces-reward-probe-001/REPORT.md) · [Interpretation](experiments/codeforces-reward-probe-001/NOTES.md).
+
+This samples eight solutions per problem without changing weights or generating development/confirmation predictions. The sample is fixed before model answers, balanced by difficulty and drawn only from training. A mixed group has both passing and failing solutions; all-fail and all-pass groups have zero reward variation. Probe outcomes do not remove tasks from the 628-task training pool. Results and selected IDs are saved in the run directory.
+
 When starting a training smoke check, omit `--baseline-only` and set a short budget, for example `--steps 10 --eval-every 5`. The existing runtime checks enforce four distinct prompts × eight candidates per optimizer update. The default Codeforces completion cap is 1,024 tokens; `--max-tokens` can override it and is recorded in the run configuration.
 
 **Baseline result:** the unchanged original model solves 1/67 development problems greedily (easy 0/30, medium 1/37). This is a different benchmark from earlier MBPP results; no model training or regression occurred. A single greedy attempt does not establish sampled GRPO reward availability. Check that signal before committing to a long training budget. [Readiness and baseline evidence](experiments/codeforces-python-ready/REPORT.md).
@@ -47,7 +57,7 @@ Official completeness means all recorded official tests are present, not exhaust
 
 ## Live progress and saved outputs
 
-The dashboard binds to **0.0.0.0:7860**. From your tablet open `http://<computer-tailscale-ip>:7860/?project=python-grpo` and select the run name. `baseline_validation/percent` shows baseline progress; `progress/optimizer_step` shows actual training steps. A baseline-only run has zero optimizer steps.
+The dashboard binds to **0.0.0.0:7860**. From your tablet open `http://<computer-tailscale-ip>:7860/?project=python-grpo` and select the run name. `probe/percent`, `probe/eta_seconds`, and `probe/mixed_reward_groups` track the sampled-reward check; `baseline_validation/percent` shows baseline progress; `progress/optimizer_step` shows actual training steps. A baseline-only run has zero optimizer steps.
 
 `runs/<name>/` stores configuration and source/data/image fingerprints, status heartbeats, metrics, generated code, development results and a readable report. Training runs also save checkpoints and adapters. Validation retains the original model unless a checkpoint strictly improves development correctness. No new model weights were published during data preparation or baseline checking.
 
