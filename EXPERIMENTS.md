@@ -1,5 +1,7 @@
 # Python coding GRPO experiment ledger
 
+Historical sections describe the code at their recorded tags. The current active workflow is in [README.md](README.md); retired scripts remain recoverable through Git and frozen experiment snapshots.
+
 We are tracking attempts to improve a tiny model's Python coding performance, including unsuccessful and inconclusive results. Model selection uses validation; test results are reported separately.
 
 | Run | Date | Starting model | Change | Validation outcome | Final-adapter test result | Conclusion |
@@ -75,3 +77,16 @@ This first data import did not achieve hundreds of independently verified learna
 - All 31 regression checks passed. No additional model was trained. Existing expanded MBPP development data and the 49-task unqueried confirmation pool remain unchanged.
 
 The resulting 22-task manifest is a stronger, small input pool for a controlled run, with separate assertion-suite training and expanded-MBPP development scorers required. It does not establish a model improvement, guarantee full semantic decontamination, or reach the target of hundreds of diverse verified problems.
+
+## Simplified native-program pipeline — 2026-11-09
+
+[Smoke report](experiments/simple-pipeline-v1/REPORT.md) · [Data accounting and simplification](experiments/simple-pipeline-v1/DATA.md).
+
+- Retired 19 superseded root files and kept one active preparation/training/evaluation path. Historical source and results remain available.
+- Reprocessed the original 3,000 rows without reference-pass, assertion-count, code-length, task-family or difficulty gates. Retained 2,613 source-test-eligible training problems.
+- Preserved native test setup and statement order. All 23 active regression checks passed.
+- The 10-step smoke run sampled 40 distinct problems; 21/40 prompt groups had mixed rewards. Peak PyTorch allocation was 1.46 GiB.
+- Fixed expanded-MBPP development correctness: 16/29 original, 15/29 final. No checkpoint beat the original model, which remains selected.
+- No confirmation model predictions were generated. The source tests remain imperfect; corpus eligibility is not independent correctness certification.
+
+This completes the simplification and an end-to-end smoke check. It does not establish model improvement or justify selecting the smoke adapter. Full-budget training is a separate experiment.

@@ -1,0 +1,14 @@
+{
+  "correctness": 0.5517241379310345,
+  "mean_test_fraction": 0.6666666666666666,
+  "mean_tokens": 80.6896551724138,
+  "problems": 29,
+  "evaluator": "cpython",
+  "correctness_protocol": "expanded_score",
+  "failure_counts": {
+    "ok": 16,
+    "expanded_test_failure": 2,
+    "assertion_error": 9,
+    "runtime_error": 2
+  }
+}

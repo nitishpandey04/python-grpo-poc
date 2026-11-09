@@ -1,67 +1,116 @@
-"""Prepare a reference-verified MBPP subset; original split boundaries are preserved."""
+"""Prepare native OpenCoder test programs without reference or difficulty gates."""
 import argparse
 import ast
-import hashlib
+import collections
+import difflib
 import json
 from pathlib import Path
+import re
 
-from execution import Sandbox
+from evaluate import read_rows,sha
 
-
-def prepare(source, output, backend="cpython"):
-    if output.exists() and any(output.glob("*.jsonl")):
-        raise ValueError("Prepared data already exists; choose a new --output directory to preserve frozen data")
-    output.mkdir(parents=True, exist_ok=True)
-    splits = {"train": [], "validation": [], "test": []}
-    seen = set()
-    rejected = []
-    with Sandbox(timeout=8, backend=backend) as sandbox:
-        for line in source.read_text().splitlines():
-            row = json.loads(line)
-            task_id = row["task_id"]
-            split = "train" if task_id >= 601 else "validation" if task_id >= 511 else "test" if task_id >= 11 else None
-            if split is None:
-                continue
-            try:
-                tree = ast.parse(row["code"])
-                funcs = [n for n in tree.body if isinstance(n, ast.FunctionDef)]
-                if not funcs or row.get("test_setup_code", "").strip():
-                    raise ValueError("Unsupported setup")
-                # Obtain the required entry point from tests, rather than an arbitrary helper.
-                names = {n.name: n for n in funcs}
-                calls = [n.func.id for n in ast.walk(ast.parse(row["test_list"][0])) if isinstance(n, ast.Call) and isinstance(n.func, ast.Name) and n.func.id in names]
-                if not calls:
-                    raise ValueError("No simple function entry point")
-                function = names[calls[0]]
-                signature = f"def {function.name}({ast.unparse(function.args)}):"
-                if len(row["code"]) > 2500:
-                    raise ValueError("Reference too long for first experiment")
-                key = hashlib.sha256(" ".join(row["text"].lower().split()).encode()).hexdigest()
-                if key in seen:
-                    raise ValueError("Duplicate problem statement")
-                seen.add(key)
-                score = sandbox.score(row["code"], row["test_list"])
-                if score["passed"] != score["total"]:
-                    raise ValueError("Reference failed: " + score["status"])
-                prompt = [
-                    {"role": "system", "content": "Write correct Python functions. Return only Python code in a single ```python code block. Include the requested function and any helper functions. Do not include example calls, print statements, or explanations."},
-                    {"role": "user", "content": row["text"] + "\n\nRequired signature:\n" + signature},
-                ]
-                splits[split].append({"task_id": task_id, "prompt": prompt, "tests": row["test_list"], "reference": row["code"], "signature": signature})
-                print(f"accepted {task_id}: " + str({k: len(v) for k, v in splits.items()}), flush=True)
-            except (SyntaxError, ValueError) as exc:
-                rejected.append({"task_id": task_id, "reason": str(exc)})
-    for split, rows in splits.items():
-        (output / f"{split}.jsonl").write_text("".join(json.dumps(row) + "\n" for row in rows))
-    manifest = {"evaluator_backend": backend, "source": "https://github.com/google-research/google-research/tree/master/mbpp", "source_sha256": hashlib.sha256(source.read_bytes()).hexdigest(), "counts": {k: len(v) for k, v in splits.items()}, "rejected": rejected, "scope": "Reference-verified subset; original MBPP splits; three original tests per task, not expanded EvalPlus tests."}
-    (output / "manifest.json").write_text(json.dumps(manifest, indent=2))
-    print(json.dumps(manifest["counts"]), flush=True)
+MODEL='Qwen/Qwen2.5-Coder-0.5B-Instruct'
+REVISION='ea3f2471cf1b1f0db85067f1ef93848e38e88c25'
+# These supplied programs use root before initialization. Preserve the original
+# rows in the raw download and record their IDs instead of rewriting their tests.
+BROKEN_TESTS={37809597094,23726331439,24060963630}
 
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--source", type=Path, default=Path("data/mbpp.jsonl"))
-    parser.add_argument("--output", type=Path, default=Path("data/prepared"))
-    parser.add_argument("--execution-backend", choices=["cpython", "openenv"], default="cpython")
-    args = parser.parse_args()
-    prepare(args.source, args.output, args.execution_backend)
+def normalized(text):
+    return tuple(re.findall(r'\w+|[^\w\s]',text.casefold()))
+
+
+def same_statement(a,b):
+    if a==b:return True
+    if min(len(a),len(b))/max(len(a),len(b),1)<0.95:return False
+    # Do not merge numerically different or negated contracts as punctuation edits.
+    important=lambda words:[w for w in words if any(c.isdigit() for c in w) or w in {'not','no','non','without','true','false','inclusive','exclusive'}]
+    if important(a)!=important(b):return False
+    if len(set(a)&set(b))/max(1,len(set(a)|set(b)))<0.95:return False
+    return difflib.SequenceMatcher(None,a,b,autojunk=False).ratio()>=0.98
+
+
+def normalize(raw):
+    statement=raw.get('instruction','').strip()
+    if not statement:raise ValueError('missing_statement')
+    tests=raw.get('testcase')
+    if not isinstance(tests,list) or not tests or not all(isinstance(t,str) for t in tests):raise ValueError('missing_test_program')
+    program='\n'.join(tests)
+    if not program.strip():raise ValueError('missing_test_program')
+    try:
+        tree=ast.parse(program)
+        compile(tree,'<dataset-tests>','exec')
+    except SyntaxError as exc:raise ValueError('test_syntax_error') from exc
+    # A program with only setup/printing supplies no pass/fail check. There is
+    # no minimum number or required shape of checks; setup and helpers are kept.
+    if not any(isinstance(n,(ast.Assert,ast.Raise)) for n in ast.walk(tree)):
+        raise ValueError('no_explicit_test_check')
+    entry=raw.get('entry_point','').strip()
+    interface=''
+    reference=raw.get('code') or ''
+    # Signature extraction is optional metadata, never an eligibility test.
+    try:
+        for node in ast.parse(reference).body:
+            if isinstance(node,(ast.FunctionDef,ast.AsyncFunctionDef)) and node.name==entry:
+                interface=('async ' if isinstance(node,ast.AsyncFunctionDef) else '')+f'def {entry}({ast.unparse(node.args)}):';break
+    except SyntaxError:pass
+    if not interface and entry:interface='Requested entry point: '+entry
+    prompt=statement+('\n\n'+interface if interface else '')
+    return {'task_id':'opencoder/'+str(raw['seq_id']),'instruction':statement,'entry_point':entry,
+            'prompt':[{'role':'system','content':'Write correct Python code. Return only Python code in a single ```python code block, including any required helpers and imports.'},{'role':'user','content':prompt}],
+            'tests':[program],'reference':reference}
+
+
+def prepare(args):
+    if args.output.exists():raise ValueError('Output exists; choose a fresh directory')
+    imported=json.loads(args.raw.with_name('manifest.json').read_text())
+    if sha(args.raw)!=imported['raw_sha256']:raise ValueError('Raw download changed')
+    evaluation=json.loads((args.evaluation/'manifest.json').read_text())
+    if sha(args.evaluation/'development.jsonl')!=evaluation['development_sha256']:raise ValueError('Fixed development data changed')
+    if sha(args.evaluation/'protected-statements.jsonl')!=evaluation['protected_statements_sha256']:raise ValueError('Protected statement data changed')
+    protected=[(r['task_id'],normalized(r['statement'])) for r in read_rows(args.evaluation/'protected-statements.jsonl')]
+    reserved={identifier for identifier,_ in protected if isinstance(identifier,str) and identifier.startswith('opencoder/')}
+    accepted=[];decisions=[];seen=[]
+    raw=[json.loads(line) for line in args.raw.read_text().splitlines() if line.strip()]
+    for i,item in enumerate(raw):
+        task='opencoder/'+str(item['seq_id'])
+        try:row=normalize(item)
+        except ValueError as exc:
+            decisions.append({'task_id':task,'reason':str(exc)});continue
+        reason=None;match=None
+        if task in reserved:reason='reserved_opencoder_holdout'
+        elif item['seq_id'] in BROKEN_TESTS:reason='known_test_setup_uses_root_before_assignment'
+        elif item['seq_id']==25886016399:reason='known_statement_example_dara_is_not_an_anagram_of_radar'
+        key=normalized(row['instruction'])
+        if reason is None:
+            match=next((identifier for identifier,text in protected if same_statement(key,text)),None)
+            if match is not None:reason='heldout_statement_overlap'
+        if reason is None:
+            match=next((identifier for identifier,text in seen if same_statement(key,text)),None)
+            if match is not None:reason='duplicate_statement'
+        if reason:
+            decisions.append({'task_id':task,'reason':reason,**({'matches':match} if match is not None else {})})
+        else:
+            accepted.append(row);seen.append((task,key))
+        if (i+1)%500==0:print(f'[prepare] {i+1}/{len(raw)} rows; training={len(accepted)}',flush=True)
+    args.output.mkdir(parents=True)
+    (args.output/'train.jsonl').write_text(''.join(json.dumps(r)+'\n' for r in accepted))
+    (args.output/'validation.jsonl').write_bytes((args.evaluation/'development.jsonl').read_bytes())
+    (args.output/'exclusions.jsonl').write_text(''.join(json.dumps(r)+'\n' for r in decisions))
+    manifest={'protocol':'python-program-grpo-v1','source':imported,'model':MODEL,'revision':REVISION,
+              'raw_rows':len(raw),'counts':{'train':len(accepted),'validation':len(read_rows(args.output/'validation.jsonl'))},
+              'exclusions':dict(collections.Counter(r['reason'] for r in decisions)),
+              'files_sha256':{s:sha(args.output/f'{s}.jsonl') for s in ['train','validation']},
+              'evaluation_manifest':str(args.evaluation/'manifest.json'),'evaluation_manifest_sha256':sha(args.evaluation/'manifest.json'),
+              'confirmation':evaluation['confirmation'],
+              'training_reward':'All supplied Python test-program checks pass, binary reward. Source tests are not independently certified.',
+              'development_protocol':'Existing original + expanded MBPP checks, unchanged.',
+              'reference_solution_required':False,'difficulty_filter':False,
+              'limitations':['Supplied tests may be weak or wrong. Passing them is not proof of correctness.','Statement matching removes exact/near-identical text, not every semantic duplicate or pretraining overlap.','Only plain Python test programs with explicit assert/raise checks are supported; pytest/unittest discovery is not integrated.']}
+    (args.output/'manifest.json').write_text(json.dumps(manifest,indent=2))
+    print(json.dumps({k:manifest[k] for k in ['raw_rows','counts','exclusions','reference_solution_required','difficulty_filter']},indent=2),flush=True)
+
+
+if __name__=='__main__':
+    p=argparse.ArgumentParser();p.add_argument('--raw',type=Path,default=Path('data/opencoder-candidates/raw.jsonl'));p.add_argument('--output',type=Path,default=Path('data/python-programs'));p.add_argument('--evaluation',type=Path,default=Path('evaluation'))
+    prepare(p.parse_args())

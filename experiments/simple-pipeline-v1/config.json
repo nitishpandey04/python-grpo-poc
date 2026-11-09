@@ -1,0 +1,35 @@
+{
+  "dataset": "data/python-programs",
+  "name": "simple-smoke-001",
+  "output": "/home/nitish/Documents/Codex/2026-11-03-i-want-to-fine-tune-a-2/runs/simple-smoke-001",
+  "max_tokens": 256,
+  "temperature": 0.8,
+  "steps": 10,
+  "eval_every": 5,
+  "prompts_per_update": 4,
+  "generations": 8,
+  "micro_batch": 2,
+  "learning_rate": 1e-05,
+  "seed": 42,
+  "stage": "short pipeline smoke test",
+  "batch_settings": {
+    "per_device_train_batch_size": 2,
+    "gradient_accumulation_steps": 16,
+    "generation_batch_size": 32,
+    "num_generations": 8
+  },
+  "dataset_manifest_sha256": "258ce65e2050c228e0de0696388c915566ece2b93279621abcce5af6cfe56ba1",
+  "reward": "binary all supplied Python test-program checks pass",
+  "development_protocol": "unchanged original + official expanded MBPP suites",
+  "source_sha256": {
+    "train.py": "6e2a90870a9e171cb85bda0364ab1684ade4460be1690e4826a9987932c2e1a4",
+    "prepare_data.py": "d7b9da51f842f55b2be80535047185e6fc40f77e2d55b9f5929b319f6c8e6df0",
+    "evaluate.py": "9f316e6505502e342667ddbb07ebb015e4058a56a3f4a50b36dc6708d6d46584",
+    "execution.py": "9d7344db317dfa7580d73291420963912c018d4ef744f1f6400f640b23469d07",
+    "cpython_worker.py": "aca1a26f515f31790f1fd4275a46b9ffce2584378192500e6dde79baa9cfcdd0",
+    "monitoring.py": "f5cd1df517f891c141e580b2c5ad999f3372f7b46b913c2a9c146b35b853ddff"
+  },
+  "confirmation_evaluated": false,
+  "gpu": "NVIDIA GeForce RTX 5060 Ti",
+  "torch": "2.11.0+cu128"
+}

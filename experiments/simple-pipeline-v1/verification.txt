@@ -1,0 +1,28 @@
+test_duplicate_matching_preserves_numbers_and_negation (test_data.NativeDataTests.test_duplicate_matching_preserves_numbers_and_negation) ... ok
+test_one_test_and_missing_or_broken_reference_are_eligible (test_data.NativeDataTests.test_one_test_and_missing_or_broken_reference_are_eligible) ... ok
+test_raise_based_tests_do_not_require_assertions (test_data.NativeDataTests.test_raise_based_tests_do_not_require_assertions) ... ok
+test_reference_classes_and_length_do_not_filter_problem (test_data.NativeDataTests.test_reference_classes_and_length_do_not_filter_problem) ... ok
+test_setup_helpers_loops_and_non_equality_checks_are_preserved (test_data.NativeDataTests.test_setup_helpers_loops_and_non_equality_checks_are_preserved) ... ok
+test_syntax_errors_and_setup_without_checks_are_reported (test_data.NativeDataTests.test_syntax_errors_and_setup_without_checks_are_reported) ... ok
+test_comparison_pairs_by_id_not_order (test_evaluation.EvaluationTests.test_comparison_pairs_by_id_not_order) ... ok
+test_comparison_rejects_different_tasks (test_evaluation.EvaluationTests.test_comparison_rejects_different_tasks) ... ok
+test_comparison_rejects_duplicate_tasks (test_evaluation.EvaluationTests.test_comparison_rejects_duplicate_tasks) ... ok
+test_extracts_code_without_explanation (test_evaluation.EvaluationTests.test_extracts_code_without_explanation) ... ok
+test_container_isolation (test_sandbox.SandboxTests.test_container_isolation) ... ok
+test_correct_and_partial_solutions (test_sandbox.SandboxTests.test_correct_and_partial_solutions) ... ok
+test_early_process_exit_is_not_success (test_sandbox.SandboxTests.test_early_process_exit_is_not_success) ... ok
+test_empty_and_invalid_tests_fail_closed (test_sandbox.SandboxTests.test_empty_and_invalid_tests_fail_closed) ... ok
+test_expanded_oracle_budget_is_explicit (test_sandbox.SandboxTests.test_expanded_oracle_budget_is_explicit) ... ok
+test_expanded_tests_reject_constant_solution (test_sandbox.SandboxTests.test_expanded_tests_reject_constant_solution) ... ok
+test_native_program_preserves_setup_and_explicit_failure (test_sandbox.SandboxTests.test_native_program_preserves_setup_and_explicit_failure) ... ok
+test_no_state_leakage_between_tests_or_requests (test_sandbox.SandboxTests.test_no_state_leakage_between_tests_or_requests) ... ok
+test_runtime_errors_during_tests_are_labelled (test_sandbox.SandboxTests.test_runtime_errors_during_tests_are_labelled) ... ok
+test_timeout_and_memory_failure_recover (test_sandbox.SandboxTests.test_timeout_and_memory_failure_recover) ... ok
+test_valid_python_defaults_classes_and_prints (test_sandbox.SandboxTests.test_valid_python_defaults_classes_and_prints) ... ok
+test_four_prompts_eight_candidates_per_update (test_training.TrainingTests.test_four_prompts_eight_candidates_per_update) ... ok
+test_training_and_development_use_their_declared_scorers (test_training.TrainingTests.test_training_and_development_use_their_declared_scorers) ... ok
+
+----------------------------------------------------------------------
+Ran 23 tests in 5.496s
+
+OK

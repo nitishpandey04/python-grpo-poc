@@ -1,5 +1,6 @@
 """Fixed greedy decoding and paired, problem-level bootstrap comparison."""
 import json
+import hashlib
 import collections
 import random
 from pathlib import Path
@@ -50,3 +51,31 @@ def compare(before, after, note="Greedy single-attempt evaluation; paired bootst
     rng = random.Random(42)
     samples = sorted(sum(rng.choices(deltas, k=len(deltas))) / len(deltas) for _ in range(5000))
     return {"problems": len(deltas), "improvement_percentage_points": 100 * sum(deltas) / len(deltas), "ci95_percentage_points": [100 * samples[125], 100 * samples[4874]], "improved": deltas.count(1), "regressed": deltas.count(-1), "note": note}
+
+
+def read_rows(path):
+    rows = [json.loads(line) for line in path.read_text().splitlines() if line.strip()]
+    ids = [row["task_id"] for row in rows]
+    if len(ids) != len(set(ids)):
+        raise ValueError(f"Duplicate task IDs in {path}")
+    return rows
+
+
+def sha(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def expanded_score(sandbox, completion, tests, task_id):
+    original = sandbox.score(completion, tests)
+    result = {**original, "correct": False}
+    if original["passed"] != original["total"]:
+        result["expanded"] = {"status":"not_run", "reason":"original_tests_failed"}
+        return result
+    plus = sandbox.score_plus(completion,task_id)
+    if plus.get("status") in {"oracle_error", "oracle_resource_limit"}:
+        raise RuntimeError(f"Verified task oracle failed: {task_id}: {plus}")
+    result["expanded"] = plus
+    result["correct"] = bool(plus.get("correct",False))
+    if not result["correct"]:
+        result["status"] = "timeout" if plus.get("status") == "timeout" or any(s.get("status")=="timeout" for s in plus.get("suites",{}).values()) else "expanded_test_failure"
+    return result

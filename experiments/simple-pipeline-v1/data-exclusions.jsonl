@@ -1,0 +1,387 @@
+{"task_id": "opencoder/26828993618", "reason": "reserved_opencoder_holdout"}
+{"task_id": "opencoder/71373120367", "reason": "reserved_opencoder_holdout"}
+{"task_id": "opencoder/6646114064", "reason": "reserved_opencoder_holdout"}
+{"task_id": "opencoder/37996825365", "reason": "reserved_opencoder_holdout"}
+{"task_id": "opencoder/5178932173", "reason": "duplicate_statement", "matches": "opencoder/35537290363"}
+{"task_id": "opencoder/70559467927", "reason": "duplicate_statement", "matches": "opencoder/34031367827"}
+{"task_id": "opencoder/72617877825", "reason": "reserved_opencoder_holdout"}
+{"task_id": "opencoder/25103384041", "reason": "reserved_opencoder_holdout"}
+{"task_id": "opencoder/37769518978", "reason": "duplicate_statement", "matches": "opencoder/5681925021"}
+{"task_id": "opencoder/44462828896", "reason": "duplicate_statement", "matches": "opencoder/19011444432"}
+{"task_id": "opencoder/39512499375", "reason": "duplicate_statement", "matches": "opencoder/28462923210"}
+{"task_id": "opencoder/40498869834", "reason": "duplicate_statement", "matches": "opencoder/34031367827"}
+{"task_id": "opencoder/12893348563", "reason": "duplicate_statement", "matches": "opencoder/34013713154"}
+{"task_id": "opencoder/70758449156", "reason": "reserved_opencoder_holdout"}
+{"task_id": "opencoder/13148152299", "reason": "duplicate_statement", "matches": "opencoder/23794794790"}
+{"task_id": "opencoder/23795424250", "reason": "duplicate_statement", "matches": "opencoder/74795245705"}
+{"task_id": "opencoder/8168266069", "reason": "duplicate_statement", "matches": "opencoder/21943705451"}
+{"task_id": "opencoder/22886588135", "reason": "duplicate_statement", "matches": "opencoder/14032340190"}
+{"task_id": "opencoder/9625751497", "reason": "duplicate_statement", "matches": "opencoder/34495129391"}
+{"task_id": "opencoder/25993855587", "reason": "duplicate_statement", "matches": "opencoder/35537290363"}
+{"task_id": "opencoder/21118500719", "reason": "heldout_statement_overlap", "matches": 395}
+{"task_id": "opencoder/15879853249", "reason": "duplicate_statement", "matches": "opencoder/15951728651"}
+{"task_id": "opencoder/36523639157", "reason": "heldout_statement_overlap", "matches": "opencoder/28749079042"}
+{"task_id": "opencoder/24383115316", "reason": "duplicate_statement", "matches": "opencoder/23173251265"}
+{"task_id": "opencoder/32021251442", "reason": "reserved_opencoder_holdout"}
+{"task_id": "opencoder/21744513802", "reason": "duplicate_statement", "matches": "opencoder/41567916551"}
+{"task_id": "opencoder/71766501575", "reason": "reserved_opencoder_holdout"}
+{"task_id": "opencoder/15030277152", "reason": "reserved_opencoder_holdout"}
+{"task_id": "opencoder/27750544040", "reason": "duplicate_statement", "matches": "opencoder/71921797007"}
+{"task_id": "opencoder/37670476356", "reason": "duplicate_statement", "matches": "opencoder/12206727424"}
+{"task_id": "opencoder/13300899956", "reason": "reserved_opencoder_holdout"}
+{"task_id": "opencoder/38910643879", "reason": "duplicate_statement", "matches": "opencoder/35081802661"}
+{"task_id": "opencoder/753679536", "reason": "duplicate_statement", "matches": "opencoder/17471981684"}
+{"task_id": "opencoder/2742943275", "reason": "duplicate_statement", "matches": "opencoder/15951728651"}
+{"task_id": "opencoder/25564655670", "reason": "heldout_statement_overlap", "matches": 32}
+{"task_id": "opencoder/194821420", "reason": "duplicate_statement", "matches": "opencoder/73087778305"}
+{"task_id": "opencoder/71715022006", "reason": "duplicate_statement", "matches": "opencoder/26972509016"}
+{"task_id": "opencoder/25231917437", "reason": "duplicate_statement", "matches": "opencoder/29781746773"}
+{"task_id": "opencoder/7112850590", "reason": "duplicate_statement", "matches": "opencoder/35081802661"}
+{"task_id": "opencoder/30980297889", "reason": "duplicate_statement", "matches": "opencoder/21943705451"}
+{"task_id": "opencoder/25875407409", "reason": "duplicate_statement", "matches": "opencoder/73651248117"}
+{"task_id": "opencoder/7363473142", "reason": "duplicate_statement", "matches": "opencoder/27111547969"}
+{"task_id": "opencoder/5493783126", "reason": "no_explicit_test_check"}
+{"task_id": "opencoder/28109733597", "reason": "duplicate_statement", "matches": "opencoder/23919556414"}
+{"task_id": "opencoder/32424095761", "reason": "duplicate_statement", "matches": "opencoder/32275331071"}
+{"task_id": "opencoder/28419153457", "reason": "duplicate_statement", "matches": "opencoder/20685553828"}
+{"task_id": "opencoder/39303219243", "reason": "heldout_statement_overlap", "matches": "opencoder/33402217053"}
+{"task_id": "opencoder/16372571012", "reason": "reserved_opencoder_holdout"}
+{"task_id": "opencoder/37809597094", "reason": "known_test_setup_uses_root_before_assignment"}
+{"task_id": "opencoder/23997547700", "reason": "duplicate_statement", "matches": "opencoder/39730417842"}
+{"task_id": "opencoder/8545737511", "reason": "duplicate_statement", "matches": "opencoder/10992933612"}
+{"task_id": "opencoder/10283747413", "reason": "duplicate_statement", "matches": "opencoder/32275331071"}
+{"task_id": "opencoder/13980396261", "reason": "heldout_statement_overlap", "matches": "opencoder/28749079042"}
+{"task_id": "opencoder/1648536197", "reason": "duplicate_statement", "matches": "opencoder/10816509631"}
+{"task_id": "opencoder/25308938222", "reason": "duplicate_statement", "matches": "opencoder/21943705451"}
+{"task_id": "opencoder/8309082322", "reason": "duplicate_statement", "matches": "opencoder/2433017285"}
+{"task_id": "opencoder/22578728363", "reason": "duplicate_statement", "matches": "opencoder/73087778305"}
+{"task_id": "opencoder/41650449503", "reason": "duplicate_statement", "matches": "opencoder/27551363285"}
+{"task_id": "opencoder/32279753445", "reason": "duplicate_statement", "matches": "opencoder/14123769386"}
+{"task_id": "opencoder/36274207876", "reason": "duplicate_statement", "matches": "opencoder/19776390569"}
+{"task_id": "opencoder/33345482920", "reason": "duplicate_statement", "matches": "opencoder/15951728651"}
+{"task_id": "opencoder/36213729407", "reason": "reserved_opencoder_holdout"}
+{"task_id": "opencoder/44289869161", "reason": "duplicate_statement", "matches": "opencoder/36912095566"}
+{"task_id": "opencoder/29895203388", "reason": "reserved_opencoder_holdout"}
+{"task_id": "opencoder/16779578104", "reason": "duplicate_statement", "matches": "opencoder/7595444579"}
+{"task_id": "opencoder/42301642282", "reason": "duplicate_statement", "matches": "opencoder/41379256407"}
+{"task_id": "opencoder/34104075189", "reason": "reserved_opencoder_holdout"}
+{"task_id": "opencoder/72595104747", "reason": "duplicate_statement", "matches": "opencoder/34627400167"}
+{"task_id": "opencoder/29539630993", "reason": "duplicate_statement", "matches": "opencoder/70223461117"}
+{"task_id": "opencoder/22438084650", "reason": "duplicate_statement", "matches": "opencoder/43144992290"}
+{"task_id": "opencoder/11292740943", "reason": "reserved_opencoder_holdout"}
+{"task_id": "opencoder/12276590580", "reason": "duplicate_statement", "matches": "opencoder/28462923210"}
+{"task_id": "opencoder/9656724221", "reason": "reserved_opencoder_holdout"}
+{"task_id": "opencoder/40792144997", "reason": "duplicate_statement", "matches": "opencoder/70726592441"}
+{"task_id": "opencoder/14904361375", "reason": "duplicate_statement", "matches": "opencoder/6522828784"}
+{"task_id": "opencoder/40987620312", "reason": "duplicate_statement", "matches": "opencoder/26972509016"}
+{"task_id": "opencoder/28965800552", "reason": "duplicate_statement", "matches": "opencoder/10490300687"}
+{"task_id": "opencoder/30471827571", "reason": "duplicate_statement", "matches": "opencoder/19776390569"}
+{"task_id": "opencoder/24098214056", "reason": "duplicate_statement", "matches": "opencoder/33210873560"}
+{"task_id": "opencoder/16288122012", "reason": "reserved_opencoder_holdout"}
+{"task_id": "opencoder/41713860202", "reason": "duplicate_statement", "matches": "opencoder/36507648171"}
+{"task_id": "opencoder/5573059535", "reason": "duplicate_statement", "matches": "opencoder/35081802661"}
+{"task_id": "opencoder/31290784842", "reason": "duplicate_statement", "matches": "opencoder/41129566243"}
+{"task_id": "opencoder/38631057586", "reason": "heldout_statement_overlap", "matches": 267}
+{"task_id": "opencoder/30343221587", "reason": "reserved_opencoder_holdout"}
+{"task_id": "opencoder/72464140788", "reason": "reserved_opencoder_holdout"}
+{"task_id": "opencoder/5287840997", "reason": "heldout_statement_overlap", "matches": 135}
+{"task_id": "opencoder/13487673706", "reason": "duplicate_statement", "matches": "opencoder/20854973713"}
+{"task_id": "opencoder/71003293221", "reason": "duplicate_statement", "matches": "opencoder/12307870644"}
+{"task_id": "opencoder/17650787800", "reason": "duplicate_statement", "matches": "opencoder/2072635224"}
+{"task_id": "opencoder/23726331439", "reason": "known_test_setup_uses_root_before_assignment"}
+{"task_id": "opencoder/37808771264", "reason": "duplicate_statement", "matches": "opencoder/34031367827"}
+{"task_id": "opencoder/19070992118", "reason": "duplicate_statement", "matches": "opencoder/28462923210"}
+{"task_id": "opencoder/16142792070", "reason": "duplicate_statement", "matches": "opencoder/17479795935"}
+{"task_id": "opencoder/9499208834", "reason": "duplicate_statement", "matches": "opencoder/33561953530"}
+{"task_id": "opencoder/1455968301", "reason": "reserved_opencoder_holdout"}
+{"task_id": "opencoder/13296952745", "reason": "reserved_opencoder_holdout"}
+{"task_id": "opencoder/36190738206", "reason": "duplicate_statement", "matches": "opencoder/70223461117"}
+{"task_id": "opencoder/12306441715", "reason": "duplicate_statement", "matches": "opencoder/28485784738"}
+{"task_id": "opencoder/70439257631", "reason": "duplicate_statement", "matches": "opencoder/72468797288"}
+{"task_id": "opencoder/40084952336", "reason": "duplicate_statement", "matches": "opencoder/3478615496"}
+{"task_id": "opencoder/34279333179", "reason": "duplicate_statement", "matches": "opencoder/19676172044"}
+{"task_id": "opencoder/20538764696", "reason": "reserved_opencoder_holdout"}
+{"task_id": "opencoder/31403450905", "reason": "duplicate_statement", "matches": "opencoder/6873808991"}
+{"task_id": "opencoder/29021215544", "reason": "duplicate_statement", "matches": "opencoder/8894425573"}
+{"task_id": "opencoder/71208298239", "reason": "test_syntax_error"}
+{"task_id": "opencoder/14343294504", "reason": "duplicate_statement", "matches": "opencoder/73087778305"}
+{"task_id": "opencoder/32324407105", "reason": "reserved_opencoder_holdout"}
+{"task_id": "opencoder/2175809555", "reason": "duplicate_statement", "matches": "opencoder/73087778305"}
+{"task_id": "opencoder/39080154830", "reason": "reserved_opencoder_holdout"}
+{"task_id": "opencoder/12783934007", "reason": "duplicate_statement", "matches": "opencoder/74795245705"}
+{"task_id": "opencoder/4327209390", "reason": "heldout_statement_overlap", "matches": "opencoder/33402217053"}
+{"task_id": "opencoder/23845210076", "reason": "duplicate_statement", "matches": "opencoder/19776390569"}
+{"task_id": "opencoder/10790298325", "reason": "reserved_opencoder_holdout"}
+{"task_id": "opencoder/21278640419", "reason": "duplicate_statement", "matches": "opencoder/12206727424"}
+{"task_id": "opencoder/31097282904", "reason": "duplicate_statement", "matches": "opencoder/17739105536"}
+{"task_id": "opencoder/6316906329", "reason": "reserved_opencoder_holdout"}
+{"task_id": "opencoder/43297797000", "reason": "duplicate_statement", "matches": "opencoder/15853860998"}
+{"task_id": "opencoder/70484882687", "reason": "duplicate_statement", "matches": "opencoder/19776390569"}
+{"task_id": "opencoder/72977635547", "reason": "duplicate_statement", "matches": "opencoder/72466161588"}
+{"task_id": "opencoder/14921441692", "reason": "duplicate_statement", "matches": "opencoder/39730417842"}
+{"task_id": "opencoder/43084116032", "reason": "reserved_opencoder_holdout"}
+{"task_id": "opencoder/35127893173", "reason": "duplicate_statement", "matches": "opencoder/21943705451"}
+{"task_id": "opencoder/9793846003", "reason": "duplicate_statement", "matches": "opencoder/34173157572"}
+{"task_id": "opencoder/17086770685", "reason": "duplicate_statement", "matches": "opencoder/11860768217"}
+{"task_id": "opencoder/24060963630", "reason": "known_test_setup_uses_root_before_assignment"}
+{"task_id": "opencoder/41117467252", "reason": "duplicate_statement", "matches": "opencoder/32359288300"}
+{"task_id": "opencoder/73699369047", "reason": "duplicate_statement", "matches": "opencoder/27342174594"}
+{"task_id": "opencoder/28039513541", "reason": "duplicate_statement", "matches": "opencoder/16312335401"}
+{"task_id": "opencoder/70854646202", "reason": "duplicate_statement", "matches": "opencoder/17471981684"}
+{"task_id": "opencoder/17724170755", "reason": "duplicate_statement", "matches": "opencoder/688064499"}
+{"task_id": "opencoder/71759412595", "reason": "reserved_opencoder_holdout"}
+{"task_id": "opencoder/29178043754", "reason": "duplicate_statement", "matches": "opencoder/70015659007"}
+{"task_id": "opencoder/71449614554", "reason": "duplicate_statement", "matches": "opencoder/34036135869"}
+{"task_id": "opencoder/28932362486", "reason": "duplicate_statement", "matches": "opencoder/11316240742"}
+{"task_id": "opencoder/38132117799", "reason": "duplicate_statement", "matches": "opencoder/6572528702"}
+{"task_id": "opencoder/36259635695", "reason": "duplicate_statement", "matches": "opencoder/21943705451"}
+{"task_id": "opencoder/23099784630", "reason": "reserved_opencoder_holdout"}
+{"task_id": "opencoder/597544222", "reason": "duplicate_statement", "matches": "opencoder/28462923210"}
+{"task_id": "opencoder/6957546013", "reason": "duplicate_statement", "matches": "opencoder/12206727424"}
+{"task_id": "opencoder/10945497654", "reason": "duplicate_statement", "matches": "opencoder/8283362673"}
+{"task_id": "opencoder/17210094724", "reason": "duplicate_statement", "matches": "opencoder/72925828476"}
+{"task_id": "opencoder/30554945031", "reason": "duplicate_statement", "matches": "opencoder/3898108542"}
+{"task_id": "opencoder/70328984310", "reason": "duplicate_statement", "matches": "opencoder/72925828476"}
+{"task_id": "opencoder/75154713066", "reason": "duplicate_statement", "matches": "opencoder/14032340190"}
+{"task_id": "opencoder/72462192628", "reason": "heldout_statement_overlap", "matches": "opencoder/16372571012"}
+{"task_id": "opencoder/44501029499", "reason": "duplicate_statement", "matches": "opencoder/18695696594"}
+{"task_id": "opencoder/71127126227", "reason": "reserved_opencoder_holdout"}
+{"task_id": "opencoder/70262677258", "reason": "duplicate_statement", "matches": "opencoder/17571723801"}
+{"task_id": "opencoder/73980170450", "reason": "duplicate_statement", "matches": "opencoder/35081802661"}
+{"task_id": "opencoder/74354384141", "reason": "duplicate_statement", "matches": "opencoder/72296514033"}
+{"task_id": "opencoder/28552718146", "reason": "reserved_opencoder_holdout"}
+{"task_id": "opencoder/18631652342", "reason": "heldout_statement_overlap", "matches": "opencoder/28749079042"}
+{"task_id": "opencoder/24026370", "reason": "duplicate_statement", "matches": "opencoder/28462923210"}
+{"task_id": "opencoder/73330354037", "reason": "reserved_opencoder_holdout"}
+{"task_id": "opencoder/9255469450", "reason": "duplicate_statement", "matches": "opencoder/35317882841"}
+{"task_id": "opencoder/39870705373", "reason": "duplicate_statement", "matches": "opencoder/11860768217"}
+{"task_id": "opencoder/26972433696", "reason": "reserved_opencoder_holdout"}
+{"task_id": "opencoder/71064741757", "reason": "duplicate_statement", "matches": "opencoder/18587995761"}
+{"task_id": "opencoder/38220657766", "reason": "duplicate_statement", "matches": "opencoder/69878242027"}
+{"task_id": "opencoder/1520508113", "reason": "reserved_opencoder_holdout"}
+{"task_id": "opencoder/7553658040", "reason": "duplicate_statement", "matches": "opencoder/72925828476"}
+{"task_id": "opencoder/24814687573", "reason": "duplicate_statement", "matches": "opencoder/73301752986"}
+{"task_id": "opencoder/18698617612", "reason": "duplicate_statement", "matches": "opencoder/19676172044"}
+{"task_id": "opencoder/25886016399", "reason": "known_statement_example_dara_is_not_an_anagram_of_radar"}
+{"task_id": "opencoder/30646453521", "reason": "duplicate_statement", "matches": "opencoder/14636980216"}
+{"task_id": "opencoder/15633216198", "reason": "duplicate_statement", "matches": "opencoder/6522828784"}
+{"task_id": "opencoder/13954558376", "reason": "duplicate_statement", "matches": "opencoder/29820465993"}
+{"task_id": "opencoder/33686533135", "reason": "duplicate_statement", "matches": "opencoder/35537290363"}
+{"task_id": "opencoder/32021149893", "reason": "duplicate_statement", "matches": "opencoder/22129050728"}
+{"task_id": "opencoder/20855507970", "reason": "reserved_opencoder_holdout"}
+{"task_id": "opencoder/18815368048", "reason": "duplicate_statement", "matches": "opencoder/15853860998"}
+{"task_id": "opencoder/17870627881", "reason": "duplicate_statement", "matches": "opencoder/3898108542"}
+{"task_id": "opencoder/2633400619", "reason": "duplicate_statement", "matches": "opencoder/42074212514"}
+{"task_id": "opencoder/12173826", "reason": "duplicate_statement", "matches": "opencoder/19011444432"}
+{"task_id": "opencoder/11622368774", "reason": "heldout_statement_overlap", "matches": "opencoder/28749079042"}
+{"task_id": "opencoder/15065045150", "reason": "duplicate_statement", "matches": "opencoder/21943705451"}
+{"task_id": "opencoder/22369499981", "reason": "duplicate_statement", "matches": "opencoder/34031367827"}
+{"task_id": "opencoder/32324657275", "reason": "reserved_opencoder_holdout"}
+{"task_id": "opencoder/18478990692", "reason": "duplicate_statement", "matches": "opencoder/28462923210"}
+{"task_id": "opencoder/20224494908", "reason": "reserved_opencoder_holdout"}
+{"task_id": "opencoder/36086171383", "reason": "duplicate_statement", "matches": "opencoder/36254637600"}
+{"task_id": "opencoder/2804948141", "reason": "duplicate_statement", "matches": "opencoder/41379256407"}
+{"task_id": "opencoder/75246721625", "reason": "duplicate_statement", "matches": "opencoder/15951728651"}
+{"task_id": "opencoder/69844818084", "reason": "duplicate_statement", "matches": "opencoder/25042447236"}
+{"task_id": "opencoder/72852712664", "reason": "duplicate_statement", "matches": "opencoder/3642131806"}
+{"task_id": "opencoder/26890706299", "reason": "duplicate_statement", "matches": "opencoder/32530691699"}
+{"task_id": "opencoder/2851535477", "reason": "duplicate_statement", "matches": "opencoder/5681925021"}
+{"task_id": "opencoder/27402275342", "reason": "duplicate_statement", "matches": "opencoder/41642391895"}
+{"task_id": "opencoder/37413427410", "reason": "duplicate_statement", "matches": "opencoder/43144992290"}
+{"task_id": "opencoder/23759800510", "reason": "duplicate_statement", "matches": "opencoder/23919556414"}
+{"task_id": "opencoder/39376792658", "reason": "duplicate_statement", "matches": "opencoder/34478518852"}
+{"task_id": "opencoder/30865636547", "reason": "duplicate_statement", "matches": "opencoder/2279330576"}
+{"task_id": "opencoder/15262858663", "reason": "duplicate_statement", "matches": "opencoder/25873830661"}
+{"task_id": "opencoder/39989246647", "reason": "reserved_opencoder_holdout"}
+{"task_id": "opencoder/43385151459", "reason": "duplicate_statement", "matches": "opencoder/34013713154"}
+{"task_id": "opencoder/25173696118", "reason": "reserved_opencoder_holdout"}
+{"task_id": "opencoder/13242834086", "reason": "duplicate_statement", "matches": "opencoder/17471981684"}
+{"task_id": "opencoder/4542273127", "reason": "duplicate_statement", "matches": "opencoder/75181583503"}
+{"task_id": "opencoder/21455581246", "reason": "duplicate_statement", "matches": "opencoder/23422842074"}
+{"task_id": "opencoder/1186442324", "reason": "duplicate_statement", "matches": "opencoder/26972509016"}
+{"task_id": "opencoder/74301114265", "reason": "duplicate_statement", "matches": "opencoder/2365611031"}
+{"task_id": "opencoder/17771320886", "reason": "duplicate_statement", "matches": "opencoder/9556377277"}
+{"task_id": "opencoder/16217656651", "reason": "reserved_opencoder_holdout"}
+{"task_id": "opencoder/21954006145", "reason": "duplicate_statement", "matches": "opencoder/34013713154"}
+{"task_id": "opencoder/899642349", "reason": "duplicate_statement", "matches": "opencoder/1688258655"}
+{"task_id": "opencoder/22935755140", "reason": "duplicate_statement", "matches": "opencoder/19559846684"}
+{"task_id": "opencoder/23509003644", "reason": "heldout_statement_overlap", "matches": "opencoder/70676290697"}
+{"task_id": "opencoder/18616734019", "reason": "heldout_statement_overlap", "matches": "opencoder/28749079042"}
+{"task_id": "opencoder/31081969245", "reason": "duplicate_statement", "matches": "opencoder/23919556414"}
+{"task_id": "opencoder/17490103813", "reason": "duplicate_statement", "matches": "opencoder/21289343117"}
+{"task_id": "opencoder/18634241951", "reason": "duplicate_statement", "matches": "opencoder/3898108542"}
+{"task_id": "opencoder/4433707090", "reason": "duplicate_statement", "matches": "opencoder/72925828476"}
+{"task_id": "opencoder/10785701115", "reason": "duplicate_statement", "matches": "opencoder/21943705451"}
+{"task_id": "opencoder/8926377206", "reason": "duplicate_statement", "matches": "opencoder/15951728651"}
+{"task_id": "opencoder/5813556471", "reason": "duplicate_statement", "matches": "opencoder/69811585425"}
+{"task_id": "opencoder/6051322307", "reason": "duplicate_statement", "matches": "opencoder/34031367827"}
+{"task_id": "opencoder/17740369836", "reason": "duplicate_statement", "matches": "opencoder/34951608543"}
+{"task_id": "opencoder/20341911211", "reason": "duplicate_statement", "matches": "opencoder/24877710684"}
+{"task_id": "opencoder/18735799479", "reason": "duplicate_statement", "matches": "opencoder/42011505856"}
+{"task_id": "opencoder/69821286011", "reason": "duplicate_statement", "matches": "opencoder/27482863890"}
+{"task_id": "opencoder/23277414497", "reason": "duplicate_statement", "matches": "opencoder/17471981684"}
+{"task_id": "opencoder/36206482664", "reason": "duplicate_statement", "matches": "opencoder/36876404608"}
+{"task_id": "opencoder/5783987454", "reason": "duplicate_statement", "matches": "opencoder/2365611031"}
+{"task_id": "opencoder/35756094698", "reason": "duplicate_statement", "matches": "opencoder/35081802661"}
+{"task_id": "opencoder/20088792488", "reason": "duplicate_statement", "matches": "opencoder/9396105523"}
+{"task_id": "opencoder/42426215846", "reason": "duplicate_statement", "matches": "opencoder/25998972801"}
+{"task_id": "opencoder/32255679546", "reason": "duplicate_statement", "matches": "opencoder/25895361929"}
+{"task_id": "opencoder/34602133291", "reason": "duplicate_statement", "matches": "opencoder/70223461117"}
+{"task_id": "opencoder/6923107628", "reason": "reserved_opencoder_holdout"}
+{"task_id": "opencoder/71575856825", "reason": "duplicate_statement", "matches": "opencoder/35081802661"}
+{"task_id": "opencoder/70124512666", "reason": "duplicate_statement", "matches": "opencoder/23986424167"}
+{"task_id": "opencoder/32402834234", "reason": "duplicate_statement", "matches": "opencoder/42821917832"}
+{"task_id": "opencoder/74125367395", "reason": "duplicate_statement", "matches": "opencoder/24008728020"}
+{"task_id": "opencoder/26229275690", "reason": "duplicate_statement", "matches": "opencoder/4027772429"}
+{"task_id": "opencoder/70223442557", "reason": "duplicate_statement", "matches": "opencoder/18552039299"}
+{"task_id": "opencoder/1288156291", "reason": "duplicate_statement", "matches": "opencoder/72925828476"}
+{"task_id": "opencoder/21290486367", "reason": "duplicate_statement", "matches": "opencoder/42074212514"}
+{"task_id": "opencoder/44022209326", "reason": "duplicate_statement", "matches": "opencoder/329757163"}
+{"task_id": "opencoder/23918216794", "reason": "duplicate_statement", "matches": "opencoder/35537290363"}
+{"task_id": "opencoder/18957348177", "reason": "heldout_statement_overlap", "matches": "opencoder/11292740943"}
+{"task_id": "opencoder/14579717683", "reason": "duplicate_statement", "matches": "opencoder/35081802661"}
+{"task_id": "opencoder/5841444045", "reason": "reserved_opencoder_holdout"}
+{"task_id": "opencoder/28345996930", "reason": "duplicate_statement", "matches": "opencoder/74666378980"}
+{"task_id": "opencoder/3303517533", "reason": "duplicate_statement", "matches": "opencoder/31331930546"}
+{"task_id": "opencoder/34277829160", "reason": "duplicate_statement", "matches": "opencoder/14218772268"}
+{"task_id": "opencoder/38307136448", "reason": "duplicate_statement", "matches": "opencoder/16562966513"}
+{"task_id": "opencoder/42599263493", "reason": "duplicate_statement", "matches": "opencoder/72605674548"}
+{"task_id": "opencoder/31953430731", "reason": "reserved_opencoder_holdout"}
+{"task_id": "opencoder/9584454389", "reason": "duplicate_statement", "matches": "opencoder/23173251265"}
+{"task_id": "opencoder/74992079799", "reason": "duplicate_statement", "matches": "opencoder/19776390569"}
+{"task_id": "opencoder/21136767399", "reason": "duplicate_statement", "matches": "opencoder/35206979251"}
+{"task_id": "opencoder/71268886827", "reason": "duplicate_statement", "matches": "opencoder/70223461117"}
+{"task_id": "opencoder/38069383954", "reason": "duplicate_statement", "matches": "opencoder/15951728651"}
+{"task_id": "opencoder/16130880967", "reason": "duplicate_statement", "matches": "opencoder/2175400675"}
+{"task_id": "opencoder/2220458177", "reason": "heldout_statement_overlap", "matches": "opencoder/72617877825"}
+{"task_id": "opencoder/397718146", "reason": "duplicate_statement", "matches": "opencoder/19011444432"}
+{"task_id": "opencoder/21289630947", "reason": "duplicate_statement", "matches": "opencoder/31108030852"}
+{"task_id": "opencoder/33186387679", "reason": "duplicate_statement", "matches": "opencoder/14347124086"}
+{"task_id": "opencoder/30767993001", "reason": "duplicate_statement", "matches": "opencoder/22129050728"}
+{"task_id": "opencoder/22697570463", "reason": "duplicate_statement", "matches": "opencoder/41129566243"}
+{"task_id": "opencoder/72403158873", "reason": "duplicate_statement", "matches": "opencoder/23359002924"}
+{"task_id": "opencoder/20149257682", "reason": "duplicate_statement", "matches": "opencoder/42011505856"}
+{"task_id": "opencoder/24062858427", "reason": "duplicate_statement", "matches": "opencoder/27173747137"}
+{"task_id": "opencoder/2011221608", "reason": "duplicate_statement", "matches": "opencoder/38556166190"}
+{"task_id": "opencoder/37651487414", "reason": "duplicate_statement", "matches": "opencoder/24563773463"}
+{"task_id": "opencoder/18021378989", "reason": "heldout_statement_overlap", "matches": 395}
+{"task_id": "opencoder/3612220531", "reason": "heldout_statement_overlap", "matches": "opencoder/20224494908"}
+{"task_id": "opencoder/17177203124", "reason": "duplicate_statement", "matches": "opencoder/42011505856"}
+{"task_id": "opencoder/43931181876", "reason": "duplicate_statement", "matches": "opencoder/7153723403"}
+{"task_id": "opencoder/33759484748", "reason": "duplicate_statement", "matches": "opencoder/74929399094"}
+{"task_id": "opencoder/3553591043", "reason": "duplicate_statement", "matches": "opencoder/7092448757"}
+{"task_id": "opencoder/2536292186", "reason": "duplicate_statement", "matches": "opencoder/16303201656"}
+{"task_id": "opencoder/430429014", "reason": "duplicate_statement", "matches": "opencoder/36912095566"}
+{"task_id": "opencoder/33859065965", "reason": "duplicate_statement", "matches": "opencoder/71204862780"}
+{"task_id": "opencoder/6793326587", "reason": "duplicate_statement", "matches": "opencoder/41129566243"}
+{"task_id": "opencoder/39716975234", "reason": "reserved_opencoder_holdout"}
+{"task_id": "opencoder/41725993041", "reason": "duplicate_statement", "matches": "opencoder/16821509271"}
+{"task_id": "opencoder/30149251821", "reason": "duplicate_statement", "matches": "opencoder/33561953530"}
+{"task_id": "opencoder/35714909285", "reason": "duplicate_statement", "matches": "opencoder/13216348037"}
+{"task_id": "opencoder/73798090911", "reason": "duplicate_statement", "matches": "opencoder/23919556414"}
+{"task_id": "opencoder/4099710000", "reason": "reserved_opencoder_holdout"}
+{"task_id": "opencoder/9993783184", "reason": "duplicate_statement", "matches": "opencoder/15736436240"}
+{"task_id": "opencoder/2299426661", "reason": "duplicate_statement", "matches": "opencoder/36912095566"}
+{"task_id": "opencoder/37936466420", "reason": "duplicate_statement", "matches": "opencoder/329757163"}
+{"task_id": "opencoder/39717378734", "reason": "duplicate_statement", "matches": "opencoder/42368676144"}
+{"task_id": "opencoder/28609211431", "reason": "duplicate_statement", "matches": "opencoder/19776390569"}
+{"task_id": "opencoder/13958249814", "reason": "duplicate_statement", "matches": "opencoder/13954327036"}
+{"task_id": "opencoder/12501727491", "reason": "duplicate_statement", "matches": "opencoder/7313756606"}
+{"task_id": "opencoder/15615608049", "reason": "duplicate_statement", "matches": "opencoder/19776390569"}
+{"task_id": "opencoder/33196572842", "reason": "duplicate_statement", "matches": "opencoder/14636980216"}
+{"task_id": "opencoder/27699782254", "reason": "duplicate_statement", "matches": "opencoder/20137218242"}
+{"task_id": "opencoder/70084950291", "reason": "duplicate_statement", "matches": "opencoder/28109870787"}
+{"task_id": "opencoder/16969569351", "reason": "duplicate_statement", "matches": "opencoder/70616889729"}
+{"task_id": "opencoder/34370328901", "reason": "duplicate_statement", "matches": "opencoder/31743587250"}
+{"task_id": "opencoder/10304824859", "reason": "duplicate_statement", "matches": "opencoder/25071756158"}
+{"task_id": "opencoder/39853381322", "reason": "duplicate_statement", "matches": "opencoder/42821917832"}
+{"task_id": "opencoder/36439964102", "reason": "heldout_statement_overlap", "matches": "opencoder/28749079042"}
+{"task_id": "opencoder/19161837001", "reason": "duplicate_statement", "matches": "opencoder/10877026221"}
+{"task_id": "opencoder/29287937046", "reason": "duplicate_statement", "matches": "opencoder/72925828476"}
+{"task_id": "opencoder/913567335", "reason": "heldout_statement_overlap", "matches": 496}
+{"task_id": "opencoder/20269226929", "reason": "duplicate_statement", "matches": "opencoder/31743587250"}
+{"task_id": "opencoder/27655519710", "reason": "duplicate_statement", "matches": "opencoder/5702366127"}
+{"task_id": "opencoder/27310442110", "reason": "duplicate_statement", "matches": "opencoder/3777352734"}
+{"task_id": "opencoder/72464409588", "reason": "duplicate_statement", "matches": "opencoder/27111547969"}
+{"task_id": "opencoder/71535700269", "reason": "duplicate_statement", "matches": "opencoder/42414280235"}
+{"task_id": "opencoder/70716783222", "reason": "duplicate_statement", "matches": "opencoder/70807740824"}
+{"task_id": "opencoder/43972449580", "reason": "duplicate_statement", "matches": "opencoder/72296529713"}
+{"task_id": "opencoder/43768295732", "reason": "duplicate_statement", "matches": "opencoder/72925828476"}
+{"task_id": "opencoder/7540590029", "reason": "duplicate_statement", "matches": "opencoder/17479795935"}
+{"task_id": "opencoder/5767461213", "reason": "duplicate_statement", "matches": "opencoder/25315281113"}
+{"task_id": "opencoder/18589285404", "reason": "duplicate_statement", "matches": "opencoder/13707349499"}
+{"task_id": "opencoder/39005972068", "reason": "duplicate_statement", "matches": "opencoder/42011505856"}
+{"task_id": "opencoder/74310319891", "reason": "duplicate_statement", "matches": "opencoder/19776390569"}
+{"task_id": "opencoder/29353783190", "reason": "duplicate_statement", "matches": "opencoder/31357937629"}
+{"task_id": "opencoder/1186313204", "reason": "duplicate_statement", "matches": "opencoder/35820286288"}
+{"task_id": "opencoder/4581587410", "reason": "duplicate_statement", "matches": "opencoder/20685553828"}
+{"task_id": "opencoder/9120489689", "reason": "duplicate_statement", "matches": "opencoder/32530691699"}
+{"task_id": "opencoder/72405205512", "reason": "reserved_opencoder_holdout"}
+{"task_id": "opencoder/74928817417", "reason": "duplicate_statement", "matches": "opencoder/8998438279"}
+{"task_id": "opencoder/5975058792", "reason": "duplicate_statement", "matches": "opencoder/74795245705"}
+{"task_id": "opencoder/33495639456", "reason": "duplicate_statement", "matches": "opencoder/24563773463"}
+{"task_id": "opencoder/21584862959", "reason": "duplicate_statement", "matches": "opencoder/19676172044"}
+{"task_id": "opencoder/7214588563", "reason": "duplicate_statement", "matches": "opencoder/38839724847"}
+{"task_id": "opencoder/24491544284", "reason": "duplicate_statement", "matches": "opencoder/20069224580"}
+{"task_id": "opencoder/12917752789", "reason": "heldout_statement_overlap", "matches": 120}
+{"task_id": "opencoder/12833126286", "reason": "duplicate_statement", "matches": "opencoder/3898108542"}
+{"task_id": "opencoder/74354382861", "reason": "reserved_opencoder_holdout"}
+{"task_id": "opencoder/23840546531", "reason": "duplicate_statement", "matches": "opencoder/32593623226"}
+{"task_id": "opencoder/70676290697", "reason": "reserved_opencoder_holdout"}
+{"task_id": "opencoder/40731310262", "reason": "duplicate_statement", "matches": "opencoder/34047523320"}
+{"task_id": "opencoder/21341696328", "reason": "duplicate_statement", "matches": "opencoder/42425619120"}
+{"task_id": "opencoder/73244428224", "reason": "duplicate_statement", "matches": "opencoder/42011505856"}
+{"task_id": "opencoder/30865588127", "reason": "duplicate_statement", "matches": "opencoder/509382011"}
+{"task_id": "opencoder/38121968250", "reason": "duplicate_statement", "matches": "opencoder/23794794790"}
+{"task_id": "opencoder/33402217053", "reason": "reserved_opencoder_holdout"}
+{"task_id": "opencoder/26215808571", "reason": "heldout_statement_overlap", "matches": "opencoder/28749079042"}
+{"task_id": "opencoder/21204498954", "reason": "duplicate_statement", "matches": "opencoder/15945296167"}
+{"task_id": "opencoder/39853851266", "reason": "no_explicit_test_check"}
+{"task_id": "opencoder/6545672334", "reason": "duplicate_statement", "matches": "opencoder/7337289917"}
+{"task_id": "opencoder/13852291545", "reason": "duplicate_statement", "matches": "opencoder/72925828476"}
+{"task_id": "opencoder/13795086486", "reason": "reserved_opencoder_holdout"}
+{"task_id": "opencoder/35031346129", "reason": "duplicate_statement", "matches": "opencoder/7092448757"}
+{"task_id": "opencoder/34159624469", "reason": "duplicate_statement", "matches": "opencoder/26379897183"}
+{"task_id": "opencoder/38728097661", "reason": "duplicate_statement", "matches": "opencoder/11860768217"}
+{"task_id": "opencoder/24485427332", "reason": "duplicate_statement", "matches": "opencoder/35081802661"}
+{"task_id": "opencoder/26224117287", "reason": "duplicate_statement", "matches": "opencoder/18479302732"}
+{"task_id": "opencoder/7345747157", "reason": "test_syntax_error"}
+{"task_id": "opencoder/19764353131", "reason": "duplicate_statement", "matches": "opencoder/11316240742"}
+{"task_id": "opencoder/14025911092", "reason": "duplicate_statement", "matches": "opencoder/7313756606"}
+{"task_id": "opencoder/39769626391", "reason": "reserved_opencoder_holdout"}
+{"task_id": "opencoder/9364402629", "reason": "duplicate_statement", "matches": "opencoder/36427401719"}
+{"task_id": "opencoder/74202648265", "reason": "duplicate_statement", "matches": "opencoder/35081802661"}
+{"task_id": "opencoder/8499338548", "reason": "reserved_opencoder_holdout"}
+{"task_id": "opencoder/29177944224", "reason": "duplicate_statement", "matches": "opencoder/5681925021"}
+{"task_id": "opencoder/25428127968", "reason": "duplicate_statement", "matches": "opencoder/16923883817"}
+{"task_id": "opencoder/28749079042", "reason": "reserved_opencoder_holdout"}
+{"task_id": "opencoder/4129011136", "reason": "duplicate_statement", "matches": "opencoder/6913819460"}
+{"task_id": "opencoder/813161013", "reason": "duplicate_statement", "matches": "opencoder/74795245705"}
+{"task_id": "opencoder/22698676053", "reason": "duplicate_statement", "matches": "opencoder/4027772429"}
+{"task_id": "opencoder/9439138871", "reason": "duplicate_statement", "matches": "opencoder/14257363563"}
+{"task_id": "opencoder/19999085879", "reason": "duplicate_statement", "matches": "opencoder/30974218324"}
+{"task_id": "opencoder/13478340311", "reason": "duplicate_statement", "matches": "opencoder/25873830661"}
+{"task_id": "opencoder/40219722122", "reason": "duplicate_statement", "matches": "opencoder/72915681169"}
+{"task_id": "opencoder/75276145395", "reason": "duplicate_statement", "matches": "opencoder/34048954400"}
+{"task_id": "opencoder/71920996516", "reason": "duplicate_statement", "matches": "opencoder/19776390569"}
+{"task_id": "opencoder/20382841084", "reason": "duplicate_statement", "matches": "opencoder/11860768217"}
+{"task_id": "opencoder/2426813818", "reason": "duplicate_statement", "matches": "opencoder/23047306202"}
+{"task_id": "opencoder/11516326916", "reason": "duplicate_statement", "matches": "opencoder/74666378980"}
+{"task_id": "opencoder/31579946396", "reason": "duplicate_statement", "matches": "opencoder/28109870787"}
+{"task_id": "opencoder/38044836940", "reason": "duplicate_statement", "matches": "opencoder/19559846684"}
+{"task_id": "opencoder/74825846921", "reason": "duplicate_statement", "matches": "opencoder/69878242027"}
+{"task_id": "opencoder/73477952841", "reason": "duplicate_statement", "matches": "opencoder/36507648171"}
+{"task_id": "opencoder/32977391775", "reason": "duplicate_statement", "matches": "opencoder/18479302732"}
+{"task_id": "opencoder/698167818", "reason": "duplicate_statement", "matches": "opencoder/73881332411"}
+{"task_id": "opencoder/6258425247", "reason": "duplicate_statement", "matches": "opencoder/42011505856"}
+{"task_id": "opencoder/73096162264", "reason": "duplicate_statement", "matches": "opencoder/7153723403"}
+{"task_id": "opencoder/70452271572", "reason": "duplicate_statement", "matches": "opencoder/8152170181"}
+{"task_id": "opencoder/4877651549", "reason": "duplicate_statement", "matches": "opencoder/28485784738"}
+{"task_id": "opencoder/6939180347", "reason": "duplicate_statement", "matches": "opencoder/11316240742"}
+{"task_id": "opencoder/75090122676", "reason": "duplicate_statement", "matches": "opencoder/36507648171"}
+{"task_id": "opencoder/19151735826", "reason": "reserved_opencoder_holdout"}
+{"task_id": "opencoder/25042223966", "reason": "duplicate_statement", "matches": "opencoder/36427401719"}
+{"task_id": "opencoder/9880825531", "reason": "duplicate_statement", "matches": "opencoder/19011444432"}
+{"task_id": "opencoder/35775367408", "reason": "duplicate_statement", "matches": "opencoder/22568335466"}
+{"task_id": "opencoder/72077039224", "reason": "heldout_statement_overlap", "matches": 32}
+{"task_id": "opencoder/25543566408", "reason": "duplicate_statement", "matches": "opencoder/32143187129"}

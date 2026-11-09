@@ -1,0 +1,24 @@
+[prepare] 500/3000 rows; training=466
+[prepare] 1000/3000 rows; training=916
+[prepare] 1500/3000 rows; training=1367
+[prepare] 2000/3000 rows; training=1794
+[prepare] 2500/3000 rows; training=2203
+[prepare] 3000/3000 rows; training=2613
+{
+  "raw_rows": 3000,
+  "counts": {
+    "train": 2613,
+    "validation": 29
+  },
+  "exclusions": {
+    "reserved_opencoder_holdout": 55,
+    "duplicate_statement": 302,
+    "heldout_statement_overlap": 22,
+    "no_explicit_test_check": 2,
+    "known_test_setup_uses_root_before_assignment": 3,
+    "test_syntax_error": 2,
+    "known_statement_example_dara_is_not_an_anagram_of_radar": 1
+  },
+  "reference_solution_required": false,
+  "difficulty_filter": false
+}

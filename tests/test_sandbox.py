@@ -1,6 +1,6 @@
 """Integration checks: all candidate code executes only inside Docker."""
 import unittest
-from execution import Sandbox
+from execution import Sandbox,program_score
 
 
 class SandboxTests(unittest.TestCase):
@@ -12,6 +12,12 @@ class SandboxTests(unittest.TestCase):
     @classmethod
     def tearDownClass(cls):
         cls.sandbox.close()
+
+    def test_native_program_preserves_setup_and_explicit_failure(self):
+        tests=['values=[1,2,3]','def check():',' for value in values:','  if f(value)!=value+1:','   raise ValueError("wrong result")','check()']
+        self.assertTrue(program_score(self.sandbox,'def f(x): return x+1',tests)['correct'])
+        self.assertFalse(program_score(self.sandbox,'def f(x): return x',tests)['correct'])
+        self.assertTrue(program_score(self.sandbox,'def f(x): return x+1',['values=[1,2,3]','assert all(f(x)>x for x in values)'])['correct'])
 
     def test_correct_and_partial_solutions(self):
         tests = ["assert add(1,2) == 3", "assert add(-1,1) == 0"]

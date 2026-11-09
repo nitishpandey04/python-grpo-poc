@@ -1,185 +1,158 @@
-"""Local GRPO experiment: baseline, checkpoint validation, final paired evaluation."""
+"""One local GRPO path: native Python training tests and fixed MBPP development evaluation."""
 import argparse
-import inspect
+import hashlib
 import json
 import os
 from pathlib import Path
-import random
 import time
-import hashlib
 
-ROOT = Path(__file__).resolve().parent
-os.environ.setdefault("HF_HOME", str(ROOT / ".cache/huggingface"))
-os.environ.setdefault("TRACKIO_DIR", str(ROOT / "runs/trackio"))
-os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
-os.environ.setdefault("PYTORCH_ALLOC_CONF", "expandable_segments:True")
-os.environ.setdefault("TRITON_CACHE_DIR", str(ROOT / ".cache/triton"))
-os.environ.setdefault("TORCHINDUCTOR_CACHE_DIR", str(ROOT / ".cache/torchinductor"))
-headers = ROOT / ".cache/python-headers/usr/include"
-if headers.exists():
-    os.environ["C_INCLUDE_PATH"] = os.pathsep.join([str(headers / "python3.12"), str(headers), os.environ.get("C_INCLUDE_PATH", "")])
+ROOT=Path(__file__).resolve().parent
+os.environ.setdefault('HF_HOME',str(ROOT/'.cache/huggingface'))
+os.environ.setdefault('TRACKIO_DIR',str(ROOT/'runs/trackio'))
+os.environ.setdefault('TOKENIZERS_PARALLELISM','false')
+os.environ.setdefault('TRITON_CACHE_DIR',str(ROOT/'.cache/triton'))
+os.environ.setdefault('TORCHINDUCTOR_CACHE_DIR',str(ROOT/'.cache/torchinductor'))
+os.environ.setdefault('PYTORCH_ALLOC_CONF','expandable_segments:True')
+headers=ROOT/'.cache/python-headers/usr/include'
+if headers.exists():os.environ['C_INCLUDE_PATH']=os.pathsep.join([str(headers/'python3.12'),str(headers),os.environ.get('C_INCLUDE_PATH','')])
 
-import torch
-from datasets import Dataset
-from peft import LoraConfig
-from transformers import AutoModelForCausalLM, AutoTokenizer, TrainerCallback, set_seed
-from trl import GRPOConfig, GRPOTrainer
-
-from evaluate import compare, evaluate
-from execution import Sandbox
+from evaluate import compare,evaluate
+from execution import Sandbox,program_score
 from monitoring import Monitor
+from evaluate import expanded_score,read_rows,sha
+from report import build_report
 
 
-def load_rows(split):
-    rows = [json.loads(line) for line in (ROOT / f"data/prepared/{split}.jsonl").read_text().splitlines()]
-    random.Random(42).shuffle(rows)
-    return rows
+def validate_generation_groups(ids, prompts, generations):
+    if len(ids) != prompts * generations:
+        raise ValueError("Incomplete generation batch")
+    groups = [ids[i:i+generations] for i in range(0,len(ids),generations)]
+    if any(len(set(group)) != 1 for group in groups) or len({group[0] for group in groups}) != prompts:
+        raise ValueError("Generation batch must have distinct prompt groups with exactly G candidates each")
+    return {"distinct_prompts": prompts, "candidates_per_prompt": generations, "candidates": len(ids)}
+
+
+def batch_settings(prompts,generations,micro_batch):
+    if min(prompts,micro_batch)<1 or generations<2:
+        raise ValueError('Need positive prompt/micro-batch counts and at least two generations')
+    total=prompts*generations
+    if total % micro_batch:
+        raise ValueError('Micro-batch must divide the generation batch exactly')
+    return {'per_device_train_batch_size':micro_batch,'gradient_accumulation_steps':total//micro_batch,'generation_batch_size':total,'num_generations':generations}
 
 
 def main(args):
-    if not torch.cuda.is_available():
-        raise RuntimeError("CUDA is unavailable. Run outside the app sandbox with the CUDA-enabled project environment.")
-    set_seed(42)
-    torch.set_num_threads(4)
-    output = ROOT / "runs" / args.name
-    output.mkdir(parents=True, exist_ok=True)
-    if (output / "config.json").exists() and not args.resume:
-        raise ValueError("Run already exists. Choose --name or explicitly use --resume CHECKPOINT.")
-    config = {**vars(args), "gpu": torch.cuda.get_device_name(), "torch": torch.__version__, "seed": 42, "decode": "greedy, one attempt", "train_reward": "fraction of original MBPP tests passed"}
-    config["prepared_data_sha256"] = {split: hashlib.sha256((ROOT / f"data/prepared/{split}.jsonl").read_bytes()).hexdigest() for split in ("train", "validation", "test")}
-    if args.resume:
-        previous = json.loads((output / "config.json").read_text())
-        previous_backend = previous.get("execution_backend", "openenv")
-        if previous_backend != args.execution_backend:
-            raise ValueError("Cannot switch execution backend while resuming; use the recorded backend or a new run name")
-        for key in ("model", "max_tokens", "prepared_data_sha256"):
-            if previous.get(key) != config.get(key):
-                raise ValueError(f"Cannot resume with changed evaluation protocol: {key}")
-    (output / "config.json").write_text(json.dumps(config, indent=2))
-    monitor = Monitor(output, args.name, config)
-    sandbox = Sandbox(timeout=8, backend=args.execution_backend)
+    import torch
+    from datasets import Dataset
+    from peft import LoraConfig
+    from transformers import AutoModelForCausalLM,AutoTokenizer,TrainerCallback,set_seed
+    from trl import GRPOConfig,GRPOTrainer
+
+    if int(os.environ.get('WORLD_SIZE','1'))!=1:raise ValueError('This pilot is configured for one GPU')
+    if args.steps<1 or args.eval_every<1:raise ValueError('Steps and evaluation interval must be positive')
+    if args.output is None:args.output=ROOT/'runs'/args.name
+    batches=batch_settings(args.prompts_per_update,args.generations,args.micro_batch)
+    manifest=json.loads((args.dataset/'manifest.json').read_text())
+    if manifest['protocol']!='python-program-grpo-v1':raise ValueError('Prepare native Python programs with prepare_data.py first')
+    for split,digest in manifest['files_sha256'].items():
+        if sha(args.dataset/f'{split}.jsonl')!=digest:raise ValueError('Frozen selected data changed')
+    train_rows=read_rows(args.dataset/'train.jsonl');val_rows=read_rows(args.dataset/'validation.jsonl')
+    # Only IDs are used to guard the sealed confirmation pool. No confirmation prediction is generated.
+    train_ids={r['task_id'] for r in train_rows};val_ids={r['task_id'] for r in val_rows};confirmation_ids=set(manifest['confirmation']['task_ids'])
+    if train_ids&val_ids or train_ids&confirmation_ids or val_ids&confirmation_ids:raise ValueError('Data leakage')
+    if len(train_rows)<args.prompts_per_update or not val_rows:raise ValueError('Insufficient training or development problems')
+    if (args.output/'config.json').exists():raise ValueError('Run exists; choose a new name')
+    if sha(Path(manifest['evaluation_manifest']))!=manifest['evaluation_manifest_sha256']:raise ValueError('Fixed evaluation metadata changed')
+    args.output.mkdir(parents=True,exist_ok=True)
+    if not torch.cuda.is_available():raise RuntimeError('CUDA unavailable')
+    set_seed(args.seed);torch.set_num_threads(4)
+    config={**{k:str(v) if isinstance(v,Path) else v for k,v in vars(args).items()},'stage':'short pipeline smoke test','batch_settings':batches,'dataset_manifest_sha256':sha(args.dataset/'manifest.json'),'reward':'binary all supplied Python test-program checks pass','development_protocol':'unchanged original + official expanded MBPP suites','source_sha256':{name:sha(ROOT/name) for name in ['train.py','prepare_data.py','evaluate.py','execution.py','cpython_worker.py','monitoring.py']},'confirmation_evaluated':False,'gpu':torch.cuda.get_device_name(),'torch':torch.__version__}
+    (args.output/'config.json').write_text(json.dumps(config,indent=2))
+    monitor=Monitor(args.output,args.output.name,config)
     try:
-        sandbox.start()
-        monitor.phase = "loading model"
-        tokenizer = AutoTokenizer.from_pretrained(args.model)
-        tokenizer.padding_side = "left"
-        if tokenizer.pad_token_id is None:
-            tokenizer.pad_token = tokenizer.eos_token
-        model = AutoModelForCausalLM.from_pretrained(args.model, dtype=torch.bfloat16, attn_implementation="sdpa").to("cuda")
-        config["model_commit"] = getattr(model.config, "_commit_hash", None)
-        (output / "config.json").write_text(json.dumps(config, indent=2))
-        train_rows = load_rows("train")
-        val_rows = load_rows("validation")[:args.val_size]
-        test_rows = load_rows("test")[:args.test_size]
-        if args.resume:
-            baseline_val = [json.loads(line) for line in (output / "baseline-validation.jsonl").read_text().splitlines()]
-            baseline_val_metric = sum(r["correct"] for r in baseline_val) / len(baseline_val)
-        else:
-            _, baseline_metrics = evaluate(model, tokenizer, val_rows, sandbox, output / "baseline-validation.jsonl", args.max_tokens, monitor, "baseline_validation")
-            baseline_val_metric = baseline_metrics["correctness"]
-            # Save baseline final-test outputs before training; never use them for checkpoint selection.
-            evaluate(model, tokenizer, test_rows, sandbox, output / "baseline-test.jsonl", args.max_tokens, monitor, "baseline_test")
+        monitor.phase='loading original model'
+        tokenizer=AutoTokenizer.from_pretrained(manifest['model'],revision=manifest['revision'],local_files_only=True)
+        tokenizer.padding_side='left'
+        if tokenizer.pad_token_id is None:tokenizer.pad_token=tokenizer.eos_token
+        model=AutoModelForCausalLM.from_pretrained(manifest['model'],revision=manifest['revision'],local_files_only=True,dtype=torch.bfloat16,attn_implementation='sdpa').to('cuda')
+        with Sandbox() as sandbox:
+            before,baseline=evaluate(model,tokenizer,val_rows,sandbox,args.output/'baseline-validation.jsonl',args.max_tokens,monitor,'baseline_validation',score_fn=expanded_score)
+            best={'step':0,'correctness':baseline['correctness']}
 
-        def correctness_reward(completions, tests, task_id, **kwargs):
-            monitor.phase = "scoring training rollouts"
-            rewards, statuses = [], []
-            for completion, problem_tests, problem_id in zip(completions, tests, task_id):
-                text = completion[0]["content"] if isinstance(completion, list) else completion
-                score = sandbox.score(text, problem_tests)
-                rewards.append(score["passed"] / score["total"])
-                statuses.append(score["status"])
-                monitor.sample({"task_id": problem_id, "completion": text, "reward": rewards[-1], **score})
-            monitor.log({"execution/syntax_error_fraction": statuses.count("syntax_error") / len(statuses), "execution/assertion_error_fraction": statuses.count("assertion_error") / len(statuses), "execution/runtime_error_fraction": statuses.count("runtime_error") / len(statuses), "execution/timeout_fraction": statuses.count("timeout") / len(statuses), "execution/memory_error_fraction": statuses.count("memory_error") / len(statuses), "execution/unsupported_fraction": statuses.count("unsupported") / len(statuses), "execution/all_tests_passed_fraction": sum(r == 1 for r in rewards) / len(rewards)})
-            monitor.phase = "updating weights / generating next group"
-            return rewards
+            def reward(completions,tests,task_id,**kwargs):
+                layout=validate_generation_groups(task_id,args.prompts_per_update,args.generations)
+                rewards=[]
+                monitor.phase='running supplied Python test programs'
+                for completion,problem_tests,problem_id in zip(completions,tests,task_id,strict=True):
+                    text=completion[0]['content'] if isinstance(completion,list) else completion
+                    score=program_score(sandbox,text,problem_tests,problem_id)
+                    value=float(score['correct']);rewards.append(value)
+                    monitor.sample({'task_id':problem_id,'completion':text,'reward':value,**score})
+                grouped=[rewards[i:i+args.generations] for i in range(0,len(rewards),args.generations)]
+                mixed=sum(len(set(group))>1 for group in grouped)
+                monitor.log({'batch/'+key:value for key,value in layout.items()})
+                monitor.log({'batch/mixed_reward_groups':mixed,'batch/zero_std_group_fraction':1-mixed/len(grouped),'batch/full_pass_fraction':sum(rewards)/len(rewards)})
+                monitor.phase='updating weights'
+                return rewards
 
-        class Progress(TrainerCallback):
-            def __init__(self):
-                self.best = baseline_val_metric
-                if (output / "selection.json").exists():
-                    self.best = json.loads((output / "selection.json").read_text())["validation_correctness"]
+            class Progress(TrainerCallback):
+                def on_step_begin(self,config,state,control,**kwargs):
+                    monitor.step=state.global_step;monitor.phase='generating training rollouts'
+                def on_log(self,config,state,control,logs=None,**kwargs):
+                    monitor.step=state.global_step
+                    monitor.log({'train/'+key:value for key,value in (logs or {}).items()})
+                    monitor.log({'progress/optimizer_step':state.global_step,'progress/total_steps':args.steps,'progress/percent':100*state.global_step/args.steps})
+                def on_step_end(self,config,state,control,model=None,**kwargs):
+                    monitor.step=state.global_step
+                    if state.global_step%args.eval_every==0 or state.global_step==args.steps:
+                        _,metrics=evaluate(model,tokenizer,val_rows,sandbox,args.output/f'validation-step-{state.global_step}.jsonl',args.max_tokens,monitor,'validation',score_fn=expanded_score)
+                        monitor.log({'validation/baseline_correctness':baseline['correctness'],'validation/change_from_baseline':metrics['correctness']-baseline['correctness']})
+                        if metrics['correctness']>best['correctness']:
+                            best.update(step=state.global_step,correctness=metrics['correctness'])
+                            model.save_pretrained(args.output/'best-adapter')
+                        monitor.phase='training'
 
-            def on_log(self, args, state, control, logs=None, **kwargs):
-                monitor.step = state.global_step
-                monitor.log({"train/" + k: v for k, v in (logs or {}).items()})
-                monitor.log({"progress/optimizer_step": state.global_step, "progress/total_steps": cli.steps, "progress/percent": 100 * state.global_step / cli.steps})
-
-            def on_step_begin(self, args, state, control, **kwargs):
-                monitor.phase = "generating training rollouts / updating weights"
-
-            def on_step_end(self, args, state, control, model=None, **kwargs):
-                monitor.step = state.global_step
-                if state.global_step % cli.eval_every == 0 or state.global_step == cli.steps:
-                    _, metrics = evaluate(model, tokenizer, val_rows, sandbox, output / f"validation-step-{state.global_step}.jsonl", cli.max_tokens, monitor, "validation")
-                    monitor.log({"validation/baseline_correctness": baseline_val_metric, "validation/change_from_baseline": metrics["correctness"] - baseline_val_metric})
-                    if metrics["correctness"] > self.best:
-                        self.best = metrics["correctness"]
-                        model.save_pretrained(output / "best-adapter")
-                        tokenizer.save_pretrained(output / "best-adapter")
-                        (output / "selection.json").write_text(json.dumps({"optimizer_step": state.global_step, "validation_correctness": self.best}, indent=2))
-                monitor.phase = "training"
-
-        cli = args
-        kwargs = dict(output_dir=str(output / "checkpoints"), max_steps=args.steps,
-                      per_device_train_batch_size=1, gradient_accumulation_steps=4,
-                      num_generations=4, max_completion_length=args.max_tokens,
-                      learning_rate=1e-5, beta=0.02, temperature=0.8,
-                      bf16=True, gradient_checkpointing=True, optim="adamw_torch",
-                      logging_steps=1, logging_first_step=True, save_steps=args.eval_every,
-                      save_total_limit=2, report_to="none", seed=42,
-                      remove_unused_columns=False, disable_dropout=True,
-                      use_vllm=False)
-        # Pin and record installed versions; tolerate max_prompt_length's removal in recent TRL.
-        if "max_prompt_length" in inspect.signature(GRPOConfig).parameters:
-            kwargs["max_prompt_length"] = 512
-        trainer = GRPOTrainer(model=model, processing_class=tokenizer,
-                              args=GRPOConfig(**kwargs),
-                              peft_config=LoraConfig(r=16, lora_alpha=32, lora_dropout=0, target_modules=["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"], task_type="CAUSAL_LM"),
-                              train_dataset=Dataset.from_list([{k: r[k] for k in ("prompt", "tests", "task_id")} for r in train_rows]),
-                              reward_funcs=correctness_reward, callbacks=[Progress()])
-        monitor.phase = "training"
-        trainer.train(resume_from_checkpoint=args.resume)
-        trainer.save_model(str(output / "final-adapter"))
-        tokenizer.save_pretrained(output / "final-adapter")
-        monitor.log({"gpu/peak_allocated_mb": torch.cuda.max_memory_allocated() / 1024**2})
-        # Select using validation only. If no checkpoint improves, preserve the original model.
-        if (output / "best-adapter").exists():
-            trainer.model.load_adapter(str(output / "best-adapter"), adapter_name="selected")
-            trainer.model.set_adapter("selected")
-            selection = json.loads((output / "selection.json").read_text())
-            after, _ = evaluate(trainer.model, tokenizer, test_rows, sandbox, output / "selected-test.jsonl", args.max_tokens, monitor, "selected_test")
-        else:
-            selection = {"optimizer_step": 0, "validation_correctness": baseline_val_metric, "note": "No strict validation improvement; baseline retained."}
-            with trainer.model.disable_adapter():
-                after, _ = evaluate(trainer.model, tokenizer, test_rows, sandbox, output / "selected-test.jsonl", args.max_tokens, monitor, "selected_test")
-        # Also report the final trained checkpoint, with no further selection using its test score.
-        trainer.model.set_adapter("default")
-        final, _ = evaluate(trainer.model, tokenizer, test_rows, sandbox, output / "final-test.jsonl", args.max_tokens, monitor, "final_test")
-        before = [json.loads(line) for line in (output / "baseline-test.jsonl").read_text().splitlines()]
-        report = {"selected_checkpoint": selection, "selected_vs_original": compare(before, after), "final_vs_original": compare(before, final), "peak_gpu_allocated_mb": torch.cuda.max_memory_allocated() / 1024**2, "limitations": ["Original MBPP tests only; expanded hidden tests are future work.", "MBPP pretraining contamination and semantic overlaps cannot be ruled out.", "Single training seed; small filtered subset; POC evidence only."]}
-        (output / "report.json").write_text(json.dumps(report, indent=2))
-        from report import build_report
-        build_report(output)
-        monitor.phase = "complete"
-        print(json.dumps(report, indent=2), flush=True)
+            cfg=GRPOConfig(output_dir=str(args.output/'checkpoints'),max_steps=args.steps,**batches,
+                max_completion_length=args.max_tokens,learning_rate=args.learning_rate,beta=0.02,temperature=args.temperature,
+                bf16=True,gradient_checkpointing=True,optim='adamw_torch',logging_steps=1,logging_first_step=True,
+                save_steps=args.eval_every,save_total_limit=2,report_to='none',seed=args.seed,
+                remove_unused_columns=False,disable_dropout=True,use_vllm=False)
+            trainer=GRPOTrainer(model=model,processing_class=tokenizer,args=cfg,
+                peft_config=LoraConfig(r=16,lora_alpha=32,lora_dropout=0,target_modules=['q_proj','k_proj','v_proj','o_proj','gate_proj','up_proj','down_proj'],task_type='CAUSAL_LM'),
+                train_dataset=Dataset.from_list([{key:row[key] for key in ['prompt','tests','task_id']} for row in train_rows]),
+                reward_funcs=reward,callbacks=[Progress()])
+            monitor.phase='training'
+            trainer.train()
+            trainer.save_model(str(args.output/'final-adapter'));tokenizer.save_pretrained(args.output/'final-adapter')
+            after=read_rows(args.output/f'validation-step-{args.steps}.jsonl')
+            report={'stage':'short pipeline smoke test','steps':args.steps,'train_problems':len(train_rows),'development_problems':len(val_rows),'sealed_confirmation_problems':len(confirmation_ids),'dataset_manifest_sha256':sha(args.dataset/'manifest.json'),'confirmation_evaluated':False,'baseline_validation':baseline,'final_validation':json.loads((args.output/f'validation-step-{args.steps}.summary.json').read_text()),'selected_checkpoint':best,'development_comparison':compare(before,after,note='Development-only comparison in a bounded pipeline pilot; not independent confirmation.'),'peak_gpu_allocated_mb':torch.cuda.max_memory_allocated()/1024**2,'limitations':['Ten-step default is a pipeline smoke test, not evidence of general improvement.','Small development set and one training seed; no claim of general improvement.','Confirmation predictions are deliberately deferred.']}
+            (args.output/'report.json').write_text(json.dumps(report,indent=2))
+            metrics=[json.loads(line) for line in (args.output/'metrics.jsonl').read_text().splitlines()]
+            layouts=[r for r in metrics if 'batch/distinct_prompts' in r]
+            if len(layouts)!=args.steps or any(r['batch/distinct_prompts']!=args.prompts_per_update or r['batch/candidates']!=args.prompts_per_update*args.generations for r in layouts):
+                raise RuntimeError('Observed optimizer batches did not match the declared layout')
+            build_report(args.output)
+            monitor.phase='complete'
+            print(json.dumps(report,indent=2),flush=True)
     except BaseException:
-        monitor.phase = "failed or interrupted"
-        raise
+        monitor.phase='failed or interrupted';raise
     finally:
-        sandbox.close()
         monitor.close()
-        (output / "status.json").write_text(json.dumps({"phase": monitor.phase, "optimizer_step": monitor.step, "updated_at": time.time()}, indent=2))
+        (args.output/'status.json').write_text(json.dumps({'phase':monitor.phase,'optimizer_step':monitor.step,'updated_at':time.time()},indent=2))
 
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--name", default="poc-" + time.strftime("%Y%m%d-%H%M%S"))
-    parser.add_argument("--model", default="Qwen/Qwen2.5-Coder-0.5B-Instruct")
-    parser.add_argument("--steps", type=int, default=200)
-    parser.add_argument("--eval-every", type=int, default=25)
-    parser.add_argument("--val-size", type=int, default=100)
-    parser.add_argument("--test-size", type=int, default=300)
-    parser.add_argument("--max-tokens", type=int, default=256)
-    parser.add_argument("--execution-backend", choices=["cpython", "openenv"], default="cpython")
-    parser.add_argument("--resume")
+if __name__=='__main__':
+    parser=argparse.ArgumentParser()
+    parser.add_argument('--dataset',type=Path,default=Path('data/python-programs'))
+    parser.add_argument('--name',default='simple-smoke')
+    parser.add_argument('--output',type=Path)
+    parser.add_argument('--max-tokens',type=int,default=256)
+    parser.add_argument('--temperature',type=float,default=0.8)
+    parser.add_argument('--steps',type=int,default=10)
+    parser.add_argument('--eval-every',type=int,default=5)
+    parser.add_argument('--prompts-per-update',type=int,default=4)
+    parser.add_argument('--generations',type=int,default=8)
+    parser.add_argument('--micro-batch',type=int,default=2)
+    parser.add_argument('--learning-rate',type=float,default=1e-5)
+    parser.add_argument('--seed',type=int,default=42)
     main(parser.parse_args())

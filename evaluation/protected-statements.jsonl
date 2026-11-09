@@ -1,0 +1,582 @@
+{"task_id": 513, "statement": "Write a function to convert tuple into list by adding the given string after every element."}
+{"task_id": 514, "statement": "Write a function to find the summation of tuple elements in the given tuple list."}
+{"task_id": 515, "statement": "Write a function to check if there is a subset with sum divisible by m."}
+{"task_id": 516, "statement": "Write a function to sort a list of elements using radix sort."}
+{"task_id": 518, "statement": "Write a function to find the square root of a perfect number."}
+{"task_id": 519, "statement": "Write a function to calculate volume of a tetrahedron."}
+{"task_id": 520, "statement": "Write a function to find the lcm of the given array elements."}
+{"task_id": 521, "statement": "Write a function to print check if the triangle is scalene or not."}
+{"task_id": 522, "statement": "Write a function to find the longest bitonic subsequence for the given array."}
+{"task_id": 523, "statement": "Write a function to check whether a given string has a capital letter, a lower case letter, a number and specified length using lambda function."}
+{"task_id": 525, "statement": "Write a python function to check whether two given lines are parallel or not."}
+{"task_id": 526, "statement": "Write a python function to capitalize first and last letters of each word of a given string."}
+{"task_id": 527, "statement": "Write a function to find all pairs in an integer array whose sum is equal to a given number."}
+{"task_id": 528, "statement": "Write a function to find the list of lists with minimum length."}
+{"task_id": 529, "statement": "Write a function to find the nth jacobsthal-lucas number."}
+{"task_id": 532, "statement": "Write a function to check if the two given strings are permutations of each other."}
+{"task_id": 533, "statement": "Write a function to remove particular data type elements from the given tuple."}
+{"task_id": 534, "statement": "Write a function to search a literals string in a string and also find the location within the original string where the pattern occurs."}
+{"task_id": 535, "statement": "Write a function to find the top or bottom surface area of a cylinder."}
+{"task_id": 536, "statement": "Write a function to select the nth items of a list."}
+{"task_id": 537, "statement": "Write a python function to find the first repeated word in a given string."}
+{"task_id": 538, "statement": "Write a python function to convert a given string list to a tuple."}
+{"task_id": 539, "statement": "Write a function to create a list containing the power of said number in bases raised to the corresponding number in the index using map function."}
+{"task_id": 540, "statement": "Write a python function to find the difference between highest and least frequencies in a given array."}
+{"task_id": 542, "statement": "Write a function to replace all occurrences of spaces, commas, or dots with a colon in the given string by using regex."}
+{"task_id": 543, "statement": "Write a function to add two numbers and print number of digits of sum."}
+{"task_id": 544, "statement": "Write a function to flatten the tuple list to a string."}
+{"task_id": 545, "statement": "Write a python function to toggle only first and last bits of a given number."}
+{"task_id": 546, "statement": "Write a function to find the last occurrence of a character in a string."}
+{"task_id": 548, "statement": "Write a function to find the length of the longest increasing subsequence of the given sequence."}
+{"task_id": 549, "statement": "Write a python function to find the sum of fifth power of first n odd natural numbers."}
+{"task_id": 550, "statement": "Write a python function to find the maximum element in a sorted and rotated array."}
+{"task_id": 551, "statement": "Write a function to extract a specified column from a given nested list."}
+{"task_id": 552, "statement": "Write a python function to check whether a given sequence is linear or not."}
+{"task_id": 553, "statement": "Write a function to convert the given tuple to a floating-point number."}
+{"task_id": 554, "statement": "Write a python function to find odd numbers from a mixed list."}
+{"task_id": 555, "statement": "Write a python function to find the difference between sum of cubes of first n natural numbers and the sum of first n natural numbers."}
+{"task_id": 556, "statement": "Write a python function to count the pairs with xor as an odd number."}
+{"task_id": 557, "statement": "Write a function to toggle characters case in a string."}
+{"task_id": 558, "statement": "Write a python function to find the digit distance between two integers."}
+{"task_id": 559, "statement": "Write a function to find the largest sum of contiguous subarray in the given array."}
+{"task_id": 560, "statement": "Write a function to find the union of elements of the given tuples."}
+{"task_id": 561, "statement": "Write a function to assign with each element, its pair elements from other similar pairs in the given tuple."}
+{"task_id": 562, "statement": "Write a python function to find the maximum length of sublist."}
+{"task_id": 563, "statement": "Write a function to extract values between quotation marks of a string."}
+{"task_id": 564, "statement": "Write a python function to count unequal element pairs from the given array."}
+{"task_id": 565, "statement": "Write a python function to split a string into characters."}
+{"task_id": 566, "statement": "Write a function to get the sum of a non-negative integer."}
+{"task_id": 567, "statement": "Write a function to check whether a specified list is sorted or not."}
+{"task_id": 568, "statement": "Write a function to create a list of empty dictionaries."}
+{"task_id": 569, "statement": "Write a function to sort each sublist of strings in a given list of lists."}
+{"task_id": 570, "statement": "Write a function to remove words from a given list of strings containing a character or string."}
+{"task_id": 571, "statement": "Write a function to find maximum possible sum of disjoint pairs for the given array of integers and a number k."}
+{"task_id": 572, "statement": "Write a python function to remove two duplicate numbers from a given number of lists."}
+{"task_id": 573, "statement": "Write a python function to calculate the product of the unique numbers of a given list."}
+{"task_id": 574, "statement": "Write a function to find the surface area of a cylinder."}
+{"task_id": 575, "statement": "Write a python function to find nth number in a sequence which is not a multiple of a given number."}
+{"task_id": 576, "statement": "Write a python function to check whether an array is subarray of another or not."}
+{"task_id": 577, "statement": "Write a python function to find the last digit in factorial of a given number."}
+{"task_id": 578, "statement": "Write a function to interleave lists of the same length."}
+{"task_id": 579, "statement": "Write a function to find the dissimilar elements in the given two tuples."}
+{"task_id": 580, "statement": "Write a function to extract the even elements in the nested mixed tuple."}
+{"task_id": 581, "statement": "Write a python function to find the surface area of the square pyramid."}
+{"task_id": 582, "statement": "Write a function to check if a dictionary is empty or not."}
+{"task_id": 583, "statement": "Write a function for nth catalan number."}
+{"task_id": 584, "statement": "Write a function to find all adverbs and their positions in a given sentence by using regex."}
+{"task_id": 585, "statement": "Write a function to find the n - expensive price items from a given dataset using heap queue algorithm."}
+{"task_id": 586, "statement": "Write a python function to split the array and add the first part to the end."}
+{"task_id": 587, "statement": "Write a function to convert a list to a tuple."}
+{"task_id": 588, "statement": "Write a python function to find the difference between largest and smallest value in a given array."}
+{"task_id": 589, "statement": "Write a function to find perfect squares between two given numbers."}
+{"task_id": 591, "statement": "Write a python function to interchange the first and last elements in a list."}
+{"task_id": 592, "statement": "Write a python function to find sum of product of binomial co-efficients."}
+{"task_id": 593, "statement": "Write a function to remove leading zeroes from an ip address."}
+{"task_id": 594, "statement": "Write a function to find the difference of first even and odd number of a given list."}
+{"task_id": 595, "statement": "Write a python function to count minimum number of swaps required to convert one binary string to another."}
+{"task_id": 597, "statement": "Write a function to find kth element from the given two sorted arrays."}
+{"task_id": 599, "statement": "Write a function to find sum and average of first n natural numbers."}
+{"task_id": 600, "statement": "Write a python function to check whether the given number is even or not using bitwise operator."}
+{"task_id": 11, "statement": "Write a python function to remove first and last occurrence of a given character from the string."}
+{"task_id": 12, "statement": "Write a function to sort a given matrix in ascending order according to the sum of its rows."}
+{"task_id": 13, "statement": "Write a function to count the most common words in a dictionary."}
+{"task_id": 14, "statement": "Write a python function to find the volume of a triangular prism."}
+{"task_id": 15, "statement": "Write a function to split a string at lowercase letters."}
+{"task_id": 16, "statement": "Write a function to find sequences of lowercase letters joined with an underscore."}
+{"task_id": 17, "statement": "Write a function to find the perimeter of a square."}
+{"task_id": 19, "statement": "Write a function to find whether a given array of integers contains any duplicate element."}
+{"task_id": 20, "statement": "Write a function to check if the given number is woodball or not."}
+{"task_id": 21, "statement": "Write a function to find m number of multiples of n."}
+{"task_id": 22, "statement": "Write a function to find the first duplicate element in a given array of integers."}
+{"task_id": 24, "statement": "Write a function to convert the given binary number to its decimal equivalent."}
+{"task_id": 25, "statement": "Write a python function to find the product of non-repeated elements in a given array."}
+{"task_id": 26, "statement": "Write a function to check if the given tuple list has all k elements."}
+{"task_id": 28, "statement": "Write a python function to find binomial co-efficient."}
+{"task_id": 29, "statement": "Write a python function to find the element occurring odd number of times."}
+{"task_id": 30, "statement": "Write a python function to count all the substrings starting and ending with same characters."}
+{"task_id": 31, "statement": "Write a function to find the top k integers that occur most frequently from given lists of sorted and distinct integers using heap queue algorithm."}
+{"task_id": 32, "statement": "Write a python function to find the largest prime factor of a given number."}
+{"task_id": 33, "statement": "Write a python function to convert a decimal number to binary number."}
+{"task_id": 34, "statement": "Write a python function to find the missing number in a sorted array."}
+{"task_id": 35, "statement": "Write a function to find the n-th rectangular number."}
+{"task_id": 36, "statement": "Write a python function to find the nth digit in the proper fraction of two given numbers."}
+{"task_id": 37, "statement": "Write a function to sort a given mixed list of integers and strings."}
+{"task_id": 38, "statement": "Write a function to find the division of first even and odd number of a given list."}
+{"task_id": 39, "statement": "Write a function to check if the letters of a given string can be rearranged so that two characters that are adjacent to each other are different."}
+{"task_id": 40, "statement": "Write a function to find frequency of the elements in a given list of lists using collections module."}
+{"task_id": 41, "statement": "Write a function to filter even numbers using lambda function."}
+{"task_id": 42, "statement": "Write a python function to find the sum of repeated elements in a given array."}
+{"task_id": 43, "statement": "Write a function to find sequences of lowercase letters joined with an underscore using regex."}
+{"task_id": 44, "statement": "Write a function that matches a word at the beginning of a string."}
+{"task_id": 45, "statement": "Write a function to find the gcd of the given array elements."}
+{"task_id": 46, "statement": "Write a python function to determine whether all the numbers are different from each other are not."}
+{"task_id": 47, "statement": "Write a python function to find the last digit when factorial of a divides factorial of b."}
+{"task_id": 48, "statement": "Write a python function to set all odd bits of a given number."}
+{"task_id": 49, "statement": "Write a function to extract every first or specified element from a given two-dimensional list."}
+{"task_id": 50, "statement": "Write a function to find the list with minimum length using lambda function."}
+{"task_id": 51, "statement": "Write a function to print check if the triangle is equilateral or not."}
+{"task_id": 52, "statement": "Write a function to caluclate area of a parallelogram."}
+{"task_id": 53, "statement": "Write a python function to check whether the first and last characters of a given string are equal or not."}
+{"task_id": 54, "statement": "Write a function to sort the given array by using counting sort."}
+{"task_id": 55, "statement": "Write a function to find t-nth term of geometric series."}
+{"task_id": 56, "statement": "Write a python function to check if a given number is one less than twice its reverse."}
+{"task_id": 57, "statement": "Write a python function to find the largest number that can be formed with the given digits."}
+{"task_id": 58, "statement": "Write a python function to check whether the given two integers have opposite sign or not."}
+{"task_id": 59, "statement": "Write a function to find the nth octagonal number."}
+{"task_id": 62, "statement": "Write a python function to find smallest number in a list."}
+{"task_id": 63, "statement": "Write a function to find the maximum difference between available pairs in the given tuple list."}
+{"task_id": 64, "statement": "Write a function to sort a list of tuples using lambda."}
+{"task_id": 65, "statement": "Write a function of recursion list sum."}
+{"task_id": 66, "statement": "Write a python function to count positive numbers in a list."}
+{"task_id": 67, "statement": "Write a function to find the number of ways to partition a set of bell numbers."}
+{"task_id": 68, "statement": "Write a python function to check whether the given array is monotonic or not."}
+{"task_id": 69, "statement": "Write a function to check whether a list contains the given sublist or not."}
+{"task_id": 71, "statement": "Write a function to sort a list of elements using comb sort."}
+{"task_id": 72, "statement": "Write a python function to check whether the given number can be represented as difference of two squares or not."}
+{"task_id": 73, "statement": "Write a function to split the given string with multiple delimiters by using regex."}
+{"task_id": 74, "statement": "Write a function to check whether it follows the sequence given in the patterns array."}
+{"task_id": 75, "statement": "Write a function to find tuples which have all elements divisible by k from the given list of tuples."}
+{"task_id": 76, "statement": "Write a python function to count the number of squares in a rectangle."}
+{"task_id": 77, "statement": "Write a python function to find the difference between sum of even and odd digits."}
+{"task_id": 79, "statement": "Write a python function to check whether the length of the word is odd or not."}
+{"task_id": 80, "statement": "Write a function to find the nth tetrahedral number."}
+{"task_id": 81, "statement": "Write a function to zip the two given tuples."}
+{"task_id": 82, "statement": "Write a function to find the volume of a sphere."}
+{"task_id": 83, "statement": "Write a python function to find the character made by adding all the characters of the given string."}
+{"task_id": 84, "statement": "Write a function to find the n-th number in newman conway sequence."}
+{"task_id": 85, "statement": "Write a function to find the surface area of a sphere."}
+{"task_id": 86, "statement": "Write a function to find nth centered hexagonal number."}
+{"task_id": 87, "statement": "Write a function to merge three dictionaries into a single expression."}
+{"task_id": 88, "statement": "Write a function to get the frequency of the elements in a list."}
+{"task_id": 89, "statement": "Write a function to find the closest smaller number than n."}
+{"task_id": 91, "statement": "Write a function to check if a substring is present in a given list of string values."}
+{"task_id": 92, "statement": "Write a function to check whether the given number is undulating or not."}
+{"task_id": 93, "statement": "Write a function to calculate the value of 'a' to the power 'b'."}
+{"task_id": 95, "statement": "Write a python function to find the minimum length of sublist."}
+{"task_id": 96, "statement": "Write a python function to find the number of divisors of a given integer."}
+{"task_id": 97, "statement": "Write a function to find frequency count of list of lists."}
+{"task_id": 98, "statement": "Write a function to multiply all the numbers in a list and divide with the length of the list."}
+{"task_id": 101, "statement": "Write a function to find the kth element in the given array."}
+{"task_id": 102, "statement": "Write a function to convert snake case string to camel case string."}
+{"task_id": 103, "statement": "Write a function to find eulerian number a(n, m)."}
+{"task_id": 104, "statement": "Write a function to sort each sublist of strings in a given list of lists using lambda function."}
+{"task_id": 105, "statement": "Write a python function to count true booleans in the given list."}
+{"task_id": 106, "statement": "Write a function to add the given list to the given tuples."}
+{"task_id": 107, "statement": "Write a python function to count hexadecimal numbers for a given range."}
+{"task_id": 108, "statement": "Write a function to merge multiple sorted inputs into a single sorted iterator using heap queue algorithm."}
+{"task_id": 109, "statement": "Write a python function to find the count of rotations of a binary string with odd value."}
+{"task_id": 110, "statement": "Write a function to extract the ranges that are missing from the given list with the given start range and end range values."}
+{"task_id": 111, "statement": "Write a function to find common elements in given nested lists. * list item * list item * list item * list item"}
+{"task_id": 112, "statement": "Write a python function to find the perimeter of a cylinder."}
+{"task_id": 113, "statement": "Write a function to check if a string represents an integer or not."}
+{"task_id": 115, "statement": "Write a function to check whether all dictionaries in a list are empty or not."}
+{"task_id": 116, "statement": "Write a function to convert a given tuple of positive integers into an integer."}
+{"task_id": 117, "statement": "Write a function to convert all possible convertible elements in the list to float."}
+{"task_id": 118, "statement": "[link text](https:// [link text](https:// [link text](https://)))write a function to convert a string to a list."}
+{"task_id": 119, "statement": "Write a python function to find the element that appears only once in a sorted array."}
+{"task_id": 120, "statement": "Write a function to find the maximum product from the pairs of tuples within a given list."}
+{"task_id": 121, "statement": "Write a function to find the triplet with sum of the given array"}
+{"task_id": 125, "statement": "Write a function to find the maximum difference between the number of 0s and number of 1s in any sub-string of the given binary string."}
+{"task_id": 127, "statement": "Write a function to multiply two integers without using the * operator in python."}
+{"task_id": 128, "statement": "Write a function to shortlist words that are longer than n from a given list of words."}
+{"task_id": 129, "statement": "Write a function to calculate magic square."}
+{"task_id": 131, "statement": "Write a python function to reverse only the vowels of a given string."}
+{"task_id": 133, "statement": "Write a function to calculate the sum of the negative numbers of a given list of numbers using lambda function."}
+{"task_id": 134, "statement": "Write a python function to check whether the last element of given array is even or odd after performing an operation p times."}
+{"task_id": 135, "statement": "Write a function to find the nth hexagonal number."}
+{"task_id": 136, "statement": "Write a function to calculate electricity bill."}
+{"task_id": 138, "statement": "Write a python function to check whether the given number can be represented as sum of non-zero powers of 2 or not."}
+{"task_id": 139, "statement": "Write a function to find the circumference of a circle."}
+{"task_id": 140, "statement": "Write a function to extract elements that occur singly in the given tuple list."}
+{"task_id": 141, "statement": "Write a function to sort a list of elements using pancake sort."}
+{"task_id": 142, "statement": "Write a function to count the same pair in three given lists."}
+{"task_id": 143, "statement": "Write a function to find number of lists present in the given tuple."}
+{"task_id": 145, "statement": "Write a python function to find the maximum difference between any two elements in a given array."}
+{"task_id": 146, "statement": "Write a function to find the ascii value of total characters in a string."}
+{"task_id": 147, "statement": "Write a function to find the maximum total path sum in the given triangle."}
+{"task_id": 148, "statement": "Write a function to divide a number into two parts such that the sum of digits is maximum."}
+{"task_id": 149, "statement": "Write a function to find the longest subsequence such that the difference between adjacents is one for the given array."}
+{"task_id": 150, "statement": "Write a python function to find whether the given number is present in the infinite sequence or not."}
+{"task_id": 151, "statement": "Write a python function to check whether the given number is co-prime or not."}
+{"task_id": 152, "statement": "Write a function to sort the given array by using merge sort."}
+{"task_id": 153, "statement": "Write a function to find the vertex of a parabola."}
+{"task_id": 154, "statement": "Write a function to extract every specified element from a given two dimensional list."}
+{"task_id": 155, "statement": "Write a python function to toggle all even bits of a given number."}
+{"task_id": 156, "statement": "Write a function to convert a tuple of string values to a tuple of integer values."}
+{"task_id": 157, "statement": "Write a function to reflect the run-length encoding from a list."}
+{"task_id": 158, "statement": "Write a python function to find k number of operations required to make all elements equal."}
+{"task_id": 159, "statement": "Write a function to print the season for the given month and day."}
+{"task_id": 160, "statement": "Write a function to find x and y that satisfies ax + by = n."}
+{"task_id": 161, "statement": "Write a function to remove all elements from a given list present in another list."}
+{"task_id": 162, "statement": "Write a function to calculate the sum of the positive integers of n+(n-2)+(n-4)... (until n-x =< 0)."}
+{"task_id": 163, "statement": "Write a function to calculate the area of a regular polygon."}
+{"task_id": 165, "statement": "Write a python function to count characters at same position in a given string (lower and uppercase characters) as in english alphabet."}
+{"task_id": 166, "statement": "Write a python function to count the pairs with xor as an even number."}
+{"task_id": 167, "statement": "Write a python function to find smallest power of 2 greater than or equal to n."}
+{"task_id": 168, "statement": "Write a python function to find the frequency of a number in a given array."}
+{"task_id": 169, "statement": "Write a function to calculate the nth pell number."}
+{"task_id": 170, "statement": "Write a function to find sum of the numbers in a list between the indices of a specified range."}
+{"task_id": 171, "statement": "Write a function to find the perimeter of a pentagon."}
+{"task_id": 172, "statement": "Write a function to find the occurence of characters 'std' in the given string 1. list item 1. list item 1. list item 2. list item 2. list item 2. list item"}
+{"task_id": 173, "statement": "Write a function to remove everything except alphanumeric characters from a string."}
+{"task_id": 174, "statement": "Write a function to group a sequence of key-value pairs into a dictionary of lists."}
+{"task_id": 175, "statement": "Write a function to verify validity of a string of parentheses."}
+{"task_id": 176, "statement": "Write a function to find the perimeter of a triangle."}
+{"task_id": 177, "statement": "Write a python function to find two distinct numbers such that their lcm lies within the given range."}
+{"task_id": 178, "statement": "Write a function to search some literals strings in a string."}
+{"task_id": 179, "statement": "Write a function to find if the given number is a keith number or not."}
+{"task_id": 180, "statement": "Write a function to calculate distance between two points using latitude and longitude."}
+{"task_id": 181, "statement": "Write a function to find the longest common prefix in the given set of strings."}
+{"task_id": 182, "statement": "Write a function to find uppercase, lowercase, special character and numeric values using regex."}
+{"task_id": 183, "statement": "Write a function to count all the distinct pairs having a difference of k in any array."}
+{"task_id": 184, "statement": "Write a function to find all the values in a list that are greater than a specified number."}
+{"task_id": 185, "statement": "Write a function to find the focus of a parabola."}
+{"task_id": 186, "statement": "Write a function to search some literals strings in a string by using regex."}
+{"task_id": 187, "statement": "Write a function to find the longest common subsequence for the given two sequences."}
+{"task_id": 188, "statement": "Write a python function to check whether the given number can be represented by product of two squares or not."}
+{"task_id": 189, "statement": "Write a python function to find the first missing positive number."}
+{"task_id": 190, "statement": "Write a python function to count the number of integral co-ordinates that lie inside a square."}
+{"task_id": 191, "statement": "Write a function to check whether the given month name contains 30 days or not."}
+{"task_id": 192, "statement": "Write a python function to check whether a string has atleast one letter and one number."}
+{"task_id": 193, "statement": "Write a function to remove the duplicates from the given tuple."}
+{"task_id": 194, "statement": "Write a python function to convert octal number to decimal number."}
+{"task_id": 195, "statement": "Write a python function to find the first position of an element in a sorted array."}
+{"task_id": 196, "statement": "Write a function to remove all the tuples with length k."}
+{"task_id": 197, "statement": "Write a function to perform the exponentiation of the given two tuples."}
+{"task_id": 198, "statement": "Write a function to find the largest triangle that can be inscribed in an ellipse."}
+{"task_id": 199, "statement": "Write a python function to find highest power of 2 less than or equal to given number."}
+{"task_id": 200, "statement": "Write a function to find all index positions of the maximum values in a given list."}
+{"task_id": 201, "statement": "Write a python function to check whether the elements in a list are same or not."}
+{"task_id": 202, "statement": "Write a function to remove even characters in a string."}
+{"task_id": 203, "statement": "Write a python function to find the hamming distance between given two integers."}
+{"task_id": 204, "statement": "Write a python function to count the occurrence of a given character in a string."}
+{"task_id": 205, "statement": "Write a function to find the inversions of tuple elements in the given tuple list."}
+{"task_id": 206, "statement": "Write a function to perform the adjacent element concatenation in the given tuples."}
+{"task_id": 207, "statement": "Write a function to count the longest repeating subsequences such that the two subsequences don\u2019t have same string characters at same positions."}
+{"task_id": 208, "statement": "Write a function to check the given decimal with a precision of 2 by using regex."}
+{"task_id": 209, "statement": "Write a function to delete the smallest element from the given heap and then insert a new item."}
+{"task_id": 210, "statement": "Write a function to check that the given string contains only a certain set of characters(in this case a-z, a-z and 0-9) by using regex."}
+{"task_id": 211, "statement": "Write a python function to count numbers whose oth and nth bits are set."}
+{"task_id": 213, "statement": "Write a function to perform the concatenation of two string tuples."}
+{"task_id": 214, "statement": "Write a function to convert radians to degrees."}
+{"task_id": 215, "statement": "Write a function to decode a run-length encoded given list."}
+{"task_id": 216, "statement": "Write a function to check if a nested list is a subset of another nested list."}
+{"task_id": 217, "statement": "Write a python function to find the first repeated character in a given string."}
+{"task_id": 218, "statement": "Write a python function to find the minimum operations required to make two numbers equal."}
+{"task_id": 219, "statement": "Write a function to extract maximum and minimum k elements in the given tuple."}
+{"task_id": 220, "statement": "Write a function to replace maximum n occurrences of spaces, commas, or dots with a colon."}
+{"task_id": 221, "statement": "Write a python function to find the first even number in a given list of numbers."}
+{"task_id": 222, "statement": "Write a function to check if all the elements in tuple have same data type or not."}
+{"task_id": 223, "statement": "Write a function to check for majority element in the given sorted array."}
+{"task_id": 224, "statement": "Write a python function to count set bits of a given number."}
+{"task_id": 225, "statement": "Write a python function to find the minimum element in a sorted and rotated array."}
+{"task_id": 226, "statement": "Write a python function to remove the characters which have odd index values of a given string."}
+{"task_id": 227, "statement": "Write a function to find minimum of three numbers."}
+{"task_id": 228, "statement": "Write a python function to check whether all the bits are unset in the given range or not."}
+{"task_id": 229, "statement": "Write a function to re-arrange the elements of the given array so that all negative elements appear before positive ones."}
+{"task_id": 230, "statement": "Write a function to replace blank spaces with any character in a string."}
+{"task_id": 231, "statement": "Write a function to find the maximum sum in the given right triangle of numbers."}
+{"task_id": 232, "statement": "Write a function to get the n largest items from a dataset."}
+{"task_id": 233, "statement": "Write a function to find the lateral surface area of a cylinder."}
+{"task_id": 234, "statement": "Write a function to find the volume of a cube."}
+{"task_id": 235, "statement": "Write a python function to set all even bits of a given number."}
+{"task_id": 236, "statement": "Write a python function to count the maximum number of equilateral triangles that can be formed within a given equilateral triangle."}
+{"task_id": 237, "statement": "Write a function to check the occurrences of records which occur similar times in the given tuples."}
+{"task_id": 238, "statement": "Write a python function to count number of non-empty substrings of a given string."}
+{"task_id": 239, "statement": "Write a function to find the number of possible sequences of length n such that each of the next element is greater than or equal to twice of the previous element but less than or equal to m."}
+{"task_id": 240, "statement": "Write a function to replace the last element of the list with another list."}
+{"task_id": 241, "statement": "Write a function to generate a 3d array having each element as '*'."}
+{"task_id": 242, "statement": "Write a function to count total characters in a string."}
+{"task_id": 244, "statement": "Write a python function to find the next perfect square greater than a given number."}
+{"task_id": 245, "statement": "Write a function to find the maximum sum of bi-tonic sub-sequence for the given array."}
+{"task_id": 246, "statement": "Write a function for computing square roots using the babylonian method."}
+{"task_id": 247, "statement": "Write a function to find the longest palindromic subsequence in the given string."}
+{"task_id": 248, "statement": "Write a function to calculate the harmonic sum of n-1."}
+{"task_id": 249, "statement": "Write a function to find the intersection of two arrays using lambda function."}
+{"task_id": 250, "statement": "Write a python function to count the occcurences of an element in a tuple."}
+{"task_id": 253, "statement": "Write a python function to count integers from a given list."}
+{"task_id": 255, "statement": "Write a function to choose specified number of colours from three different colours and generate all the combinations with repetitions."}
+{"task_id": 257, "statement": "Write a function to swap two numbers."}
+{"task_id": 258, "statement": "Write a function to find number of odd elements in the given list using lambda function."}
+{"task_id": 259, "statement": "Write a function to maximize the given two tuples."}
+{"task_id": 260, "statement": "Write a function to find the nth newman\u2013shanks\u2013williams prime number."}
+{"task_id": 261, "statement": "Write a function to perform mathematical division operation across the given tuples."}
+{"task_id": 262, "statement": "Write a function to split a given list into two parts where the length of the first part of the list is given."}
+{"task_id": 263, "statement": "Write a function to merge two dictionaries."}
+{"task_id": 265, "statement": "Write a function to split a list for every nth element."}
+{"task_id": 266, "statement": "Write a function to find the lateral surface area of a cube."}
+{"task_id": 267, "statement": "Write a python function to find the sum of squares of first n odd natural numbers."}
+{"task_id": 268, "statement": "Write a function to find the n'th star number."}
+{"task_id": 269, "statement": "Write a function to find the ascii value of a character."}
+{"task_id": 272, "statement": "Write a function to perfom the rear element extraction from list of tuples records."}
+{"task_id": 273, "statement": "Write a function to substract the contents of one tuple with corresponding index of other tuple."}
+{"task_id": 274, "statement": "Write a python function to find sum of even index binomial coefficients."}
+{"task_id": 275, "statement": "Write a python function to find the position of the last removed element from the given array."}
+{"task_id": 276, "statement": "Write a function to find the volume of a cylinder."}
+{"task_id": 277, "statement": "Write a function to filter a dictionary based on values."}
+{"task_id": 278, "statement": "Write a function to find the element count that occurs before the record in the given tuple."}
+{"task_id": 279, "statement": "Write a function to find the nth decagonal number."}
+{"task_id": 280, "statement": "Write a function to search an element in the given array by using sequential search."}
+{"task_id": 281, "statement": "Write a python function to check if the elements of a given list are unique or not."}
+{"task_id": 282, "statement": "Write a function to substaract two lists using map and lambda function."}
+{"task_id": 283, "statement": "Write a python function to check whether the frequency of each digit is less than or equal to the digit itself."}
+{"task_id": 284, "statement": "Write a function to check whether all items of a list are equal to a given string."}
+{"task_id": 285, "statement": "Write a function that matches a string that has an a followed by two to three 'b'."}
+{"task_id": 286, "statement": "Write a function to find the largest sum of contiguous array in the modified array which is formed by repeating the given array k times."}
+{"task_id": 287, "statement": "Write a python function to find the sum of squares of first n even natural numbers."}
+{"task_id": 288, "statement": "Write a function to count array elements having modular inverse under given prime number p equal to itself."}
+{"task_id": 289, "statement": "Write a python function to calculate the number of odd days in a given year."}
+{"task_id": 290, "statement": "Write a function to find the list of lists with maximum length."}
+{"task_id": 291, "statement": "Write a function to find out the number of ways of painting the fence such that at most 2 adjacent posts have the same color for the given fence with n posts and k colors."}
+{"task_id": 292, "statement": "Write a python function to find quotient of two numbers."}
+{"task_id": 293, "statement": "Write a function to find the third side of a right angled triangle."}
+{"task_id": 294, "statement": "Write a function to find the maximum value in a given heterogeneous list."}
+{"task_id": 295, "statement": "Write a function to return the sum of all divisors of a number."}
+{"task_id": 296, "statement": "Write a python function to count inversions in an array."}
+{"task_id": 298, "statement": "Write a function to find the nested list elements which are present in another list."}
+{"task_id": 299, "statement": "Write a function to calculate the maximum aggregate from the list of tuples."}
+{"task_id": 300, "statement": "Write a function to find the count of all binary sequences of length 2n such that sum of first n bits is same as sum of last n bits."}
+{"task_id": 301, "statement": "Write a function to find the depth of a dictionary."}
+{"task_id": 302, "statement": "Write a python function to find the most significant bit number which is also a set bit."}
+{"task_id": 304, "statement": "Write a python function to find element at a given index after number of rotations."}
+{"task_id": 305, "statement": "Write a function to match two words from a list of words starting with letter 'p'."}
+{"task_id": 306, "statement": "Write a function to find the maximum sum of increasing subsequence from prefix till ith index and also including a given kth element which is after i, i.e., k > i ."}
+{"task_id": 308, "statement": "Write a function to find the specified number of largest products from two given lists."}
+{"task_id": 309, "statement": "Write a python function to find the maximum of two numbers."}
+{"task_id": 310, "statement": "Write a function to convert a given string to a tuple."}
+{"task_id": 311, "statement": "Write a python function to set the left most unset bit."}
+{"task_id": 312, "statement": "Write a function to find the volume of a cone."}
+{"task_id": 313, "statement": "Write a python function to print positive numbers in a list."}
+{"task_id": 314, "statement": "Write a function to find out the maximum sum such that no two chosen numbers are adjacent for the given rectangular grid of dimension 2 x n."}
+{"task_id": 315, "statement": "Write a python function to find the first maximum length of even word."}
+{"task_id": 316, "statement": "Write a function to find the index of the last occurrence of a given number in a sorted array."}
+{"task_id": 317, "statement": "Write a function to reflect the modified run-length encoding from a list."}
+{"task_id": 318, "statement": "Write a python function to find the maximum volume of a cuboid with given sum of sides."}
+{"task_id": 319, "statement": "Write a function to find all five characters long word in the given string by using regex."}
+{"task_id": 320, "statement": "Write a function to calculate the difference between the squared sum of first n natural numbers and the sum of squared first n natural numbers."}
+{"task_id": 321, "statement": "Write a function to find the demlo number for the given number."}
+{"task_id": 322, "statement": "Write a function to find all index positions of the minimum values in a given list."}
+{"task_id": 323, "statement": "Write a function to re-arrange the given array in alternating positive and negative items."}
+{"task_id": 324, "statement": "Write a function to extract the sum of alternate chains of tuples."}
+{"task_id": 325, "statement": "Write a python function to find the minimum number of squares whose sum is equal to a given number."}
+{"task_id": 326, "statement": "Write a function to get the word with most number of occurrences in the given strings list."}
+{"task_id": 327, "statement": "Write a function to print check if the triangle is isosceles or not."}
+{"task_id": 328, "statement": "Write a function to rotate a given list by specified number of items to the left direction."}
+{"task_id": 329, "statement": "Write a python function to count negative numbers in a list."}
+{"task_id": 330, "statement": "Write a function to find all three, four, five characters long words in the given string by using regex."}
+{"task_id": 331, "statement": "Write a python function to count unset bits of a given number."}
+{"task_id": 333, "statement": "Write a python function to sort a list according to the second element in sublist."}
+{"task_id": 334, "statement": "Write a python function to check whether the triangle is valid or not if sides are given."}
+{"task_id": 335, "statement": "Write a function to find the sum of arithmetic progression."}
+{"task_id": 336, "statement": "Write a function to check whether the given month name contains 28 days or not."}
+{"task_id": 337, "statement": "Write a function that matches a word at the end of a string, with optional punctuation."}
+{"task_id": 338, "statement": "Write a python function to count the number of substrings with same first and last characters."}
+{"task_id": 339, "statement": "Write a python function to find the maximum occuring divisor in an interval."}
+{"task_id": 340, "statement": "Write a python function to find the sum of the three lowest positive numbers from a given list of numbers."}
+{"task_id": 341, "statement": "Write a function to convert the given set into ordered tuples."}
+{"task_id": 343, "statement": "Write a function to calculate the number of digits and letters in a string."}
+{"task_id": 344, "statement": "Write a python function to find number of elements with odd factors in a given range."}
+{"task_id": 345, "statement": "Write a function to find the difference between two consecutive numbers in a given list."}
+{"task_id": 346, "statement": "Write a function to find entringer number e(n, k)."}
+{"task_id": 348, "statement": "Write a function to count sequences of given length having non-negative prefix sums that can be generated by given values."}
+{"task_id": 349, "statement": "Write a python function to check whether the given string is a binary string or not."}
+{"task_id": 350, "statement": "Write a python function to minimize the length of the string by removing occurrence of only one character."}
+{"task_id": 351, "statement": "Write a python function to find the first element occurring k times in a given array."}
+{"task_id": 352, "statement": "Write a python function to check whether all the characters in a given string are unique."}
+{"task_id": 353, "statement": "Write a function to remove a specified column from a given nested list."}
+{"task_id": 354, "statement": "Write a function to find t-nth term of arithemetic progression."}
+{"task_id": 355, "statement": "Write a python function to count the number of rectangles in a circle of radius r."}
+{"task_id": 356, "statement": "Write a function to find the third angle of a triangle using two angles."}
+{"task_id": 358, "statement": "Write a function to find modulo division of two lists using map and lambda function."}
+{"task_id": 359, "statement": "Write a python function to check whether one root of the quadratic equation is twice of the other or not."}
+{"task_id": 360, "statement": "Write a function to find the n\u2019th carol number."}
+{"task_id": 361, "statement": "Write a function to remove empty lists from a given list of lists."}
+{"task_id": 362, "statement": "Write a python function to find the item with maximum occurrences in a given list."}
+{"task_id": 363, "statement": "Write a function to add the k elements to each element in the tuple."}
+{"task_id": 364, "statement": "Write a function to find the number of flips required to make the given binary string a sequence of alternate characters."}
+{"task_id": 365, "statement": "Write a python function to count the number of digits of a given number."}
+{"task_id": 366, "statement": "Write a python function to find the largest product of the pair of adjacent elements from a given list of integers."}
+{"task_id": 368, "statement": "Write a function to repeat the given tuple n times."}
+{"task_id": 369, "statement": "Write a function to find the lateral surface area of cuboid"}
+{"task_id": 370, "statement": "Write a function to sort a tuple by its float element."}
+{"task_id": 371, "statement": "Write a function to find the smallest missing element in a sorted array."}
+{"task_id": 372, "statement": "Write a function to sort a given list of elements in ascending order using heap queue algorithm."}
+{"task_id": 373, "statement": "Write a function to find the volume of a cuboid."}
+{"task_id": 374, "statement": "Write a function to print all permutations of a given string including duplicates."}
+{"task_id": 375, "statement": "Write a function to round the given number to the nearest multiple of a specific number."}
+{"task_id": 376, "statement": "Write a function to remove tuple elements that occur more than once and replace the duplicates with some custom value."}
+{"task_id": 377, "statement": "Write a python function to remove all occurrences of a character in a given string."}
+{"task_id": 378, "statement": "Write a python function to shift last element to first position in the given list."}
+{"task_id": 379, "statement": "Write a function to find the surface area of a cuboid."}
+{"task_id": 380, "statement": "Write a function to generate a two-dimensional array."}
+{"task_id": 383, "statement": "Write a python function to toggle all odd bits of a given number."}
+{"task_id": 384, "statement": "Write a python function to find the frequency of the smallest value in a given array."}
+{"task_id": 385, "statement": "Write a function to find the n'th perrin number using recursion."}
+{"task_id": 386, "statement": "Write a function to find out the minimum no of swaps required for bracket balancing in the given string."}
+{"task_id": 387, "statement": "Write a python function to check whether the hexadecimal number is even or odd."}
+{"task_id": 388, "statement": "Write a python function to find the highest power of 2 that is less than or equal to n."}
+{"task_id": 389, "statement": "Write a function to find the n'th lucas number."}
+{"task_id": 390, "statement": "Write a function to insert a given string at the beginning of all items in a list."}
+{"task_id": 391, "statement": "Write a function to convert more than one list to nested dictionary."}
+{"task_id": 392, "statement": "Write a function to find the maximum sum possible by using the given equation f(n) = max( (f(n/2) + f(n/3) + f(n/4) + f(n/5)), n)."}
+{"task_id": 393, "statement": "Write a function to find the list with maximum length using lambda function."}
+{"task_id": 394, "statement": "Write a function to check if given tuple is distinct or not."}
+{"task_id": 395, "statement": "Write a python function to find the first non-repeated character in a given string."}
+{"task_id": 397, "statement": "Write a function to find the median of three specific numbers."}
+{"task_id": 399, "statement": "Write a function to perform the mathematical bitwise xor operation across the given tuples."}
+{"task_id": 400, "statement": "Write a function to extract the frequency of unique tuples in the given list order irrespective."}
+{"task_id": 401, "statement": "Write a function to perform index wise addition of tuple elements in the given two nested tuples."}
+{"task_id": 402, "statement": "Write a function to compute the value of ncr%p."}
+{"task_id": 403, "statement": "Write a function to check if a url is valid or not using regex."}
+{"task_id": 404, "statement": "Write a python function to find the minimum of two numbers."}
+{"task_id": 405, "statement": "Write a function to check whether an element exists within a tuple."}
+{"task_id": 406, "statement": "Write a python function to find the parity of a given number."}
+{"task_id": 407, "statement": "Write a function to create the next bigger number by rearranging the digits of a given number."}
+{"task_id": 408, "statement": "Write a function to find k number of pairs which consist of one element from the first array and one element from the second array."}
+{"task_id": 409, "statement": "Write a function to find the minimum product from the pairs of tuples within a given list."}
+{"task_id": 410, "statement": "Write a function to find the minimum value in a given heterogeneous list."}
+{"task_id": 411, "statement": "Write a function to convert the given snake case string to camel case string by using regex."}
+{"task_id": 412, "statement": "Write a python function to remove odd numbers from a given list."}
+{"task_id": 413, "statement": "Write a function to extract the nth element from a given list of tuples."}
+{"task_id": 414, "statement": "Write a python function to check whether the value exists in a sequence or not."}
+{"task_id": 415, "statement": "Write a python function to find a pair with highest product from a given array of integers."}
+{"task_id": 418, "statement": "Write a python function to find the sublist having maximum length."}
+{"task_id": 419, "statement": "Write a function to round every number of a given list of numbers and print the total sum multiplied by the length of the list."}
+{"task_id": 421, "statement": "Write a function to concatenate each element of tuple by the delimiter."}
+{"task_id": 423, "statement": "Write a function to solve gold mine problem."}
+{"task_id": 424, "statement": "Write a function to extract only the rear index element of each string in the given tuple."}
+{"task_id": 425, "statement": "Write a function to count the number of sublists containing a particular element."}
+{"task_id": 426, "statement": "Write a function to filter odd numbers using lambda function."}
+{"task_id": 427, "statement": "Write a function to convert a date of yyyy-mm-dd format to dd-mm-yyyy format by using regex."}
+{"task_id": 428, "statement": "Write a function to sort the given array by using shell sort."}
+{"task_id": 429, "statement": "Write a function to extract the elementwise and tuples from the given two tuples."}
+{"task_id": 430, "statement": "Write a function to find the directrix of a parabola."}
+{"task_id": 431, "statement": "Write a function that takes two lists and returns true if they have at least one common element."}
+{"task_id": 432, "statement": "Write a function to find the median of a trapezium."}
+{"task_id": 433, "statement": "Write a function to check whether the entered number is greater than the elements of the given array."}
+{"task_id": 434, "statement": "Write a function that matches a string that has an a followed by one or more b's."}
+{"task_id": 435, "statement": "Write a python function to find the last digit of a given number."}
+{"task_id": 436, "statement": "Write a python function to print negative numbers in a list."}
+{"task_id": 437, "statement": "Write a function to remove odd characters in a string."}
+{"task_id": 438, "statement": "Write a function to count bidirectional tuple pairs."}
+{"task_id": 439, "statement": "Write a function to convert a list of multiple integers into a single integer."}
+{"task_id": 440, "statement": "Write a function to find all adverbs and their positions in a given sentence."}
+{"task_id": 441, "statement": "Write a function to find the surface area of a cube."}
+{"task_id": 444, "statement": "Write a function to trim each tuple by k in the given tuple list."}
+{"task_id": 445, "statement": "Write a function to perform index wise multiplication of tuple elements in the given two tuples."}
+{"task_id": 446, "statement": "Write a python function to count the occurence of all elements of list in a tuple."}
+{"task_id": 447, "statement": "Write a function to find cubes of individual elements in a list using lambda function."}
+{"task_id": 449, "statement": "Write a python function to check whether the triangle is valid or not if 3 points are given."}
+{"task_id": 450, "statement": "Write a function to extract specified size of strings from a give list of string values."}
+{"task_id": 451, "statement": "Write a function to remove all whitespaces from the given string using regex."}
+{"task_id": 452, "statement": "Write a function that gives loss amount if the given amount has loss else return none."}
+{"task_id": 453, "statement": "Write a python function to find the sum of even factors of a number."}
+{"task_id": 454, "statement": "Write a function that matches a word containing 'z'."}
+{"task_id": 455, "statement": "Write a function to check whether the given month number contains 31 days or not."}
+{"task_id": 456, "statement": "Write a function to reverse strings in a given list of string values."}
+{"task_id": 457, "statement": "Write a python function to find the sublist having minimum length."}
+{"task_id": 458, "statement": "Write a function to find the area of a rectangle."}
+{"task_id": 459, "statement": "Write a function to remove uppercase substrings from a given string by using regex."}
+{"task_id": 460, "statement": "Write a python function to get the first element of each sublist."}
+{"task_id": 461, "statement": "Write a python function to count the upper case characters in a given string."}
+{"task_id": 462, "statement": "Write a function to find all possible combinations of the elements of a given list."}
+{"task_id": 463, "statement": "Write a function to find the maximum product subarray of the given array."}
+{"task_id": 464, "statement": "Write a function to check if all values are same in a dictionary."}
+{"task_id": 465, "statement": "Write a function to drop empty items from a given dictionary."}
+{"task_id": 466, "statement": "Write a function to find the peak element in the given array."}
+{"task_id": 467, "statement": "Write a python function to convert decimal number to octal number."}
+{"task_id": 468, "statement": "Write a function to find the maximum product formed by multiplying numbers of an increasing subsequence of that array."}
+{"task_id": 469, "statement": "Write a function to find the maximum profit earned from a maximum of k stock transactions"}
+{"task_id": 470, "statement": "Write a function to find the pairwise addition of the elements of the given tuples."}
+{"task_id": 471, "statement": "Write a python function to find remainder of array multiplication divided by n."}
+{"task_id": 472, "statement": "Write a python function to check whether the given list contains consecutive numbers or not."}
+{"task_id": 473, "statement": "Write a function to find the tuple intersection of elements in the given tuple list irrespective of their order."}
+{"task_id": 474, "statement": "Write a function to replace characters in a string."}
+{"task_id": 475, "statement": "Write a function to sort counter by value."}
+{"task_id": 477, "statement": "Write a python function to convert the given string to lower case."}
+{"task_id": 478, "statement": "Write a function to remove lowercase substrings from a given string."}
+{"task_id": 479, "statement": "Write a python function to find the first digit of a given number."}
+{"task_id": 481, "statement": "Write a function to determine if there is a subset of the given set with sum equal to the given sum."}
+{"task_id": 482, "statement": "Write a function to find sequences of one upper case letter followed by lower case letters in the given string by using regex."}
+{"task_id": 483, "statement": "Write a python function to find the first natural number whose factorial is divisible by x."}
+{"task_id": 484, "statement": "Write a function to remove the matching tuples from the given two tuples."}
+{"task_id": 485, "statement": "Write a function to find the largest palindromic number in the given array."}
+{"task_id": 486, "statement": "Write a function to compute binomial probability for the given number."}
+{"task_id": 487, "statement": "Write a function to sort a list of tuples in increasing order by the last element in each tuple."}
+{"task_id": 488, "statement": "Write a function to find the area of a pentagon."}
+{"task_id": 489, "statement": "Write a python function to find the frequency of the largest value in a given array."}
+{"task_id": 490, "statement": "Write a function to extract all the pairs which are symmetric in the given tuple list."}
+{"task_id": 491, "statement": "Write a function to find the sum of geometric progression series."}
+{"task_id": 492, "statement": "Write a function to search an element in the given array by using binary search."}
+{"task_id": 493, "statement": "Write a function to calculate a grid of hexagon coordinates where function returns a list of lists containing 6 tuples of x, y point coordinates."}
+{"task_id": 494, "statement": "Write a function to convert the given binary tuple to integer."}
+{"task_id": 495, "statement": "Write a function to remove lowercase substrings from a given string by using regex."}
+{"task_id": 496, "statement": "Write a function to find the smallest integers from a given list of numbers using heap queue algorithm."}
+{"task_id": 497, "statement": "Write a function to find the surface area of a cone."}
+{"task_id": 498, "statement": "Write a python function to find gcd of two positive integers."}
+{"task_id": 499, "statement": "Write a function to find the diameter of a circle."}
+{"task_id": 500, "statement": "Write a function to concatenate all elements of the given list into a string."}
+{"task_id": 501, "statement": "Write a python function to find common divisor between two numbers in a given pair."}
+{"task_id": 502, "statement": "Write a python function to find remainder of two numbers."}
+{"task_id": 503, "statement": "Write a function to add consecutive numbers of a given list."}
+{"task_id": 505, "statement": "Write a function to move all zeroes to the end of the given array."}
+{"task_id": 506, "statement": "Write a function to calculate the permutation coefficient of given p(n, k)."}
+{"task_id": 507, "statement": "Write a function to remove specific words from a given list."}
+{"task_id": 508, "statement": "Write a function to check if the common elements between two given lists are in the same order or not."}
+{"task_id": 509, "statement": "Write a python function to find the average of odd numbers till a given odd number."}
+{"task_id": 510, "statement": "Write a function to find the number of subsequences having product smaller than k for the given non negative array."}
+{"task_id": "opencoder/71373120367", "statement": "Write a function to find the closest number to the target in a given list of integers."}
+{"task_id": "opencoder/1455968301", "statement": "Write a function to find the maximum product of two integers in a given list."}
+{"task_id": "opencoder/25103384041", "statement": "Write a python function that checks if one string is a permutation of another string. A permutation of a string is another string that contains the same characters, only the order of characters can be different. For example, 'abc' and 'bca' are permutations of each other."}
+{"task_id": "opencoder/70676290697", "statement": "Write a python function to find the Fibonacci sequence up to the nth number."}
+{"task_id": "opencoder/32021251442", "statement": "Write a python function to calculate the number of trailing zeroes in the factorial of a given number."}
+{"task_id": "opencoder/71766501575", "statement": "Write a function to find the closest value to a target in a sorted list of integers. If two numbers are equally close, return the smallest number."}
+{"task_id": "opencoder/15030277152", "statement": "Write a function that checks if a given string is a valid password. A valid password must meet the following conditions:\n- It is at least 8 characters long.\n- It includes at least one uppercase letter, one lowercase letter, and one digit.\n- It may also include special characters like !, @, #, $, %, ^, &, *."}
+{"task_id": "opencoder/13300899956", "statement": "Write a function that checks if a given string is a valid identifier according to the following rules:\n- It must start with a letter (a-z, A-Z) or an underscore (_).\n- It can contain letters, digits (0-9), and underscores.\n- It cannot be a Python keyword."}
+{"task_id": "opencoder/25173696118", "statement": "Write a python function to reverse the digits of a 32-bit signed integer. If the reversed integer overflows (i.e., is outside the range [-2^31, 2^31 - 1]), return 0."}
+{"task_id": "opencoder/26972433696", "statement": "Write a function to generate all possible combinations of parentheses given a certain length. The parentheses must be balanced, meaning every opening parenthesis has a closing one."}
+{"task_id": "opencoder/36213729407", "statement": "Write a python function to find the number of ways to partition a positive integer n into the sum of positive integers, ignoring order."}
+{"task_id": "opencoder/34104075189", "statement": "Write a Python function that takes a string as input and adds characters in front of it to make it a palindrome. The function should return the shortest palindrome that can be formed by performing this transformation."}
+{"task_id": "opencoder/43084116032", "statement": "Write a function to find the n-th Fibonacci number using an iterative approach."}
+{"task_id": "opencoder/4099710000", "statement": "Write a function to determine if a given string is a permutation of a palindrome. A palindrome is a word or phrase that reads the same backward as forward. A permutation is a rearrangement of letters. The palindrome does not need to be limited to just dictionary words."}
+{"task_id": "opencoder/20538764696", "statement": "Write a function that takes a string of bracket pairs and checks if they are properly nested. A properly nested string of brackets is one in which every opening bracket has a corresponding closing bracket of the same type, and the pairs of brackets are properly ordered."}
+{"task_id": "opencoder/10790298325", "statement": "Write a python function to check if two sentences are similar. Two sentences are considered similar if one sentence can be obtained by shuffling the words of the other sentence. The comparison should be case-sensitive."}
+{"task_id": "opencoder/6316906329", "statement": "Write a python function to find the score of a student based on marks obtained.\nThe grading system is as below:\nMarks below 40: 0 Score\nMarks from 40-59: 1 Score\nMarks from 60-79: 2 Score\nMarks above 80: 3 Score"}
+{"task_id": "opencoder/23099784630", "statement": "Write a function `maxSubarraySum` that takes in an array of integers and returns the maximum sum of a contiguous subarray within the input array. If the input array is empty or does not contain any positive numbers, the function should return 0."}
+{"task_id": "opencoder/71127126227", "statement": "Write a python function to find the length of the shortest, non-empty, contiguous subarray of an array with sum at least k. If there is no such subarray, return 0 instead."}
+{"task_id": "opencoder/73330354037", "statement": "Write a function to determine if a list of meeting intervals have any overlap."}
+{"task_id": "opencoder/1520508113", "statement": "Write a function to check if there exists a subsequence of length 3 in the list of integers that is strictly increasing."}
+{"task_id": "opencoder/39989246647", "statement": "Write a python function to find the nth row of Pascal's triangle.\n\nPascal's triangle is a triangular array of the binomial coefficients. Each number is the sum of the two directly above it. The first row starts with a single 1, and each subsequent row starts and ends with 1, with each inner element being the sum of the two elements directly above it.\n\nFor example, the 0th row is [1], the 1st row is [1, 1], the 2nd row is [1, 2, 1], and so on."}
+{"task_id": "opencoder/16217656651", "statement": "Write a python function to check if a given string is a valid ISBN-10 number. An ISBN-10 number is a 10 digit code which is used to uniquely identify books. The last digit is a check digit which can be a number from 0 to 10 (the digit 10 is usually represented by 'X'). The check digit is calculated using the formula: (1 * d1 + 2 * d2 + 3 * d3 + ... + 10 * d10) mod 11 = 0, where d1, d2, ..., d10 are the digits of the ISBN."}
+{"task_id": "opencoder/6923107628", "statement": "Write a python function to calculate the number of unique permutations of a given string."}
+{"task_id": "opencoder/5841444045", "statement": "Write a python function that generates a list of prime numbers within a given range."}
+{"task_id": "opencoder/72405205512", "statement": "Write a function to determine if a given string is a valid identifier according to the following rules:\n1. The first character must be a letter (a-z, A-Z) or an underscore (_).\n2. The rest of the characters can be letters, digits (0-9), or underscores (_).\n3. The string cannot be a Python keyword."}
+{"task_id": "opencoder/39769626391", "statement": "Write a function to search for a target value in a 2D matrix. The matrix has the following properties:\n- Integers in each row are sorted from left to right.\n- The first integer of each row is greater than the last integer of the previous row."}
+{"task_id": "opencoder/26828993618", "statement": "Write a function that determines if a given directed graph represented as an adjacency list has a cycle. A cycle in a graph is a path that starts and ends at the same vertex."}
+{"task_id": "opencoder/6646114064", "statement": "Write a function that checks if a given string matches the following pattern: it starts with an uppercase letter, followed by one or more lowercase letters, and ends with one or more digits."}
+{"task_id": "opencoder/37996825365", "statement": "Write a function that reverses a string if the length of the string is a multiple of 4."}
+{"task_id": "opencoder/28749079042", "statement": "Write a function to find the first non-repeating character in a given string."}
+{"task_id": "opencoder/72617877825", "statement": "Write a python function to remove duplicates from a list while preserving the order of elements."}
+{"task_id": "opencoder/32324657275", "statement": "Write a python function to find the median of two sorted arrays."}
+{"task_id": "opencoder/70758449156", "statement": "Write a python function that reverses the digits of a given 32-bit signed integer. If the reversed integer overflows, return 0."}
+{"task_id": "opencoder/33402217053", "statement": "Write a function that takes in a list of integers and returns the maximum product that can be obtained by multiplying any three integers from the list."}
+{"task_id": "opencoder/30343221587", "statement": "Write a function to check if a given number is a happy number or not. A happy number is a number defined by the following process: Starting with any positive integer, replace the number by the sum of the squares of its digits, and repeat the process until the number equals 1 (where it will stay), or it loops endlessly in a cycle which does not include 1. Those numbers for which this process ends in 1 are happy numbers."}
+{"task_id": "opencoder/16372571012", "statement": "Write a function to find the kth smallest element in a given list."}
+{"task_id": "opencoder/11292740943", "statement": "Write a python function to find the number of ways to reach the nth stair if you can either climb 1 or 2 steps at a time."}
+{"task_id": "opencoder/29895203388", "statement": "Write a function that determines whether a given list of numbers has a majority element. A majority element appears more than n/2 times in the list, where n is the length of the list."}
+{"task_id": "opencoder/9656724221", "statement": "Write a function that checks if two strings are buddy strings. Two strings are buddy strings if you can swap two letters in one of the strings to get the other string. Additionally, if the strings are identical, they can only be buddy strings if they contain duplicate letters."}
+{"task_id": "opencoder/16288122012", "statement": "Write a function to find the number of times a sorted array is rotated. An array is considered to be rotated if the elements at the beginning are moved to the end. The array may contain duplicates."}
+{"task_id": "opencoder/72464140788", "statement": "Write a function to find the number of times a string occurs as a substring in another string."}
+{"task_id": "opencoder/13296952745", "statement": "Write a python function to find the number of ways to make change for a given amount using standard coin denominations (1, 5, 10, 25)."}
+{"task_id": "opencoder/32324407105", "statement": "Write a function to find the second smallest unique element in a list of integers. If there is no second smallest unique element, return None."}
+{"task_id": "opencoder/39080154830", "statement": "Write a python function called `concatenate_lists` that takes two lists as parameters and returns a new list which is the result of concatenating the two given lists."}
+{"task_id": "opencoder/71759412595", "statement": "Write a function that calculates the number of arithmetic slices in a given list of integers. An arithmetic slice is a subsequence of at least three numbers where the difference between consecutive elements is constant."}
+{"task_id": "opencoder/28552718146", "statement": "Write a Python function that checks if a given string is a valid float number or not. A valid float number can have an optional leading sign (+ or -), followed by digits, an optional decimal point, and optional fractional digits. It can also have an optional exponent part, which consists of 'e' or 'E', followed by an optional sign and digits."}
+{"task_id": "opencoder/8499338548", "statement": "Write a python function to find the binary representation of a given decimal number without using built-in functions like bin()."}
+{"task_id": "opencoder/20855507970", "statement": "Write a function that takes in a list of integers and returns the average of the positive numbers in the list. If the list does not contain any positive numbers, return 0."}
+{"task_id": "opencoder/20224494908", "statement": "Write a python function to find the nth prime number."}
+{"task_id": "opencoder/31953430731", "statement": "Write a python function to check if the given number is a valid triangle number. A triangle number is a number that can be represented as a triangle of dots. For example, 3 is a triangle number because it can be represented as:\n```\n *\n* *\n* * *\n```\nTo check if a number is a triangle number, we can use the formula:\n```\nn*(n+1)/2 = number\n```\nwhere n is the number of rows in the triangle."}
+{"task_id": "opencoder/39716975234", "statement": "Write a function to check if the given list of numbers can be divided into consecutive subsequences of length k."}
+{"task_id": "opencoder/74354382861", "statement": "Write a function that checks if a given list of integers has a subarray with a sum of zero. If such a subarray exists, return the starting and ending indices of the subarray. If multiple subarrays with a sum of zero exist, return the indices of the longest subarray. If no such subarray exists, return an empty list."}
+{"task_id": "opencoder/13795086486", "statement": "Write a function to check if a string is a rotation of a substring of another string."}
+{"task_id": "opencoder/19151735826", "statement": "Write a function to find the second highest number in a given list. The function should return -1 if there is no second highest number."}

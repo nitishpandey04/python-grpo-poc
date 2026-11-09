@@ -104,3 +104,11 @@ class Sandbox:
 
     def __exit__(self, *args):
         self.close()
+
+
+def program_score(sandbox,completion,tests,task_id=None):
+    """Run one native Python test program, preserving setup and statement order."""
+    program=tests if isinstance(tests,str) else '\n'.join(tests)
+    if not program.strip():raise ValueError('Empty Python test program')
+    score=sandbox.score(completion,[program])
+    return {**score,'correct':score['total']==1 and score['passed']==1,'correctness_protocol':'python_test_program'}
