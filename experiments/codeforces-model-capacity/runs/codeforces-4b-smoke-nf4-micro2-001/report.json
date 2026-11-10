@@ -1,0 +1,62 @@
+{
+  "stage": "short pipeline smoke test",
+  "steps": 10,
+  "train_problems": 628,
+  "development_problems": 67,
+  "sealed_confirmation_problems": 49,
+  "dataset_manifest_sha256": "68dc5df9f80ae4ca15c1fba54b5f1d3868da00b1d53ebb8494ecf583fb7d6f50",
+  "confirmation_evaluated": false,
+  "development_protocol": "Fixed Codeforces train-derived development split, same official Python I/O grader before/after. Existing MBPP development/confirmation inputs remain unchanged.",
+  "baseline_validation": {
+    "correctness": 0.43283582089552236,
+    "mean_tokens": 564.3283582089553,
+    "problems": 67,
+    "mean_checked_tests": 22.52238805970149,
+    "evaluator": "cpython",
+    "correctness_protocol": "solution_score",
+    "failure_counts": {
+      "ok": 29,
+      "syntax_error": 20,
+      "wrong_answer": 14,
+      "runtime_error": 3,
+      "memory_error": 1
+    }
+  },
+  "final_validation": {
+    "correctness": 0.4626865671641791,
+    "mean_tokens": 559.6567164179105,
+    "problems": 67,
+    "mean_checked_tests": 24.925373134328357,
+    "evaluator": "cpython",
+    "correctness_protocol": "solution_score",
+    "failure_counts": {
+      "ok": 31,
+      "syntax_error": 20,
+      "wrong_answer": 12,
+      "runtime_error": 3,
+      "memory_error": 1
+    }
+  },
+  "selected_checkpoint": {
+    "step": 10,
+    "correctness": 0.4626865671641791
+  },
+  "development_comparison": {
+    "problems": 67,
+    "improvement_percentage_points": 2.985074626865672,
+    "ci95_percentage_points": [
+      -4.477611940298507,
+      10.44776119402985
+    ],
+    "improved": 4,
+    "regressed": 2,
+    "note": "Development-only comparison in a bounded pipeline pilot; not independent confirmation."
+  },
+  "peak_gpu_allocated_mb": 11970.19384765625,
+  "peak_gpu_reserved_mb": 13018.0,
+  "limitations": [
+    "Ten-step default is a pipeline smoke test, not evidence of general improvement.",
+    "Small development set and one training seed; no claim of general improvement.",
+    "Confirmation predictions are deliberately deferred."
+  ]
+}

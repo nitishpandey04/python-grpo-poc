@@ -136,3 +136,15 @@ Current binary rewards are sparse for a long run. A small, separately tracked Py
 - All 31 checks passed. Data unchanged at 628 training/67 development, medium scope retained, no confirmation predictions and no new model upload.
 
 This establishes that the 1.5B LoRA GRPO configuration fits and runs locally, and that its original model supplies more reward signal on the frozen probe. It does not establish GRPO improvement or justify a full-budget run on this evidence alone.
+
+## 3B / 4B capacity comparison — 2026-11-10
+
+[Matched probe, training results and full evidence](experiments/codeforces-model-capacity/REPORT.md).
+
+- Fixed 32 × eight probe: 3B BF16 passes 29/256 with 9 mixed groups; 4B BF16 passes 153/256 with 14 mixed groups; 4B NF4 passes 137/256 with 16 mixed groups. Medium passes are 8, 68 and 57 out of 128 respectively.
+- 3B BF16 completes ten updates at 10.82 GiB peak PyTorch allocation; development stays 7/67 and the original base is retained.
+- 4B BF16 runs out of memory during its first 32-candidate generation, before any optimizer update. Its original greedy development score is 27/67.
+- 4B NF4 QLoRA completes the identical ten-update batch protocol at 11.69 GiB peak allocation / 12.71 GiB reserved / 13.09 GiB sampled device usage. Development moves 29/67 → 31/67, four improvements and two regressions; step 10 is selected locally. The paired 95% interval includes zero.
+- All 31 checks pass; all 628 training tasks, medium scope and official grading coverage remain unchanged. Confirmation remains unqueried, adapters local, and the published older model unchanged.
+
+Use the 4B NF4 configuration as the strongest tested practical starting point. This small development result does not establish general improvement. A separate concise-code prompt check can address substantial 1,024-token truncation before a longer training budget. Four billion parameters is the largest tested model, not a measured absolute GPU ceiling.

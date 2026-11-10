@@ -1,0 +1,6 @@
+{
+  "phase": "failed",
+  "updated_at": 1794288340.5342577,
+  "error_type": "CalledProcessError",
+  "message": "Command '['/home/nitish/.local/bin/hf', 'download', 'Qwen/Qwen3-4B-Instruct-2507', '--revision', 'cdbee75f17c01a7cc42f958dc650907174af0554', '--cache-dir', '/home/nitish/Documents/Codex/2026-11-03-i-want-to-fine-tune-a-2/.cache/huggingface/hub', '--include', '*.safetensors', '--include', '*.json', '--include', '*.txt', '--include', '*.jinja', '--include', 'README.md', '--include', 'LICENSE*']' returned non-zero exit status 1."
+}

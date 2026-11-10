@@ -1,0 +1,5 @@
+{
+  "before_kbit_preparation": "torch.bfloat16",
+  "after_kbit_preparation": "torch.float32",
+  "prepared_with_autocast": "torch.float32"
+}

@@ -1,0 +1,898 @@
+{
+  "data_sha256": "68dc5df9f80ae4ca15c1fba54b5f1d3868da00b1d53ebb8494ecf583fb7d6f50",
+  "counts": {
+    "train": 628,
+    "validation": 67
+  },
+  "training_medium_problems": 324,
+  "probe_selection_sha256": "f574311016b663737778a75389504e687881299fbf56f7745418b7bf851aa9e3",
+  "historical_1.5b": {
+    "data_sha256": "68dc5df9f80ae4ca15c1fba54b5f1d3868da00b1d53ebb8494ecf583fb7d6f50",
+    "selection_sha256": "f574311016b663737778a75389504e687881299fbf56f7745418b7bf851aa9e3",
+    "model_source": {
+      "repo": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+      "revision": "2e1fd397ee46e1388853d2af2c993145b0f1098a",
+      "license": "apache-2.0",
+      "weights": [
+        {
+          "path": "model.safetensors",
+          "bytes": 3087467144,
+          "sha256": "c1b9b30e907950516ba3c646bdf570d8084c25a6410a0cdca80cf04b11bc13a8"
+        }
+      ],
+      "download_method": "Installed hf CLI with HF_HUB_DISABLE_XET=1 after stalled Xet transfer"
+    },
+    "probe_0.5b": {
+      "problems": 32,
+      "candidates": 256,
+      "correct_candidates": 3,
+      "full_pass_fraction": 0.01171875,
+      "all_fail_groups": 30,
+      "mixed_reward_groups": 2,
+      "all_pass_groups": 0,
+      "solved_at_least_once": 2,
+      "token_cap_hits": 2,
+      "failure_counts": {
+        "runtime_error": 80,
+        "wrong_answer": 153,
+        "ok": 3,
+        "syntax_error": 16,
+        "memory_error": 1,
+        "timeout": 3
+      }
+    },
+    "probe_1.5b": {
+      "problems": 32,
+      "candidates": 256,
+      "correct_candidates": 9,
+      "full_pass_fraction": 0.03515625,
+      "all_fail_groups": 28,
+      "mixed_reward_groups": 4,
+      "all_pass_groups": 0,
+      "solved_at_least_once": 4,
+      "token_cap_hits": 2,
+      "failure_counts": {
+        "wrong_answer": 186,
+        "runtime_error": 41,
+        "ok": 9,
+        "syntax_error": 7,
+        "timeout": 13
+      }
+    },
+    "probe_1.5b_by_difficulty": {
+      "easy": {
+        "problems": 16,
+        "candidates": 128,
+        "correct_candidates": 8,
+        "full_pass_fraction": 0.0625,
+        "all_fail_groups": 13,
+        "mixed_reward_groups": 3,
+        "all_pass_groups": 0,
+        "solved_at_least_once": 3,
+        "token_cap_hits": 0,
+        "failure_counts": {
+          "wrong_answer": 102,
+          "runtime_error": 14,
+          "ok": 8,
+          "syntax_error": 2,
+          "timeout": 2
+        }
+      },
+      "medium": {
+        "problems": 16,
+        "candidates": 128,
+        "correct_candidates": 1,
+        "full_pass_fraction": 0.0078125,
+        "all_fail_groups": 15,
+        "mixed_reward_groups": 1,
+        "all_pass_groups": 0,
+        "solved_at_least_once": 1,
+        "token_cap_hits": 2,
+        "failure_counts": {
+          "wrong_answer": 84,
+          "runtime_error": 27,
+          "syntax_error": 5,
+          "timeout": 11,
+          "ok": 1
+        }
+      }
+    },
+    "greedy_development": {
+      "original_0.5b": 1,
+      "original_1.5b": 4,
+      "trained_1.5b_step_10": 4,
+      "problems": 67,
+      "improved": 0,
+      "regressed": 0
+    },
+    "training": {
+      "optimizer_steps": 10,
+      "distinct_prompts": 40,
+      "candidates": 320,
+      "passing_candidates": 16.0,
+      "mixed_groups": 7,
+      "by_difficulty": {
+        "easy": {
+          "problems": 18,
+          "candidates": 144,
+          "passing_candidates": 15.0,
+          "mixed_groups": 6,
+          "all_pass_groups": 0
+        },
+        "medium": {
+          "problems": 22,
+          "candidates": 176,
+          "passing_candidates": 1.0,
+          "mixed_groups": 1,
+          "all_pass_groups": 0
+        }
+      },
+      "peak_pytorch_allocated_mib": 7039.72314453125,
+      "peak_sampled_device_mib": 7761.0
+    },
+    "final_adapter": {
+      "local_path": "runs/codeforces-1.5b-smoke-001/final-adapter",
+      "sha256": "4126c2ebbe5a35c26169d16200a1be0d32ec9329de03a478765834232301a7a2",
+      "selected": false,
+      "uploaded": false
+    },
+    "historical_evidence_sha256": {
+      "probe_0.5b": "a8007e830e2fbd7e6e557444b8cf1c3617113c8a3a947c9d2145874e02f93f2d",
+      "baseline_0.5b": "9a2190d57a2a2b97d3a7b86a27e2f9e1ade469528db99ae4f0c9504928fdd95a"
+    },
+    "confirmation_evaluated": false
+  },
+  "models": [
+    {
+      "source": {
+        "repo": "Qwen/Qwen2.5-Coder-3B-Instruct",
+        "revision": "488639f1ff808d1d3d0ba301aef8c11461451ec5",
+        "license": "other",
+        "weights": [
+          {
+            "path": "model-00001-of-00002.safetensors",
+            "bytes": 4957560304,
+            "lfs_sha256": "5b684409377e037e5ed75d680a070126e841dab17e8cb9a818868deadf01ab39"
+          },
+          {
+            "path": "model-00002-of-00002.safetensors",
+            "bytes": 1214366696,
+            "lfs_sha256": "8bc5227aae6174eaf0b589fd4fbeb0de046a1fc951a67f2d2538acad811e1068"
+          }
+        ]
+      },
+      "runs": [
+        {
+          "name": "codeforces-3b-probe-bf16-001",
+          "precision": "bfloat16",
+          "micro_batch": 2,
+          "prompts_per_update": 4,
+          "config": {
+            "dataset": "data/codeforces-python",
+            "name": "codeforces-3b-probe-bf16-001",
+            "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+            "model_revision": "488639f1ff808d1d3d0ba301aef8c11461451ec5",
+            "load_in_4bit": false,
+            "output": "/home/nitish/Documents/Codex/2026-11-03-i-want-to-fine-tune-a-2/runs/codeforces-3b-probe-bf16-001",
+            "max_tokens": 1024,
+            "baseline_only": false,
+            "reward_probe": true,
+            "probe_problems": 32,
+            "temperature": 0.8,
+            "steps": 10,
+            "eval_every": 5,
+            "prompts_per_update": 4,
+            "generations": 8,
+            "micro_batch": 2,
+            "learning_rate": 1e-05,
+            "seed": 42,
+            "precision": "bfloat16",
+            "cuda_total_memory_mb": 15847.8125,
+            "stage": "reward-probe",
+            "batch_settings": {
+              "per_device_train_batch_size": 2,
+              "gradient_accumulation_steps": 16,
+              "generation_batch_size": 32,
+              "num_generations": 8
+            },
+            "dataset_manifest_sha256": "68dc5df9f80ae4ca15c1fba54b5f1d3868da00b1d53ebb8494ecf583fb7d6f50",
+            "reward": "Binary: all official I/O records pass; fail fast on first failure. No minimum test count or model-difficulty calibration gate.",
+            "development_protocol": "Fixed Codeforces train-derived development split, same official Python I/O grader before/after. Existing MBPP development/confirmation inputs remain unchanged.",
+            "execution_image": "python-grpo-cpython:v3",
+            "execution_image_id": "sha256:4ee6fd96080cdeb87a2a07a3fc4dcd7dc47c58280fe222b1418569825af1927d",
+            "source_sha256": {
+              "train.py": "0a1ec8cf778b0bdd28590733758531a928c04361cdd0f610703fd6011fbd0c16",
+              "prepare_data.py": "dfa76588395d1f627b5c22bba9320a2b0f87baf70fea2c46dca9d4eda692f1e1",
+              "evaluate.py": "bd10e398059dd2531715f02353930a022dfc1e8b364d9062faeea65c41fcb5c0",
+              "execution.py": "a12fb9d1dccad99157acb95bbce4a4cc8baadf4bcfaae0b17c21fa6344f52af2",
+              "cpython_worker.py": "14445b3bc07085cb508d5ff25fc91570929c1399b7fc200fe091ebc0feae1987",
+              "monitoring.py": "f5cd1df517f891c141e580b2c5ad999f3372f7b46b913c2a9c146b35b853ddff"
+            },
+            "confirmation_evaluated": false,
+            "gpu": "NVIDIA GeForce RTX 5060 Ti",
+            "torch": "2.11.0+cu128",
+            "probe_selection_sha256": "f574311016b663737778a75389504e687881299fbf56f7745418b7bf851aa9e3"
+          },
+          "source_snapshot": "source",
+          "report": {
+            "stage": "reward-probe",
+            "steps": 0,
+            "train_problems": 628,
+            "probe_problems": 32,
+            "generations": 8,
+            "temperature": 0.8,
+            "max_completion_tokens": 1024,
+            "development_evaluated": false,
+            "confirmation_evaluated": false,
+            "dataset_manifest_sha256": "68dc5df9f80ae4ca15c1fba54b5f1d3868da00b1d53ebb8494ecf583fb7d6f50",
+            "probe_selection_sha256": "f574311016b663737778a75389504e687881299fbf56f7745418b7bf851aa9e3",
+            "peak_gpu_allocated_mb": 6597.3310546875,
+            "peak_gpu_reserved_mb": 6638.0,
+            "overall": {
+              "problems": 32,
+              "candidates": 256,
+              "correct_candidates": 29,
+              "full_pass_fraction": 0.11328125,
+              "all_fail_groups": 22,
+              "mixed_reward_groups": 9,
+              "all_pass_groups": 1,
+              "solved_at_least_once": 10,
+              "token_cap_hits": 0,
+              "failure_counts": {
+                "wrong_answer": 195,
+                "runtime_error": 25,
+                "ok": 29,
+                "syntax_error": 3,
+                "memory_error": 3,
+                "timeout": 1
+              }
+            },
+            "by_difficulty": {
+              "easy": {
+                "problems": 16,
+                "candidates": 128,
+                "correct_candidates": 21,
+                "full_pass_fraction": 0.1640625,
+                "all_fail_groups": 9,
+                "mixed_reward_groups": 6,
+                "all_pass_groups": 1,
+                "solved_at_least_once": 7,
+                "token_cap_hits": 0,
+                "failure_counts": {
+                  "wrong_answer": 96,
+                  "ok": 21,
+                  "runtime_error": 11
+                }
+              },
+              "medium": {
+                "problems": 16,
+                "candidates": 128,
+                "correct_candidates": 8,
+                "full_pass_fraction": 0.0625,
+                "all_fail_groups": 13,
+                "mixed_reward_groups": 3,
+                "all_pass_groups": 0,
+                "solved_at_least_once": 3,
+                "token_cap_hits": 0,
+                "failure_counts": {
+                  "runtime_error": 14,
+                  "wrong_answer": 99,
+                  "syntax_error": 3,
+                  "ok": 8,
+                  "memory_error": 3,
+                  "timeout": 1
+                }
+              }
+            },
+            "elapsed_seconds": 446.49950957400006
+          }
+        },
+        {
+          "name": "codeforces-3b-smoke-bf16-001",
+          "precision": "bfloat16",
+          "micro_batch": 2,
+          "prompts_per_update": 4,
+          "config": {
+            "dataset": "data/codeforces-python",
+            "name": "codeforces-3b-smoke-bf16-001",
+            "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+            "model_revision": "488639f1ff808d1d3d0ba301aef8c11461451ec5",
+            "load_in_4bit": false,
+            "output": "/home/nitish/Documents/Codex/2026-11-03-i-want-to-fine-tune-a-2/runs/codeforces-3b-smoke-bf16-001",
+            "max_tokens": 1024,
+            "baseline_only": false,
+            "reward_probe": false,
+            "probe_problems": 32,
+            "temperature": 0.8,
+            "steps": 10,
+            "eval_every": 10,
+            "prompts_per_update": 4,
+            "generations": 8,
+            "micro_batch": 2,
+            "learning_rate": 1e-05,
+            "seed": 42,
+            "precision": "bfloat16",
+            "cuda_total_memory_mb": 15847.8125,
+            "stage": "short pipeline smoke test",
+            "batch_settings": {
+              "per_device_train_batch_size": 2,
+              "gradient_accumulation_steps": 16,
+              "generation_batch_size": 32,
+              "num_generations": 8
+            },
+            "dataset_manifest_sha256": "68dc5df9f80ae4ca15c1fba54b5f1d3868da00b1d53ebb8494ecf583fb7d6f50",
+            "reward": "Binary: all official I/O records pass; fail fast on first failure. No minimum test count or model-difficulty calibration gate.",
+            "development_protocol": "Fixed Codeforces train-derived development split, same official Python I/O grader before/after. Existing MBPP development/confirmation inputs remain unchanged.",
+            "execution_image": "python-grpo-cpython:v3",
+            "execution_image_id": "sha256:4ee6fd96080cdeb87a2a07a3fc4dcd7dc47c58280fe222b1418569825af1927d",
+            "source_sha256": {
+              "train.py": "0a1ec8cf778b0bdd28590733758531a928c04361cdd0f610703fd6011fbd0c16",
+              "prepare_data.py": "dfa76588395d1f627b5c22bba9320a2b0f87baf70fea2c46dca9d4eda692f1e1",
+              "evaluate.py": "bd10e398059dd2531715f02353930a022dfc1e8b364d9062faeea65c41fcb5c0",
+              "execution.py": "a12fb9d1dccad99157acb95bbce4a4cc8baadf4bcfaae0b17c21fa6344f52af2",
+              "cpython_worker.py": "14445b3bc07085cb508d5ff25fc91570929c1399b7fc200fe091ebc0feae1987",
+              "monitoring.py": "f5cd1df517f891c141e580b2c5ad999f3372f7b46b913c2a9c146b35b853ddff"
+            },
+            "confirmation_evaluated": false,
+            "gpu": "NVIDIA GeForce RTX 5060 Ti",
+            "torch": "2.11.0+cu128"
+          },
+          "source_snapshot": "source",
+          "report": {
+            "stage": "short pipeline smoke test",
+            "steps": 10,
+            "train_problems": 628,
+            "development_problems": 67,
+            "sealed_confirmation_problems": 49,
+            "dataset_manifest_sha256": "68dc5df9f80ae4ca15c1fba54b5f1d3868da00b1d53ebb8494ecf583fb7d6f50",
+            "confirmation_evaluated": false,
+            "development_protocol": "Fixed Codeforces train-derived development split, same official Python I/O grader before/after. Existing MBPP development/confirmation inputs remain unchanged.",
+            "baseline_validation": {
+              "correctness": 0.1044776119402985,
+              "mean_tokens": 440.6119402985075,
+              "problems": 67,
+              "mean_checked_tests": 5.582089552238806,
+              "evaluator": "cpython",
+              "correctness_protocol": "solution_score",
+              "failure_counts": {
+                "wrong_answer": 51,
+                "ok": 7,
+                "runtime_error": 5,
+                "timeout": 4
+              }
+            },
+            "final_validation": {
+              "correctness": 0.1044776119402985,
+              "mean_tokens": 440.92537313432837,
+              "problems": 67,
+              "mean_checked_tests": 5.477611940298507,
+              "evaluator": "cpython",
+              "correctness_protocol": "solution_score",
+              "failure_counts": {
+                "wrong_answer": 51,
+                "ok": 7,
+                "runtime_error": 5,
+                "timeout": 4
+              }
+            },
+            "selected_checkpoint": {
+              "step": 0,
+              "correctness": 0.1044776119402985
+            },
+            "development_comparison": {
+              "problems": 67,
+              "improvement_percentage_points": 0.0,
+              "ci95_percentage_points": [
+                0.0,
+                0.0
+              ],
+              "improved": 0,
+              "regressed": 0,
+              "note": "Development-only comparison in a bounded pipeline pilot; not independent confirmation."
+            },
+            "peak_gpu_allocated_mb": 11077.1806640625,
+            "peak_gpu_reserved_mb": 11452.0,
+            "limitations": [
+              "Ten-step default is a pipeline smoke test, not evidence of general improvement.",
+              "Small development set and one training seed; no claim of general improvement.",
+              "Confirmation predictions are deliberately deferred."
+            ]
+          },
+          "training": {
+            "correct_candidates": 47.0,
+            "mixed_groups": 17,
+            "distinct_tasks": 40,
+            "peak_sampled_device_mib": 11840.0,
+            "by_difficulty": {
+              "easy": {
+                "groups": 18,
+                "correct_candidates": 38.0
+              },
+              "medium": {
+                "groups": 22,
+                "correct_candidates": 9.0
+              }
+            }
+          },
+          "adapter": {
+            "path": "runs/codeforces-3b-smoke-bf16-001/final-adapter",
+            "sha256": "cf58c0c6846fbcd13c51b7b6762defc6a3e49a44278afefa91f4bca9bb3db2e4",
+            "uploaded": false
+          }
+        }
+      ],
+      "selected_training_run": "codeforces-3b-smoke-bf16-001"
+    },
+    {
+      "source": {
+        "repo": "Qwen/Qwen3-4B-Instruct-2507",
+        "revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+        "license": "apache-2.0",
+        "weights": [
+          {
+            "path": "model-00001-of-00003.safetensors",
+            "bytes": 3957900840,
+            "lfs_sha256": "75311d91bb08cf0b882913da464a1e722a31fb44db35208663487efb7a3d8ed6"
+          },
+          {
+            "path": "model-00002-of-00003.safetensors",
+            "bytes": 3987450520,
+            "lfs_sha256": "0b48adbb1f60e901153d91907ba11ce63bd4b8b584482e730f48808d055dfba1"
+          },
+          {
+            "path": "model-00003-of-00003.safetensors",
+            "bytes": 99630640,
+            "lfs_sha256": "7dd39ccca5e4de123c74c14af44c9bf2eb75df33b4614382af0134528e060d5d"
+          }
+        ]
+      },
+      "runs": [
+        {
+          "name": "codeforces-4b-probe-bf16-001",
+          "precision": "bfloat16",
+          "micro_batch": 2,
+          "prompts_per_update": 4,
+          "config": {
+            "dataset": "data/codeforces-python",
+            "name": "codeforces-4b-probe-bf16-001",
+            "model": "Qwen/Qwen3-4B-Instruct-2507",
+            "model_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+            "load_in_4bit": false,
+            "output": "/home/nitish/Documents/Codex/2026-11-03-i-want-to-fine-tune-a-2/runs/codeforces-4b-probe-bf16-001",
+            "max_tokens": 1024,
+            "baseline_only": false,
+            "reward_probe": true,
+            "probe_problems": 32,
+            "temperature": 0.8,
+            "steps": 10,
+            "eval_every": 5,
+            "prompts_per_update": 4,
+            "generations": 8,
+            "micro_batch": 2,
+            "learning_rate": 1e-05,
+            "seed": 42,
+            "precision": "bfloat16",
+            "cuda_total_memory_mb": 15847.8125,
+            "stage": "reward-probe",
+            "batch_settings": {
+              "per_device_train_batch_size": 2,
+              "gradient_accumulation_steps": 16,
+              "generation_batch_size": 32,
+              "num_generations": 8
+            },
+            "dataset_manifest_sha256": "68dc5df9f80ae4ca15c1fba54b5f1d3868da00b1d53ebb8494ecf583fb7d6f50",
+            "reward": "Binary: all official I/O records pass; fail fast on first failure. No minimum test count or model-difficulty calibration gate.",
+            "development_protocol": "Fixed Codeforces train-derived development split, same official Python I/O grader before/after. Existing MBPP development/confirmation inputs remain unchanged.",
+            "execution_image": "python-grpo-cpython:v3",
+            "execution_image_id": "sha256:4ee6fd96080cdeb87a2a07a3fc4dcd7dc47c58280fe222b1418569825af1927d",
+            "source_sha256": {
+              "train.py": "2a75cefa5e079dea7d16e84c6e2a8f8df596e72b195be296910ad7185650fc1b",
+              "prepare_data.py": "dfa76588395d1f627b5c22bba9320a2b0f87baf70fea2c46dca9d4eda692f1e1",
+              "evaluate.py": "bd10e398059dd2531715f02353930a022dfc1e8b364d9062faeea65c41fcb5c0",
+              "execution.py": "a12fb9d1dccad99157acb95bbce4a4cc8baadf4bcfaae0b17c21fa6344f52af2",
+              "cpython_worker.py": "14445b3bc07085cb508d5ff25fc91570929c1399b7fc200fe091ebc0feae1987",
+              "monitoring.py": "f5cd1df517f891c141e580b2c5ad999f3372f7b46b913c2a9c146b35b853ddff"
+            },
+            "confirmation_evaluated": false,
+            "gpu": "NVIDIA GeForce RTX 5060 Ti",
+            "torch": "2.11.0+cu128",
+            "probe_selection_sha256": "f574311016b663737778a75389504e687881299fbf56f7745418b7bf851aa9e3"
+          },
+          "source_snapshot": "source-v2",
+          "report": {
+            "stage": "reward-probe",
+            "steps": 0,
+            "train_problems": 628,
+            "probe_problems": 32,
+            "generations": 8,
+            "temperature": 0.8,
+            "max_completion_tokens": 1024,
+            "development_evaluated": false,
+            "confirmation_evaluated": false,
+            "dataset_manifest_sha256": "68dc5df9f80ae4ca15c1fba54b5f1d3868da00b1d53ebb8494ecf583fb7d6f50",
+            "probe_selection_sha256": "f574311016b663737778a75389504e687881299fbf56f7745418b7bf851aa9e3",
+            "peak_gpu_allocated_mb": 9522.15771484375,
+            "peak_gpu_reserved_mb": 9746.0,
+            "overall": {
+              "problems": 32,
+              "candidates": 256,
+              "correct_candidates": 153,
+              "full_pass_fraction": 0.59765625,
+              "all_fail_groups": 7,
+              "mixed_reward_groups": 14,
+              "all_pass_groups": 11,
+              "solved_at_least_once": 25,
+              "token_cap_hits": 52,
+              "failure_counts": {
+                "syntax_error": 52,
+                "wrong_answer": 39,
+                "ok": 153,
+                "runtime_error": 5,
+                "timeout": 7
+              }
+            },
+            "by_difficulty": {
+              "easy": {
+                "problems": 16,
+                "candidates": 128,
+                "correct_candidates": 85,
+                "full_pass_fraction": 0.6640625,
+                "all_fail_groups": 4,
+                "mixed_reward_groups": 4,
+                "all_pass_groups": 8,
+                "solved_at_least_once": 12,
+                "token_cap_hits": 21,
+                "failure_counts": {
+                  "syntax_error": 21,
+                  "wrong_answer": 21,
+                  "ok": 85,
+                  "runtime_error": 1
+                }
+              },
+              "medium": {
+                "problems": 16,
+                "candidates": 128,
+                "correct_candidates": 68,
+                "full_pass_fraction": 0.53125,
+                "all_fail_groups": 3,
+                "mixed_reward_groups": 10,
+                "all_pass_groups": 3,
+                "solved_at_least_once": 13,
+                "token_cap_hits": 31,
+                "failure_counts": {
+                  "syntax_error": 31,
+                  "ok": 68,
+                  "wrong_answer": 18,
+                  "runtime_error": 4,
+                  "timeout": 7
+                }
+              }
+            },
+            "elapsed_seconds": 750.4678254500004
+          }
+        },
+        {
+          "name": "codeforces-4b-probe-nf4-001",
+          "precision": "nf4-bfloat16-compute",
+          "micro_batch": 2,
+          "prompts_per_update": 4,
+          "config": {
+            "dataset": "data/codeforces-python",
+            "name": "codeforces-4b-probe-nf4-001",
+            "model": "Qwen/Qwen3-4B-Instruct-2507",
+            "model_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+            "load_in_4bit": true,
+            "output": "/home/nitish/Documents/Codex/2026-11-03-i-want-to-fine-tune-a-2/runs/codeforces-4b-probe-nf4-001",
+            "max_tokens": 1024,
+            "baseline_only": false,
+            "reward_probe": true,
+            "probe_problems": 32,
+            "temperature": 0.8,
+            "steps": 10,
+            "eval_every": 5,
+            "prompts_per_update": 4,
+            "generations": 8,
+            "micro_batch": 2,
+            "learning_rate": 1e-05,
+            "seed": 42,
+            "precision": "nf4-bfloat16-compute",
+            "cuda_total_memory_mb": 15847.8125,
+            "stage": "reward-probe",
+            "batch_settings": {
+              "per_device_train_batch_size": 2,
+              "gradient_accumulation_steps": 16,
+              "generation_batch_size": 32,
+              "num_generations": 8
+            },
+            "dataset_manifest_sha256": "68dc5df9f80ae4ca15c1fba54b5f1d3868da00b1d53ebb8494ecf583fb7d6f50",
+            "reward": "Binary: all official I/O records pass; fail fast on first failure. No minimum test count or model-difficulty calibration gate.",
+            "development_protocol": "Fixed Codeforces train-derived development split, same official Python I/O grader before/after. Existing MBPP development/confirmation inputs remain unchanged.",
+            "execution_image": "python-grpo-cpython:v3",
+            "execution_image_id": "sha256:4ee6fd96080cdeb87a2a07a3fc4dcd7dc47c58280fe222b1418569825af1927d",
+            "source_sha256": {
+              "train.py": "2a75cefa5e079dea7d16e84c6e2a8f8df596e72b195be296910ad7185650fc1b",
+              "prepare_data.py": "dfa76588395d1f627b5c22bba9320a2b0f87baf70fea2c46dca9d4eda692f1e1",
+              "evaluate.py": "bd10e398059dd2531715f02353930a022dfc1e8b364d9062faeea65c41fcb5c0",
+              "execution.py": "a12fb9d1dccad99157acb95bbce4a4cc8baadf4bcfaae0b17c21fa6344f52af2",
+              "cpython_worker.py": "14445b3bc07085cb508d5ff25fc91570929c1399b7fc200fe091ebc0feae1987",
+              "monitoring.py": "f5cd1df517f891c141e580b2c5ad999f3372f7b46b913c2a9c146b35b853ddff"
+            },
+            "confirmation_evaluated": false,
+            "gpu": "NVIDIA GeForce RTX 5060 Ti",
+            "torch": "2.11.0+cu128",
+            "probe_selection_sha256": "f574311016b663737778a75389504e687881299fbf56f7745418b7bf851aa9e3"
+          },
+          "source_snapshot": "source-v2",
+          "report": {
+            "stage": "reward-probe",
+            "steps": 0,
+            "train_problems": 628,
+            "probe_problems": 32,
+            "generations": 8,
+            "temperature": 0.8,
+            "max_completion_tokens": 1024,
+            "development_evaluated": false,
+            "confirmation_evaluated": false,
+            "dataset_manifest_sha256": "68dc5df9f80ae4ca15c1fba54b5f1d3868da00b1d53ebb8494ecf583fb7d6f50",
+            "probe_selection_sha256": "f574311016b663737778a75389504e687881299fbf56f7745418b7bf851aa9e3",
+            "peak_gpu_allocated_mb": 4595.80322265625,
+            "peak_gpu_reserved_mb": 4922.0,
+            "overall": {
+              "problems": 32,
+              "candidates": 256,
+              "correct_candidates": 137,
+              "full_pass_fraction": 0.53515625,
+              "all_fail_groups": 8,
+              "mixed_reward_groups": 16,
+              "all_pass_groups": 8,
+              "solved_at_least_once": 24,
+              "token_cap_hits": 78,
+              "failure_counts": {
+                "syntax_error": 78,
+                "ok": 137,
+                "wrong_answer": 35,
+                "runtime_error": 4,
+                "timeout": 2
+              }
+            },
+            "by_difficulty": {
+              "easy": {
+                "problems": 16,
+                "candidates": 128,
+                "correct_candidates": 80,
+                "full_pass_fraction": 0.625,
+                "all_fail_groups": 3,
+                "mixed_reward_groups": 7,
+                "all_pass_groups": 6,
+                "solved_at_least_once": 13,
+                "token_cap_hits": 26,
+                "failure_counts": {
+                  "syntax_error": 26,
+                  "ok": 80,
+                  "wrong_answer": 20,
+                  "runtime_error": 2
+                }
+              },
+              "medium": {
+                "problems": 16,
+                "candidates": 128,
+                "correct_candidates": 57,
+                "full_pass_fraction": 0.4453125,
+                "all_fail_groups": 5,
+                "mixed_reward_groups": 9,
+                "all_pass_groups": 2,
+                "solved_at_least_once": 11,
+                "token_cap_hits": 52,
+                "failure_counts": {
+                  "syntax_error": 52,
+                  "ok": 57,
+                  "wrong_answer": 15,
+                  "runtime_error": 2,
+                  "timeout": 2
+                }
+              }
+            },
+            "elapsed_seconds": 927.3564419590002
+          }
+        },
+        {
+          "name": "codeforces-4b-smoke-bf16-001",
+          "precision": "bfloat16",
+          "micro_batch": 2,
+          "prompts_per_update": 4,
+          "config": {
+            "dataset": "data/codeforces-python",
+            "name": "codeforces-4b-smoke-bf16-001",
+            "model": "Qwen/Qwen3-4B-Instruct-2507",
+            "model_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+            "load_in_4bit": false,
+            "output": "/home/nitish/Documents/Codex/2026-11-03-i-want-to-fine-tune-a-2/runs/codeforces-4b-smoke-bf16-001",
+            "max_tokens": 1024,
+            "baseline_only": false,
+            "reward_probe": false,
+            "probe_problems": 32,
+            "temperature": 0.8,
+            "steps": 10,
+            "eval_every": 10,
+            "prompts_per_update": 4,
+            "generations": 8,
+            "micro_batch": 2,
+            "learning_rate": 1e-05,
+            "seed": 42,
+            "precision": "bfloat16",
+            "cuda_total_memory_mb": 15847.8125,
+            "stage": "short pipeline smoke test",
+            "batch_settings": {
+              "per_device_train_batch_size": 2,
+              "gradient_accumulation_steps": 16,
+              "generation_batch_size": 32,
+              "num_generations": 8
+            },
+            "dataset_manifest_sha256": "68dc5df9f80ae4ca15c1fba54b5f1d3868da00b1d53ebb8494ecf583fb7d6f50",
+            "reward": "Binary: all official I/O records pass; fail fast on first failure. No minimum test count or model-difficulty calibration gate.",
+            "development_protocol": "Fixed Codeforces train-derived development split, same official Python I/O grader before/after. Existing MBPP development/confirmation inputs remain unchanged.",
+            "execution_image": "python-grpo-cpython:v3",
+            "execution_image_id": "sha256:4ee6fd96080cdeb87a2a07a3fc4dcd7dc47c58280fe222b1418569825af1927d",
+            "source_sha256": {
+              "train.py": "2a75cefa5e079dea7d16e84c6e2a8f8df596e72b195be296910ad7185650fc1b",
+              "prepare_data.py": "dfa76588395d1f627b5c22bba9320a2b0f87baf70fea2c46dca9d4eda692f1e1",
+              "evaluate.py": "bd10e398059dd2531715f02353930a022dfc1e8b364d9062faeea65c41fcb5c0",
+              "execution.py": "a12fb9d1dccad99157acb95bbce4a4cc8baadf4bcfaae0b17c21fa6344f52af2",
+              "cpython_worker.py": "14445b3bc07085cb508d5ff25fc91570929c1399b7fc200fe091ebc0feae1987",
+              "monitoring.py": "f5cd1df517f891c141e580b2c5ad999f3372f7b46b913c2a9c146b35b853ddff"
+            },
+            "confirmation_evaluated": false,
+            "gpu": "NVIDIA GeForce RTX 5060 Ti",
+            "torch": "2.11.0+cu128"
+          },
+          "source_snapshot": "source-v2",
+          "failure": {
+            "error_type": "cuda_oom",
+            "phase": "generating training rollouts",
+            "optimizer_step": 0,
+            "peak_gpu_allocated_mb": 15028.775390625,
+            "peak_gpu_reserved_mb": 15452.0,
+            "message": "CUDA out of memory. Tried to allocate 360.00 MiB. GPU 0 has a total capacity of 15.48 GiB of which 360.62 MiB is free. Including non-PyTorch memory, this process has 14.91 GiB memory in use. Of the allocated memory 14.33 GiB is allocated by PyTorch, and 439.69 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)"
+          }
+        },
+        {
+          "name": "codeforces-4b-smoke-nf4-micro2-001",
+          "precision": "nf4-bfloat16-compute",
+          "micro_batch": 2,
+          "prompts_per_update": 4,
+          "config": {
+            "dataset": "data/codeforces-python",
+            "name": "codeforces-4b-smoke-nf4-micro2-001",
+            "model": "Qwen/Qwen3-4B-Instruct-2507",
+            "model_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+            "load_in_4bit": true,
+            "output": "/home/nitish/Documents/Codex/2026-11-03-i-want-to-fine-tune-a-2/runs/codeforces-4b-smoke-nf4-micro2-001",
+            "max_tokens": 1024,
+            "baseline_only": false,
+            "reward_probe": false,
+            "probe_problems": 32,
+            "temperature": 0.8,
+            "steps": 10,
+            "eval_every": 10,
+            "prompts_per_update": 4,
+            "generations": 8,
+            "micro_batch": 2,
+            "learning_rate": 1e-05,
+            "seed": 42,
+            "precision": "nf4-bfloat16-compute",
+            "cuda_total_memory_mb": 15847.8125,
+            "stage": "short pipeline smoke test",
+            "batch_settings": {
+              "per_device_train_batch_size": 2,
+              "gradient_accumulation_steps": 16,
+              "generation_batch_size": 32,
+              "num_generations": 8
+            },
+            "dataset_manifest_sha256": "68dc5df9f80ae4ca15c1fba54b5f1d3868da00b1d53ebb8494ecf583fb7d6f50",
+            "reward": "Binary: all official I/O records pass; fail fast on first failure. No minimum test count or model-difficulty calibration gate.",
+            "development_protocol": "Fixed Codeforces train-derived development split, same official Python I/O grader before/after. Existing MBPP development/confirmation inputs remain unchanged.",
+            "execution_image": "python-grpo-cpython:v3",
+            "execution_image_id": "sha256:4ee6fd96080cdeb87a2a07a3fc4dcd7dc47c58280fe222b1418569825af1927d",
+            "source_sha256": {
+              "train.py": "2a75cefa5e079dea7d16e84c6e2a8f8df596e72b195be296910ad7185650fc1b",
+              "prepare_data.py": "dfa76588395d1f627b5c22bba9320a2b0f87baf70fea2c46dca9d4eda692f1e1",
+              "evaluate.py": "bd10e398059dd2531715f02353930a022dfc1e8b364d9062faeea65c41fcb5c0",
+              "execution.py": "a12fb9d1dccad99157acb95bbce4a4cc8baadf4bcfaae0b17c21fa6344f52af2",
+              "cpython_worker.py": "14445b3bc07085cb508d5ff25fc91570929c1399b7fc200fe091ebc0feae1987",
+              "monitoring.py": "f5cd1df517f891c141e580b2c5ad999f3372f7b46b913c2a9c146b35b853ddff"
+            },
+            "confirmation_evaluated": false,
+            "gpu": "NVIDIA GeForce RTX 5060 Ti",
+            "torch": "2.11.0+cu128"
+          },
+          "source_snapshot": "source-v2",
+          "report": {
+            "stage": "short pipeline smoke test",
+            "steps": 10,
+            "train_problems": 628,
+            "development_problems": 67,
+            "sealed_confirmation_problems": 49,
+            "dataset_manifest_sha256": "68dc5df9f80ae4ca15c1fba54b5f1d3868da00b1d53ebb8494ecf583fb7d6f50",
+            "confirmation_evaluated": false,
+            "development_protocol": "Fixed Codeforces train-derived development split, same official Python I/O grader before/after. Existing MBPP development/confirmation inputs remain unchanged.",
+            "baseline_validation": {
+              "correctness": 0.43283582089552236,
+              "mean_tokens": 564.3283582089553,
+              "problems": 67,
+              "mean_checked_tests": 22.52238805970149,
+              "evaluator": "cpython",
+              "correctness_protocol": "solution_score",
+              "failure_counts": {
+                "ok": 29,
+                "syntax_error": 20,
+                "wrong_answer": 14,
+                "runtime_error": 3,
+                "memory_error": 1
+              }
+            },
+            "final_validation": {
+              "correctness": 0.4626865671641791,
+              "mean_tokens": 559.6567164179105,
+              "problems": 67,
+              "mean_checked_tests": 24.925373134328357,
+              "evaluator": "cpython",
+              "correctness_protocol": "solution_score",
+              "failure_counts": {
+                "ok": 31,
+                "syntax_error": 20,
+                "wrong_answer": 12,
+                "runtime_error": 3,
+                "memory_error": 1
+              }
+            },
+            "selected_checkpoint": {
+              "step": 10,
+              "correctness": 0.4626865671641791
+            },
+            "development_comparison": {
+              "problems": 67,
+              "improvement_percentage_points": 2.985074626865672,
+              "ci95_percentage_points": [
+                -4.477611940298507,
+                10.44776119402985
+              ],
+              "improved": 4,
+              "regressed": 2,
+              "note": "Development-only comparison in a bounded pipeline pilot; not independent confirmation."
+            },
+            "peak_gpu_allocated_mb": 11970.19384765625,
+            "peak_gpu_reserved_mb": 13018.0,
+            "limitations": [
+              "Ten-step default is a pipeline smoke test, not evidence of general improvement.",
+              "Small development set and one training seed; no claim of general improvement.",
+              "Confirmation predictions are deliberately deferred."
+            ]
+          },
+          "training": {
+            "correct_candidates": 157.0,
+            "mixed_groups": 17,
+            "distinct_tasks": 40,
+            "peak_sampled_device_mib": 13406.0,
+            "by_difficulty": {
+              "easy": {
+                "groups": 18,
+                "correct_candidates": 111.0
+              },
+              "medium": {
+                "groups": 22,
+                "correct_candidates": 46.0
+              }
+            }
+          },
+          "adapter": {
+            "path": "runs/codeforces-4b-smoke-nf4-micro2-001/final-adapter",
+            "sha256": "5692f480d56bf6eaf182ecfb978da356599d5cc6261ec3154d8e3d32ed99b242",
+            "uploaded": false
+          }
+        }
+      ],
+      "selected_training_run": "codeforces-4b-smoke-nf4-micro2-001"
+    }
+  ],
+  "confirmation_evaluated": false
+}

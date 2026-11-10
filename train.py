@@ -148,7 +148,7 @@ def main(args):
     if selected is not None:
         selection={'split':'train','seed':args.seed,'rule':'Hash-order within difficulty, round-robin equal allocation, independent of model outcomes. Balanced probe is not a population-weighted score.','problems':[{k:r[k] for k in ['task_id','difficulty','rating']} for r in selected]}
         (args.output/'probe-selection.json').write_text(json.dumps(selection,indent=2))
-    config={**{k:str(v) if isinstance(v,Path) else v for k,v in vars(args).items()},'model':model_id,'model_revision':model_revision,'stage':'reward-probe' if args.reward_probe else 'baseline-only' if args.baseline_only else 'short pipeline smoke test','batch_settings':batches,'dataset_manifest_sha256':sha(args.dataset/'manifest.json'),'reward':manifest['training_reward'],'development_protocol':manifest['development_protocol'],'execution_image':manifest.get('execution_image','python-grpo-cpython:v3'),'execution_image_id':subprocess.check_output(['docker','image','inspect','--format','{{.Id}}',manifest.get('execution_image','python-grpo-cpython:v3')],text=True).strip(),'source_sha256':{name:sha(ROOT/name) for name in ['train.py','prepare_data.py','evaluate.py','execution.py','cpython_worker.py','monitoring.py']},'confirmation_evaluated':False,'gpu':torch.cuda.get_device_name(),'torch':torch.__version__}
+    config={**{k:str(v) if isinstance(v,Path) else v for k,v in vars(args).items()},'model':model_id,'model_revision':model_revision,'precision':'nf4-bfloat16-compute' if args.load_in_4bit else 'bfloat16','cuda_total_memory_mb':torch.cuda.get_device_properties(0).total_memory/1024**2,'stage':'reward-probe' if args.reward_probe else 'baseline-only' if args.baseline_only else 'short pipeline smoke test','batch_settings':batches,'dataset_manifest_sha256':sha(args.dataset/'manifest.json'),'reward':manifest['training_reward'],'development_protocol':manifest['development_protocol'],'execution_image':manifest.get('execution_image','python-grpo-cpython:v3'),'execution_image_id':subprocess.check_output(['docker','image','inspect','--format','{{.Id}}',manifest.get('execution_image','python-grpo-cpython:v3')],text=True).strip(),'source_sha256':{name:sha(ROOT/name) for name in ['train.py','prepare_data.py','evaluate.py','execution.py','cpython_worker.py','monitoring.py']},'confirmation_evaluated':False,'gpu':torch.cuda.get_device_name(),'torch':torch.__version__}
     if selected is not None:config['probe_selection_sha256']=sha(args.output/'probe-selection.json')
     (args.output/'config.json').write_text(json.dumps(config,indent=2))
     monitor=Monitor(args.output,args.output.name,config)
@@ -157,13 +157,20 @@ def main(args):
         tokenizer=AutoTokenizer.from_pretrained(model_id,revision=model_revision,local_files_only=True)
         tokenizer.padding_side='left'
         if tokenizer.pad_token_id is None:tokenizer.pad_token=tokenizer.eos_token
-        model=AutoModelForCausalLM.from_pretrained(model_id,revision=model_revision,local_files_only=True,dtype=torch.bfloat16,attn_implementation='sdpa').to('cuda')
+        load_kwargs={'revision':model_revision,'local_files_only':True,'dtype':torch.bfloat16,'attn_implementation':'sdpa'}
+        if args.load_in_4bit:
+            from transformers import BitsAndBytesConfig
+            load_kwargs.update(quantization_config=BitsAndBytesConfig(load_in_4bit=True,bnb_4bit_quant_type='nf4',bnb_4bit_use_double_quant=True,bnb_4bit_compute_dtype=torch.bfloat16),device_map={'':0})
+        model=AutoModelForCausalLM.from_pretrained(model_id,**load_kwargs)
+        # GRPOTrainer creates/freezes PEFT adapters and enables checkpointing inputs.
+        # Keep non-quantized weights in BF16: generic k-bit prep upcasts Qwen's KV cache.
+        if not args.load_in_4bit:model=model.to('cuda')
         with Sandbox(image=manifest.get('execution_image'),memory=manifest.get('container_memory','1g')) as sandbox:
             if args.reward_probe:
                 summary=probe_rewards(model,tokenizer,selected,sandbox,args,monitor)
                 report={'stage':'reward-probe','steps':0,'train_problems':len(train_rows),'probe_problems':len(selected),'generations':args.generations,'temperature':args.temperature,'max_completion_tokens':args.max_tokens,
                     'development_evaluated':False,'confirmation_evaluated':False,'dataset_manifest_sha256':sha(args.dataset/'manifest.json'),'probe_selection_sha256':config['probe_selection_sha256'],
-                    'peak_gpu_allocated_mb':torch.cuda.max_memory_allocated()/1024**2,**summary}
+                    'peak_gpu_allocated_mb':torch.cuda.max_memory_allocated()/1024**2,'peak_gpu_reserved_mb':torch.cuda.max_memory_reserved()/1024**2,**summary}
                 (args.output/'report.json').write_text(json.dumps(report,indent=2));build_report(args.output)
                 monitor.phase='complete';print(json.dumps(report,indent=2),flush=True)
                 return
@@ -175,7 +182,7 @@ def main(args):
                     outputs=[r for r in before if r['task_id'] in ids]
                     groups[label]={'correct':sum(r['correct'] for r in outputs),'problems':len(outputs),'mean_tokens':sum(r['tokens'] for r in outputs)/len(outputs),'token_cap_hits':sum(r['tokens']>=args.max_tokens for r in outputs)}
                     monitor.log({f'baseline/{label}_correctness':groups[label]['correct']/len(outputs)})
-                report={'stage':'baseline-only','steps':0,'train_problems':len(train_rows),'development_problems':len(val_rows),'sealed_confirmation_problems':len(confirmation_ids),'confirmation_evaluated':False,'baseline_validation':baseline,'by_difficulty':groups,'max_completion_tokens':args.max_tokens,'dataset_manifest_sha256':sha(args.dataset/'manifest.json'),'peak_gpu_allocated_mb':torch.cuda.max_memory_allocated()/1024**2,'development_protocol':manifest['development_protocol']}
+                report={'stage':'baseline-only','steps':0,'train_problems':len(train_rows),'development_problems':len(val_rows),'sealed_confirmation_problems':len(confirmation_ids),'confirmation_evaluated':False,'baseline_validation':baseline,'by_difficulty':groups,'max_completion_tokens':args.max_tokens,'dataset_manifest_sha256':sha(args.dataset/'manifest.json'),'peak_gpu_allocated_mb':torch.cuda.max_memory_allocated()/1024**2,'peak_gpu_reserved_mb':torch.cuda.max_memory_reserved()/1024**2,'development_protocol':manifest['development_protocol']}
                 (args.output/'report.json').write_text(json.dumps(report,indent=2));build_report(args.output)
                 monitor.phase='complete';print(json.dumps(report,indent=2),flush=True)
                 return
@@ -206,6 +213,7 @@ def main(args):
                     monitor.log({'progress/optimizer_step':state.global_step,'progress/total_steps':args.steps,'progress/percent':100*state.global_step/args.steps})
                 def on_step_end(self,config,state,control,model=None,**kwargs):
                     monitor.step=state.global_step
+                    monitor.log({'progress/optimizer_step':state.global_step,'progress/total_steps':args.steps,'progress/percent':100*state.global_step/args.steps})
                     if state.global_step%args.eval_every==0 or state.global_step==args.steps:
                         _,metrics=evaluate(model,tokenizer,val_rows,sandbox,args.output/f'validation-step-{state.global_step}.jsonl',args.max_tokens,monitor,'validation',score_fn=evaluation_scorer)
                         monitor.log({'validation/baseline_correctness':baseline['correctness'],'validation/change_from_baseline':metrics['correctness']-baseline['correctness']})
@@ -227,7 +235,7 @@ def main(args):
             trainer.train()
             trainer.save_model(str(args.output/'final-adapter'));tokenizer.save_pretrained(args.output/'final-adapter')
             after=read_rows(args.output/f'validation-step-{args.steps}.jsonl')
-            report={'stage':'short pipeline smoke test','steps':args.steps,'train_problems':len(train_rows),'development_problems':len(val_rows),'sealed_confirmation_problems':len(confirmation_ids),'dataset_manifest_sha256':sha(args.dataset/'manifest.json'),'confirmation_evaluated':False,'development_protocol':manifest['development_protocol'],'baseline_validation':baseline,'final_validation':json.loads((args.output/f'validation-step-{args.steps}.summary.json').read_text()),'selected_checkpoint':best,'development_comparison':compare(before,after,note='Development-only comparison in a bounded pipeline pilot; not independent confirmation.'),'peak_gpu_allocated_mb':torch.cuda.max_memory_allocated()/1024**2,'limitations':['Ten-step default is a pipeline smoke test, not evidence of general improvement.','Small development set and one training seed; no claim of general improvement.','Confirmation predictions are deliberately deferred.']}
+            report={'stage':'short pipeline smoke test','steps':args.steps,'train_problems':len(train_rows),'development_problems':len(val_rows),'sealed_confirmation_problems':len(confirmation_ids),'dataset_manifest_sha256':sha(args.dataset/'manifest.json'),'confirmation_evaluated':False,'development_protocol':manifest['development_protocol'],'baseline_validation':baseline,'final_validation':json.loads((args.output/f'validation-step-{args.steps}.summary.json').read_text()),'selected_checkpoint':best,'development_comparison':compare(before,after,note='Development-only comparison in a bounded pipeline pilot; not independent confirmation.'),'peak_gpu_allocated_mb':torch.cuda.max_memory_allocated()/1024**2,'peak_gpu_reserved_mb':torch.cuda.max_memory_reserved()/1024**2,'limitations':['Ten-step default is a pipeline smoke test, not evidence of general improvement.','Small development set and one training seed; no claim of general improvement.','Confirmation predictions are deliberately deferred.']}
             (args.output/'report.json').write_text(json.dumps(report,indent=2))
             metrics=[json.loads(line) for line in (args.output/'metrics.jsonl').read_text().splitlines()]
             layouts=[r for r in metrics if 'batch/distinct_prompts' in r]
@@ -236,6 +244,10 @@ def main(args):
             build_report(args.output)
             monitor.phase='complete'
             print(json.dumps(report,indent=2),flush=True)
+    except torch.cuda.OutOfMemoryError as exc:
+        failure={'error_type':'cuda_oom','phase':monitor.phase,'optimizer_step':monitor.step,'peak_gpu_allocated_mb':torch.cuda.max_memory_allocated()/1024**2,'peak_gpu_reserved_mb':torch.cuda.max_memory_reserved()/1024**2,'message':str(exc)}
+        (args.output/'failure.json').write_text(json.dumps(failure,indent=2))
+        monitor.phase='failed: CUDA out of memory';raise
     except BaseException:
         monitor.phase='failed or interrupted';raise
     finally:
@@ -249,6 +261,7 @@ if __name__=='__main__':
     parser.add_argument('--name',default='simple-smoke')
     parser.add_argument('--model')
     parser.add_argument('--model-revision')
+    parser.add_argument('--load-in-4bit',action='store_true')
     parser.add_argument('--output',type=Path)
     parser.add_argument('--max-tokens',type=int)
     mode=parser.add_mutually_exclusive_group()

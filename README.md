@@ -1,8 +1,10 @@
 # Python coding GRPO on a 16 GB GPU
 
-One active path: **prepare Codeforces problems → generate Python solutions → execute official tests in Docker → train with GRPO and compare on fixed development data**. Qwen2.5-Coder (0.5B baseline and 1.5B comparison), LoRA, TRL and local Trackio logging.
+One active path: **prepare Codeforces problems → generate Python solutions → execute official tests in Docker → train with GRPO and compare on fixed development data**. Qwen2.5-Coder baselines and Qwen3-4B comparison, LoRA/QLoRA, TRL and local Trackio logging.
 
 Codeforces problems are language-neutral. Every prepared row requests **Python 3**, and the runner executes Python only. No C++ or other-language solutions are used as training targets.
+
+**Latest comparison:** Qwen3-4B-Instruct-2507 with NF4 QLoRA completed ten local GRPO updates, using 11.69 GiB peak PyTorch allocation (13.09 GiB sampled device usage). Development moved 29/67 → 31/67; this small development-only gain needs confirmation. The 3B model stayed 7/67, while 4B BF16 ran out of memory during rollout generation. [Results, capacity measurements and commands](experiments/codeforces-model-capacity/REPORT.md).
 
 ## Prepared data
 

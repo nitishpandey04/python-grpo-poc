@@ -1,0 +1,6 @@
+{
+  "reason": "Tiny Qwen3 check showed generic PEFT k-bit preparation changed KV cache BF16 to FP32 even under autocast. Remove redundant preparation; GRPOTrainer handles adapter freezing and input-gradient hooks.",
+  "BF16_path_changed": false,
+  "data_or_sampling_changed": false,
+  "time": 1794288689.7748096
+}

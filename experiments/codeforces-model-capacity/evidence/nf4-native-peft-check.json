@@ -1,0 +1,7 @@
+{
+  "cache_dtype": "torch.bfloat16",
+  "loss": 4.867002487182617,
+  "finite_nonzero_adapter_gradients": true,
+  "base_frozen": true,
+  "gradient_checkpointing": true
+}

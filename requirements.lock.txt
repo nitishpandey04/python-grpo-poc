@@ -5,6 +5,7 @@ aiosignal==1.4.0
 annotated-doc==0.0.5
 anyio==4.16.0
 attrs==26.1.0
+bitsandbytes==0.50.2
 brotli==1.2.1
 click==8.5.0
 cuda-bindings==12.9.7

@@ -1,0 +1,15 @@
+{
+  "correctness": 0.4626865671641791,
+  "mean_tokens": 559.6567164179105,
+  "problems": 67,
+  "mean_checked_tests": 24.925373134328357,
+  "evaluator": "cpython",
+  "correctness_protocol": "solution_score",
+  "failure_counts": {
+    "ok": 31,
+    "syntax_error": 20,
+    "wrong_answer": 12,
+    "runtime_error": 3,
+    "memory_error": 1
+  }
+}

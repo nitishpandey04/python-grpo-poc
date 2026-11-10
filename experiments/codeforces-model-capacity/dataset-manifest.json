@@ -1,0 +1,172 @@
+{
+  "protocol": "python-grpo-v1",
+  "source": {
+    "repo": "open-r1/codeforces",
+    "revision": "fbe3f6e903ee854eec2e69e9d96d0306cde59baf",
+    "split": "verifiable/train",
+    "files": [
+      {
+        "path": "verifiable/train-00000-of-00010.parquet",
+        "sha256": "8bfefff9f32637b443360fca01e9b310d1833e2c6d2161a4001bda5c466a6269"
+      },
+      {
+        "path": "verifiable/train-00001-of-00010.parquet",
+        "sha256": "053b62f6b0b3c08dd16a86bfb1153830b31f9d785d309ab4a7b2899d7a4db7ef"
+      },
+      {
+        "path": "verifiable/train-00002-of-00010.parquet",
+        "sha256": "68dac41f21c18f4520ccb8078fee70186bc6f5b817038b4c9dac8a89c1d896d6"
+      },
+      {
+        "path": "verifiable/train-00003-of-00010.parquet",
+        "sha256": "291d7fceeefa605102feb89b9469935f8ce85eb942eef42f748cbecb597096b4"
+      },
+      {
+        "path": "verifiable/train-00004-of-00010.parquet",
+        "sha256": "3e034b6431836947fa62c00e4f0201d35ecc20826cf5ef4bf834ca98d0493793"
+      },
+      {
+        "path": "verifiable/train-00005-of-00010.parquet",
+        "sha256": "bbb4a04a69bec8c57f6b5b36cfdaccd879e3e71ed2b9e96fe20b65a04d2d21a8"
+      },
+      {
+        "path": "verifiable/train-00006-of-00010.parquet",
+        "sha256": "3fbc234f0a4980aeada21b4900919657b4dbe76d1e3e99e6c24608dc650dccdb"
+      },
+      {
+        "path": "verifiable/train-00007-of-00010.parquet",
+        "sha256": "345b1bd27020c127049de6a8f9587cada8bef475936064ff510126940f057ce9"
+      },
+      {
+        "path": "verifiable/train-00008-of-00010.parquet",
+        "sha256": "dfd81c2b64aca39aa7d0963815ea3880f9b8e87ef3e1d21c1179aaa579eff043"
+      },
+      {
+        "path": "verifiable/train-00009-of-00010.parquet",
+        "sha256": "fc4ba4b71bfdb6f7df97d88000d968a362cbc0001025c9457ca84fd1e4a2d300"
+      }
+    ]
+  },
+  "model": "Qwen/Qwen2.5-Coder-0.5B-Instruct",
+  "revision": "ea3f2471cf1b1f0db85067f1ef93848e38e88c25",
+  "language": "python",
+  "execution_mode": "stdio",
+  "execution_image": "python-grpo-cpython:v3",
+  "container_memory": "2g",
+  "max_completion_tokens": 1024,
+  "raw_rows": 8338,
+  "candidate_rows": 695,
+  "requested_rating_range": [
+    800,
+    1600
+  ],
+  "difficulty_definition": {
+    "easy": [
+      800,
+      1000
+    ],
+    "medium": [
+      1100,
+      1600
+    ]
+  },
+  "counts": {
+    "train": 628,
+    "validation": 67
+  },
+  "difficulty_counts": {
+    "train": {
+      "easy": 304,
+      "medium": 324
+    },
+    "validation": {
+      "easy": 30,
+      "medium": 37
+    }
+  },
+  "official_test_records": {
+    "train": 32983,
+    "validation": 3396
+  },
+  "exclusions": {
+    "additional_generated_tests_not_loaded": 6684,
+    "outside_requested_ratings_or_unrated": 524,
+    "custom_checker_not_supported_in_initial_scope": 399,
+    "file_or_interactive_interface": 8,
+    "output_spec_requires_unavailable_semantic_checker": 20,
+    "missing_problem_statement": 8
+  },
+  "split_rule": "Union published aliases and near-identical statements before splitting; SHA-256 group ID with seed 42, modulo 10 gives a fixed roughly 10% development set; no model outcomes used.",
+  "files_sha256": {
+    "train": "ea4add8828c686ae237b4910ac48f9d353c6efb7e8f3a9567b76463ac2367820",
+    "validation": "51066ef90592f00afe31f07663b1ea65ddc76f84b4665e75f125b660ef56041f"
+  },
+  "evaluation_manifest": "evaluation/manifest.json",
+  "evaluation_manifest_sha256": "c8b0ae66a1578fa8d0dafa11616cc6f2a54f5972c21382570743880a864706b1",
+  "confirmation": {
+    "tasks": 49,
+    "task_ids": [
+      14,
+      58,
+      62,
+      63,
+      65,
+      67,
+      68,
+      88,
+      89,
+      98,
+      103,
+      105,
+      109,
+      128,
+      140,
+      141,
+      142,
+      168,
+      170,
+      222,
+      226,
+      227,
+      230,
+      235,
+      237,
+      238,
+      250,
+      257,
+      268,
+      273,
+      277,
+      293,
+      300,
+      389,
+      390,
+      394,
+      395,
+      410,
+      413,
+      421,
+      424,
+      427,
+      430,
+      439,
+      447,
+      450,
+      470,
+      473,
+      477
+    ],
+    "source_sha256": "293947acc44ea063075d38a6c201c0656ad1fc430bf2f3047ccc30ea470b934d",
+    "predictions_generated": false
+  },
+  "codeforces_test_split_read": false,
+  "training_reward": "Binary: all official I/O records pass; fail fast on first failure. No minimum test count or model-difficulty calibration gate.",
+  "development_protocol": "Fixed Codeforces train-derived development split, same official Python I/O grader before/after. Existing MBPP development/confirmation inputs remain unchanged.",
+  "limitations": [
+    "Easy/medium rating labels are an experiment choice, not a guarantee of suitability for the 0.5B model.",
+    "Upstream complete official tests are not necessarily exhaustive; missing checker metadata does not prove unique outputs. Explicit alternate-answer/tolerance specifications are deferred.",
+    "Default no-checker comparison follows upstream whitespace/YES-NO normalization, not general semantic equivalence.",
+    "Per-case source time/memory limits are applied to Python; this is not an exact reproduction of Codeforces language-specific judging.",
+    "Text and alias checks do not guarantee semantic or pretraining decontamination."
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "stage": "reward-probe",
+  "steps": 0,
+  "train_problems": 628,
+  "probe_problems": 32,
+  "generations": 8,
+  "temperature": 0.8,
+  "max_completion_tokens": 1024,
+  "development_evaluated": false,
+  "confirmation_evaluated": false,
+  "dataset_manifest_sha256": "68dc5df9f80ae4ca15c1fba54b5f1d3868da00b1d53ebb8494ecf583fb7d6f50",
+  "probe_selection_sha256": "f574311016b663737778a75389504e687881299fbf56f7745418b7bf851aa9e3",
+  "peak_gpu_allocated_mb": 6597.3310546875,
+  "peak_gpu_reserved_mb": 6638.0,
+  "overall": {
+    "problems": 32,
+    "candidates": 256,
+    "correct_candidates": 29,
+    "full_pass_fraction": 0.11328125,
+    "all_fail_groups": 22,
+    "mixed_reward_groups": 9,
+    "all_pass_groups": 1,
+    "solved_at_least_once": 10,
+    "token_cap_hits": 0,
+    "failure_counts": {
+      "wrong_answer": 195,
+      "runtime_error": 25,
+      "ok": 29,
+      "syntax_error": 3,
+      "memory_error": 3,
+      "timeout": 1
+    }
+  },
+  "by_difficulty": {
+    "easy": {
+      "problems": 16,
+      "candidates": 128,
+      "correct_candidates": 21,
+      "full_pass_fraction": 0.1640625,
+      "all_fail_groups": 9,
+      "mixed_reward_groups": 6,
+      "all_pass_groups": 1,
+      "solved_at_least_once": 7,
+      "token_cap_hits": 0,
+      "failure_counts": {
+        "wrong_answer": 96,
+        "ok": 21,
+        "runtime_error": 11
+      }
+    },
+    "medium": {
+      "problems": 16,
+      "candidates": 128,
+      "correct_candidates": 8,
+      "full_pass_fraction": 0.0625,
+      "all_fail_groups": 13,
+      "mixed_reward_groups": 3,
+      "all_pass_groups": 0,
+      "solved_at_least_once": 3,
+      "token_cap_hits": 0,
+      "failure_counts": {
+        "runtime_error": 14,
+        "wrong_answer": 99,
+        "syntax_error": 3,
+        "ok": 8,
+        "memory_error": 3,
+        "timeout": 1
+      }
+    }
+  },
+  "elapsed_seconds": 446.49950957400006
+}

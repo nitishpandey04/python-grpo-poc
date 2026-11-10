@@ -1,0 +1,29 @@
+[
+  {
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "revision": "488639f1ff808d1d3d0ba301aef8c11461451ec5",
+    "path": "model-00001-of-00002.safetensors",
+    "sha256": "5b684409377e037e5ed75d680a070126e841dab17e8cb9a818868deadf01ab39",
+    "bytes": 4957560304,
+    "reason": "Redownloadable cache evicted for sequential model comparison",
+    "time": 1794288340.288299
+  },
+  {
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "revision": "488639f1ff808d1d3d0ba301aef8c11461451ec5",
+    "path": "model-00002-of-00002.safetensors",
+    "sha256": "8bc5227aae6174eaf0b589fd4fbeb0de046a1fc951a67f2d2538acad811e1068",
+    "bytes": 1214366696,
+    "reason": "Redownloadable cache evicted for sequential model comparison",
+    "time": 1794288340.3086963
+  },
+  {
+    "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+    "revision": "2e1fd397ee46e1388853d2af2c993145b0f1098a",
+    "path": "model.safetensors",
+    "sha256": "c1b9b30e907950516ba3c646bdf570d8084c25a6410a0cdca80cf04b11bc13a8",
+    "bytes": 3087467144,
+    "reason": "Redownloadable cache evicted for sequential model comparison",
+    "time": 1794288340.3184447
+  }
+]
