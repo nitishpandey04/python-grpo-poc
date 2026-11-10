@@ -148,3 +148,7 @@ This establishes that the 1.5B LoRA GRPO configuration fits and runs locally, an
 - All 31 checks pass; all 628 training tasks, medium scope and official grading coverage remain unchanged. Confirmation remains unqueried, adapters local, and the published older model unchanged.
 
 Use the 4B NF4 configuration as the strongest tested practical starting point. This small development result does not establish general improvement. A separate concise-code prompt check can address substantial 1,024-token truncation before a longer training budget. Four billion parameters is the largest tested model, not a measured absolute GPU ceiling.
+
+## Concise-code prompt check and 50-update GRPO — started 2026-11-10
+
+[Precommitted experiment plan](experiments/codeforces-concise-001/PLAN.md). Results pending. Compare a no-comments/no-reasoning prompt against the frozen 4B NF4 probe, select the prompt using training-probe pass counts and truncation only, then recompute its original-model baseline and train 50 updates with development checks every ten. Model, dataset, official grading and 1,024-token cap remain fixed; confirmation stays untouched. The detached queue retains live progress in Trackio and local run directories. All 32 checks passed before launch.

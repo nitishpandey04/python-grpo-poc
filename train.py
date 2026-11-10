@@ -23,6 +23,18 @@ from monitoring import Monitor
 from evaluate import expanded_score,read_rows,sha
 from report import build_report
 
+CONCISE_CODE_INSTRUCTION='Do not include comments or reasoning. Keep the solution concise and complete.'
+
+
+def concise_code_rows(rows):
+    result=[]
+    for row in rows:
+        if row['prompt'][0]['role']!='system':raise ValueError('Concise-code override requires a system message')
+        prompt=[dict(message) for message in row['prompt']]
+        prompt[0]['content']+=' '+CONCISE_CODE_INSTRUCTION
+        result.append({**row,'prompt':prompt})
+    return result
+
 
 def validate_generation_groups(ids, prompts, generations):
     if len(ids) != prompts * generations:
@@ -133,6 +145,9 @@ def main(args):
     model_id,model_revision=resolve_model(manifest,args.model,args.model_revision)
     stdio=manifest.get('execution_mode')=='stdio'
     if stdio and any(r.get('language')!='python' for r in train_rows+val_rows):raise ValueError('This run accepts Python-only data')
+    if args.concise_code:
+        if not stdio:raise ValueError('Concise-code comparison is for the Python standard-I/O dataset')
+        train_rows=concise_code_rows(train_rows);val_rows=concise_code_rows(val_rows)
     if args.max_tokens is None:args.max_tokens=manifest.get('max_completion_tokens',256)
     evaluation_scorer=solution_score if stdio else expanded_score
     # Only IDs are used to guard the sealed confirmation pool. No confirmation prediction is generated.
@@ -148,8 +163,11 @@ def main(args):
     if selected is not None:
         selection={'split':'train','seed':args.seed,'rule':'Hash-order within difficulty, round-robin equal allocation, independent of model outcomes. Balanced probe is not a population-weighted score.','problems':[{k:r[k] for k in ['task_id','difficulty','rating']} for r in selected]}
         (args.output/'probe-selection.json').write_text(json.dumps(selection,indent=2))
-    config={**{k:str(v) if isinstance(v,Path) else v for k,v in vars(args).items()},'model':model_id,'model_revision':model_revision,'precision':'nf4-bfloat16-compute' if args.load_in_4bit else 'bfloat16','cuda_total_memory_mb':torch.cuda.get_device_properties(0).total_memory/1024**2,'stage':'reward-probe' if args.reward_probe else 'baseline-only' if args.baseline_only else 'short pipeline smoke test','batch_settings':batches,'dataset_manifest_sha256':sha(args.dataset/'manifest.json'),'reward':manifest['training_reward'],'development_protocol':manifest['development_protocol'],'execution_image':manifest.get('execution_image','python-grpo-cpython:v3'),'execution_image_id':subprocess.check_output(['docker','image','inspect','--format','{{.Id}}',manifest.get('execution_image','python-grpo-cpython:v3')],text=True).strip(),'source_sha256':{name:sha(ROOT/name) for name in ['train.py','prepare_data.py','evaluate.py','execution.py','cpython_worker.py','monitoring.py']},'confirmation_evaluated':False,'gpu':torch.cuda.get_device_name(),'torch':torch.__version__}
+    run_stage='short pipeline smoke test' if args.steps<=10 else 'bounded GRPO experiment'
+    config={**{k:str(v) if isinstance(v,Path) else v for k,v in vars(args).items()},'model':model_id,'model_revision':model_revision,'precision':'nf4-bfloat16-compute' if args.load_in_4bit else 'bfloat16','cuda_total_memory_mb':torch.cuda.get_device_properties(0).total_memory/1024**2,'stage':'reward-probe' if args.reward_probe else 'baseline-only' if args.baseline_only else run_stage,'batch_settings':batches,'dataset_manifest_sha256':sha(args.dataset/'manifest.json'),'reward':manifest['training_reward'],'development_protocol':manifest['development_protocol'],'execution_image':manifest.get('execution_image','python-grpo-cpython:v3'),'execution_image_id':subprocess.check_output(['docker','image','inspect','--format','{{.Id}}',manifest.get('execution_image','python-grpo-cpython:v3')],text=True).strip(),'source_sha256':{name:sha(ROOT/name) for name in ['train.py','prepare_data.py','evaluate.py','execution.py','cpython_worker.py','monitoring.py']},'confirmation_evaluated':False,'gpu':torch.cuda.get_device_name(),'torch':torch.__version__}
     if selected is not None:config['probe_selection_sha256']=sha(args.output/'probe-selection.json')
+    config['prompt_override_instruction']=CONCISE_CODE_INSTRUCTION if args.concise_code else None
+    config['effective_system_prompts']=sorted({row['prompt'][0]['content'] for row in train_rows+val_rows})
     (args.output/'config.json').write_text(json.dumps(config,indent=2))
     monitor=Monitor(args.output,args.output.name,config)
     try:
@@ -235,7 +253,7 @@ def main(args):
             trainer.train()
             trainer.save_model(str(args.output/'final-adapter'));tokenizer.save_pretrained(args.output/'final-adapter')
             after=read_rows(args.output/f'validation-step-{args.steps}.jsonl')
-            report={'stage':'short pipeline smoke test','steps':args.steps,'train_problems':len(train_rows),'development_problems':len(val_rows),'sealed_confirmation_problems':len(confirmation_ids),'dataset_manifest_sha256':sha(args.dataset/'manifest.json'),'confirmation_evaluated':False,'development_protocol':manifest['development_protocol'],'baseline_validation':baseline,'final_validation':json.loads((args.output/f'validation-step-{args.steps}.summary.json').read_text()),'selected_checkpoint':best,'development_comparison':compare(before,after,note='Development-only comparison in a bounded pipeline pilot; not independent confirmation.'),'peak_gpu_allocated_mb':torch.cuda.max_memory_allocated()/1024**2,'peak_gpu_reserved_mb':torch.cuda.max_memory_reserved()/1024**2,'limitations':['Ten-step default is a pipeline smoke test, not evidence of general improvement.','Small development set and one training seed; no claim of general improvement.','Confirmation predictions are deliberately deferred.']}
+            report={'stage':run_stage,'steps':args.steps,'train_problems':len(train_rows),'development_problems':len(val_rows),'sealed_confirmation_problems':len(confirmation_ids),'dataset_manifest_sha256':sha(args.dataset/'manifest.json'),'confirmation_evaluated':False,'development_protocol':manifest['development_protocol'],'baseline_validation':baseline,'final_validation':json.loads((args.output/f'validation-step-{args.steps}.summary.json').read_text()),'selected_checkpoint':best,'development_comparison':compare(before,after,note='Development-only comparison in a bounded pipeline pilot; not independent confirmation.'),'peak_gpu_allocated_mb':torch.cuda.max_memory_allocated()/1024**2,'peak_gpu_reserved_mb':torch.cuda.max_memory_reserved()/1024**2,'limitations':['A bounded development-only run does not establish general improvement.','Small development set and one training seed; no claim of general improvement.','Confirmation predictions are deliberately deferred.']}
             (args.output/'report.json').write_text(json.dumps(report,indent=2))
             metrics=[json.loads(line) for line in (args.output/'metrics.jsonl').read_text().splitlines()]
             layouts=[r for r in metrics if 'batch/distinct_prompts' in r]
@@ -262,6 +280,7 @@ if __name__=='__main__':
     parser.add_argument('--model')
     parser.add_argument('--model-revision')
     parser.add_argument('--load-in-4bit',action='store_true')
+    parser.add_argument('--concise-code',action='store_true')
     parser.add_argument('--output',type=Path)
     parser.add_argument('--max-tokens',type=int)
     mode=parser.add_mutually_exclusive_group()

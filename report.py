@@ -38,13 +38,13 @@ def build_report(run):
     prompts=sum(r['batch/distinct_prompts'] for r in metrics if 'batch/distinct_prompts' in r)
     comparison=report['development_comparison'];best=report['selected_checkpoint']
     lines=[f'# {run.name}: Python GRPO','',
-        'This is a short pipeline smoke test. It does not establish general model improvement.','',
+        f"This is a {report['stage']}. It does not establish general model improvement.",'',
         f"Available training problems: {report['train_problems']}. Optimizer steps: {report['steps']}. Distinct sampled training problems: {len({r['task_id'] for r in rollouts})}.",'',
         f"Fixed development correctness: original {round(before['correctness']*n)}/{n}; final adapter {round(after['correctness']*n)}/{n}. Selected step: {best['step']} (zero retains the original model).",'',
         f"Development change: {comparison['improvement_percentage_points']:+.2f} percentage points; paired bootstrap interval {comparison['ci95_percentage_points']}. Problems improved/regressed: {comparison['improved']}/{comparison['regressed']}.",'',
         f'Mixed-reward prompt groups: {mixed}/{prompts}. Training reward uses supplied tests, whose coverage and expectations may be imperfect.', '',
         f"Peak PyTorch allocation: {report['peak_gpu_allocated_mb']/1024:.2f} GiB. Confirmation problems: {report['sealed_confirmation_problems']}; no confirmation predictions generated.",'',
-        report.get('development_protocol','Fixed development evaluation.')+' Tests are finite; semantic/pretraining overlap remains possible. This short run does not establish general improvement.', '',
+        report.get('development_protocol','Fixed development evaluation.')+' Tests are finite; semantic/pretraining overlap remains possible. This bounded run does not establish general improvement.', '',
         'Configuration, source/data fingerprints, model outputs, scalar metrics, development comparisons, and the final adapter are saved alongside this report. Historical experiment files are unchanged.','']
     (run/'REPORT.md').write_text('\n'.join(lines))
 

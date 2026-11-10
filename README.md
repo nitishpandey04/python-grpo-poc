@@ -43,6 +43,8 @@ To compare the 1.5B model on the identical data, add these arguments to either a
 
 Both override arguments are required together. Download that pinned model into the local cache first; the run records its resolved identity independently of the frozen dataset manifest. The original 0.5B model remains the default for reproducing earlier runs.
 
+For the concise-code prompt experiment, add `--concise-code` to a probe or training command. It appends a no-comments/no-reasoning instruction at runtime to both training and development prompts, records the effective system messages, and preserves frozen dataset files and grading. [Current experiment plan](experiments/codeforces-concise-001/PLAN.md).
+
 Before optimization, check sampled training rewards on 16 easy and 16 medium problems:
 
 ```bash

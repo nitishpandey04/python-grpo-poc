@@ -1,0 +1,42 @@
+{
+  "created_at": 1794309783.1369255,
+  "model": "Qwen/Qwen3-4B-Instruct-2507",
+  "model_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+  "precision": "nf4-bfloat16-compute",
+  "base_adapter": null,
+  "prompt_change": "Do not include comments or reasoning. Keep the solution concise and complete.",
+  "fence_format": "unchanged: one closed python code block",
+  "old_probe": "codeforces-4b-probe-nf4-001",
+  "new_probe": "codeforces-4b-concise-probe-001",
+  "training_run": "codeforces-4b-grpo50-001",
+  "selection_rule": "Use concise prompt iff correct_candidates >= 137 AND token_cap_hits < 78 on the fixed 32-problem training probe; otherwise retain original prompt. Mixed groups are reported, not used to drop tasks. No development result is used to select the prompt.",
+  "probe": {
+    "problems": 32,
+    "generations": 8,
+    "seed": 42,
+    "temperature": 0.8,
+    "top_p": 1.0,
+    "top_k": 0,
+    "max_tokens": 1024
+  },
+  "training": {
+    "steps": 50,
+    "eval_every": 10,
+    "prompts_per_update": 4,
+    "generations": 8,
+    "micro_batch": 2,
+    "learning_rate": 1e-05,
+    "seed": 42,
+    "max_tokens": 1024,
+    "beta": 0.02,
+    "lora_rank": 16,
+    "start": "original pinned quantized base, not prior smoke adapter"
+  },
+  "training_problem_count": 628,
+  "development_problem_count": 67,
+  "confirmation_evaluated": false,
+  "dataset_manifest_sha256": "68dc5df9f80ae4ca15c1fba54b5f1d3868da00b1d53ebb8494ecf583fb7d6f50",
+  "probe_selection_sha256": "f574311016b663737778a75389504e687881299fbf56f7745418b7bf851aa9e3",
+  "development_protocol": "Recompute greedy original-model baseline using selected prompt; compare greedy answers on same 67 fixed problems after each 10 updates. Select only strict development improvements. Confirmation remains untouched.",
+  "minimum_free_disk_bytes_before_training": 1200000000
+}

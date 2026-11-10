@@ -1,10 +1,20 @@
 import unittest
-from train import batch_settings,validate_generation_groups,select_probe_rows,summarize_probe,resolve_model
+from train import batch_settings,validate_generation_groups,select_probe_rows,summarize_probe,resolve_model,concise_code_rows,CONCISE_CODE_INSTRUCTION
 from execution import program_score,solution_score
 from evaluate import expanded_score
 
 
 class TrainingTests(unittest.TestCase):
+    def test_concise_prompt_preserves_problem_tests_and_original_rows(self):
+        import copy
+        rows=[{'task_id':'cf/1','prompt':[{'role':'system','content':'Return one ```python code block.'},{'role':'user','content':'Problem and examples'}],'tests':{'cases':[{'input':'1','output':'2'}]}}]
+        original=copy.deepcopy(rows)
+        changed=concise_code_rows(rows)
+        self.assertEqual(rows,original)
+        self.assertEqual(changed[0]['prompt'][0]['content'],original[0]['prompt'][0]['content']+' '+CONCISE_CODE_INSTRUCTION)
+        changed[0]['prompt'][0]=original[0]['prompt'][0]
+        self.assertEqual(changed,original)
+
     def test_model_override_requires_its_own_revision_and_keeps_data_manifest(self):
         manifest={'model':'original','revision':'original-sha'}
         self.assertEqual(resolve_model(manifest),('original','original-sha'))
